@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Assignment 3</string>
+    <string name="title_home">Home</string>
+    <string name="title_shop">Shop</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_detail">Product Detail</string>
+</resources>
