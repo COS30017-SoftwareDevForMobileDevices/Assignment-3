@@ -58,7 +58,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         tools:text="Air Jordan 1 'Chicago'" />
 
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:textColor="#757575"
-        android:textSize="16sp"
+        android:textSize="14sp"
         tools:text="$190.00" />
 
 </LinearLayout>

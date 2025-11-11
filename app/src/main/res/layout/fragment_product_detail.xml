@@ -20,8 +20,8 @@
 
         <ImageButton
             android:id="@+id/btn_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Back"
             android:src="@drawable/ic_arrow_back"
@@ -44,8 +44,8 @@
 
         <ImageButton
             android:id="@+id/btn_favorite_top"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Add to favorites"
             android:src="@drawable/ic_favorite_outline"
@@ -148,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:text="By NIKE"
                     android:textColor="#757575"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:layout_marginBottom="4dp"/>
 
                 <TextView
@@ -157,7 +157,9 @@
                     android:layout_height="wrap_content"
                     android:text="Air Challenger Pro"
                     android:textColor="@android:color/black"
-                    android:textSize="32sp"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.1"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="8dp"/>
 
@@ -166,8 +168,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="$180.00"
-                    android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textColor="@color/red_main"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="24dp"/>
 
@@ -183,7 +185,7 @@
                         android:layout_weight="1"
                         android:text="Select Size"
                         android:textColor="@android:color/black"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -191,8 +193,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Size Guide"
-                        android:textColor="#FF0000"
-                        android:textSize="14sp"
+                        android:textColor="@android:color/holo_green_dark"
+                        android:textSize="12sp"
                         android:textStyle="bold"/>
 
                 </LinearLayout>
@@ -308,7 +310,7 @@
                     android:layout_height="wrap_content"
                     android:text="Product Description"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="12dp"/>
 
@@ -319,7 +321,7 @@
                     android:layout_height="wrap_content"
                     android:text="The Air Challenger Pro combines cutting-edge technology with iconic style. Featuring a lightweight FlyKnit upper for breathability and a responsive ZoomX foam sole for unparalleled comfort and energy return."
                     android:textColor="#757575"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:lineSpacingExtra="4dp"
                     android:layout_marginBottom="8dp"/>
 
@@ -329,8 +331,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Read More"
-                    android:textColor="#FF0000"
-                    android:textSize="14sp"
+                    android:textColor="#444343"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     android:paddingVertical="8dp"/>
 
@@ -359,9 +361,10 @@
             android:layout_margin="16dp"
             android:text="Add to Cart"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:backgroundTint="@color/red_main"
+            app:iconSize="20dp"
             app:cornerRadius="12dp"
             app:icon="@drawable/ic_shopping_fill"
             app:iconGravity="textStart"

@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="KICKS"
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -117,7 +117,7 @@
                             android:layout_marginTop="8dp"
                             android:text="The latest styles have arrived. Get them before\nthey're gone."
                             android:textColor="#FFFFFF"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
 
                         <Button
                             android:id="@+id/btn_shop_now"
@@ -242,7 +242,7 @@
                 android:layout_marginTop="24dp"
                 android:text="Featured Kicks"
                 android:textColor="#000000"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
 

@@ -56,8 +56,8 @@
                 <!-- Profile Image -->
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/img_profile"
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     app:contentPadding="20dp"
                     android:scaleType="centerCrop"
                     android:background="@drawable/bg_user_guest"
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:text="Alex Jordan"
                     android:textColor="@android:color/black"
-                    android:textSize="28sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_marginTop="16dp"/>
 
@@ -109,7 +109,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="20dp"
+                        android:padding="14dp"
                         android:gravity="center_vertical">
 
                         <!-- Icon Container -->
@@ -136,7 +136,7 @@
                             android:layout_marginStart="16dp"
                             android:text="My Orders"
                             android:textColor="@android:color/black"
-                            android:textSize="18sp"/>
+                            android:textSize="16sp"/>
 
                         <!-- Arrow -->
                         <ImageView
@@ -164,9 +164,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:padding="20dp"
-                        android:gravity="center_vertical">
+                        android:padding="14dp">
 
                         <!-- Icon Container -->
                         <FrameLayout
@@ -178,9 +178,9 @@
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_location_fill"
                                 android:contentDescription="Shipping Address"
-                                app:tint="@android:color/black"/>
+                                android:src="@drawable/ic_location_fill"
+                                app:tint="@android:color/black" />
 
                         </FrameLayout>
 
@@ -188,19 +188,19 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_marginStart="16dp"
+                            android:layout_weight="1"
                             android:text="Shipping Address"
                             android:textColor="@android:color/black"
-                            android:textSize="18sp"/>
+                            android:textSize="16sp" />
 
                         <!-- Arrow -->
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_keyboard_arrow_right"
                             android:contentDescription="Navigate"
-                            app:tint="#757575"/>
+                            android:src="@drawable/ic_keyboard_arrow_right"
+                            app:tint="#757575" />
 
                     </LinearLayout>
 
@@ -222,10 +222,11 @@
                 android:layout_margin="16dp"
                 android:text="Log Out"
                 android:textColor="@color/red_main"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:backgroundTint="#FFE8E8"
                 app:cornerRadius="12dp"
+                app:iconSize="20dp"
                 app:icon="@drawable/ic_logout"
                 app:iconGravity="textStart"
                 app:iconTint="@color/red_main"

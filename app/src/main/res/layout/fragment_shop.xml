@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="New Releases"
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -62,12 +62,13 @@
                     android:layout_marginStart="16dp"
                     android:text="Filter"
                     android:textColor="#FFFFFF"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textAllCaps="false"
                     app:backgroundTint="@color/red_main"
                     app:cornerRadius="12dp"
                     app:icon="@drawable/ic_filter_list"
                     app:iconGravity="textStart"
+                    app:iconSize="22dp"
                     app:iconTint="#FFFFFF"
                     style="@style/Widget.MaterialComponents.Button" />
 
@@ -81,12 +82,13 @@
                     android:layout_marginEnd="16dp"
                     android:text="Sort"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textAllCaps="false"
                     app:backgroundTint="@color/white"
                     app:cornerRadius="12dp"
                     app:icon="@drawable/ic_compare_arrows"
                     app:iconGravity="textStart"
+                    app:iconSize="22dp"
                     app:iconTint="@color/black"
                     style="@style/Widget.MaterialComponents.Button" />
 
