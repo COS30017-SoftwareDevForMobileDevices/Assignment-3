@@ -1,6 +1,7 @@
 package com.assignment3
 
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -27,9 +28,16 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val navView: BottomNavigationView = binding.navView
+        val navView: BottomNavigationView = binding.bottomNavView
 
         val navController = findNavController(R.id.fragment_activity_main)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_product_detail -> binding.bottomNavView.visibility = View.GONE
+                else -> binding.bottomNavView.visibility = View.VISIBLE
+            }
+        }
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(

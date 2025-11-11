@@ -1,7 +1,6 @@
 package com.assignment3.fragments.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +12,9 @@ import com.assignment3.databinding.FragmentHomeBinding
 import com.assignment3.models.Product
 import com.assignment3.R
 import com.assignment3.adapters.CardAdapter
-import com.assignment3.fragments.productdetail.ProductDetailFragment
 import com.assignment3.interfaces.ProductClickListener
 import com.assignment3.models.productList
 import com.assignment3.models.PRODUCT_ID_EXTRA
-
 
 class HomeFragment : Fragment(), ProductClickListener {
 
@@ -51,7 +48,7 @@ class HomeFragment : Fragment(), ProductClickListener {
 
     override fun onClick(product: Product) {
         findNavController().navigate(
-            R.id.action_homeFragment_to_productDetailFragment,
+            R.id.action_navigation_home_to_navigation_product_detail,
             Bundle().apply {
                 putInt(PRODUCT_ID_EXTRA, product.productId)
             }
@@ -62,16 +59,12 @@ class HomeFragment : Fragment(), ProductClickListener {
     private fun populateProducts() {
         productList.clear()
 
-        productList.add(
-            Product(R.drawable.sneaker, "Jordan 1 High", 239.54, productList.size)
-        )
-        productList.add(
-            Product(R.drawable.sneaker, "Jordan 2 High", 239.54, productList.size)
-        )
-        productList.add(
-            Product(R.drawable.sneaker, "Jordan 3 High", 239.54, productList.size)
-        )
+        productList.add(Product(R.drawable.sneaker, "Jordan 1 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 2 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 3 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 4 High", 239.54, productList.size))
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

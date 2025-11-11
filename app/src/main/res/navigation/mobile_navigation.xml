@@ -12,16 +12,23 @@
         tools:layout="@layout/fragment_home" >
 
         <action
-            android:id="@+id/action_homeFragment_to_productDetailFragment"
+            android:id="@+id/action_navigation_home_to_navigation_product_detail"
             app:destination="@id/navigation_product_detail" />
 
     </fragment>
+
 
     <fragment
         android:id="@+id/navigation_shop"
         android:name="com.assignment3.fragments.shop.ShopFragment"
         android:label="@string/title_shop"
-        tools:layout="@layout/fragment_shop" />
+        tools:layout="@layout/fragment_shop" >
+        <action
+            android:id="@+id/action_navigation_shop_to_navigation_product_detail"
+            app:destination="@id/navigation_product_detail" />
+
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_favorites"
@@ -29,11 +36,19 @@
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" />
 
+
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.assignment3.fragments.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+
+
+    <fragment
+        android:id="@+id/navigation_guest"
+        android:name="com.assignment3.fragments.guest.GuestProfileFragment"
+        android:label="@string/title_guest"
+        tools:layout="@layout/fragment_guest_profile" />
 
 
     <fragment

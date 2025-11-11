@@ -8,61 +8,50 @@
     tools:context=".fragments.home.HomeFragment">
 
     <!-- Top Navigation Bar -->
-    <androidx.appcompat.widget.Toolbar
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/home_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:titleTextColor="@color/black">
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_app_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="12dp">
+            android:text="KICKS"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_app_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="KICKS"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+        <ImageButton
+            android:id="@+id/btn_search"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_search"
+            app:tint="#000000"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_cart" />
 
-            <ImageButton
-                android:id="@+id/btn_search"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@android:drawable/ic_menu_search"
-                app:tint="#000000"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_cart" />
-
-            <ImageButton
-                android:id="@+id/btn_cart"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@android:drawable/ic_menu_sort_by_size"
-                app:tint="#000000"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+        <ImageButton
+            android:id="@+id/btn_cart"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_sort_by_size"
+            app:tint="#000000"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.appcompat.widget.Toolbar>
-
-
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <!-- Scrollable Content -->
@@ -136,7 +125,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="24dp"
                             android:background="@drawable/bg_button_main"
-                            android:backgroundTint="#FF0000"
+                            android:backgroundTint="@color/red_main"
                             android:paddingHorizontal="32dp"
                             android:paddingVertical="12dp"
                             android:text="Shop Now"
@@ -166,6 +155,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
+
 
             <!-- Brands Section -->
             <HorizontalScrollView
@@ -242,6 +232,7 @@
 
             </HorizontalScrollView>
 
+
             <!-- Featured Kicks Section -->
             <TextView
                 android:id="@+id/tv_featured_title"
@@ -254,6 +245,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
+
             <!-- RecyclerView for Product Grid -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_products"
@@ -264,6 +256,7 @@
                 android:nestedScrollingEnabled="false"
                 android:paddingHorizontal="10dp" />
 
+            
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

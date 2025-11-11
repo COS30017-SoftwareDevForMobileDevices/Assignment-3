@@ -4,12 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import com.assignment3.R
+import com.assignment3.adapters.CardAdapter
 import com.assignment3.databinding.FragmentShopBinding
+import com.assignment3.interfaces.ProductClickListener
+import com.assignment3.models.PRODUCT_ID_EXTRA
+import com.assignment3.models.Product
+import com.assignment3.models.productList
 
-class ShopFragment : Fragment() {
+class ShopFragment : Fragment(), ProductClickListener {
 
     private var _binding: FragmentShopBinding? = null
 
@@ -27,12 +34,44 @@ class ShopFragment : Fragment() {
         _binding = FragmentShopBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textShop
-        shopViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        populateProducts()
+
+        val shopFragment = this
+        _binding?.recyclerViewProducts?.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = CardAdapter(productList, shopFragment)
         }
+
+
         return root
     }
+
+
+    override fun onClick(product: Product) {
+        findNavController().navigate(
+            R.id.action_navigation_shop_to_navigation_product_detail,
+            Bundle().apply {
+                putInt(PRODUCT_ID_EXTRA, product.productId)
+            }
+        )
+    }
+
+
+    private fun populateProducts() {
+        productList.clear()
+
+        productList.add(Product(R.drawable.sneaker, "Jordan 1 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 2 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 3 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 4 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 5 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 6 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 7 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 8 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 9 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 10 High", 239.54, productList.size))
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

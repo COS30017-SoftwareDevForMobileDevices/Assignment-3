@@ -1,17 +1,16 @@
-package com.assignment3.fragments.profile
+package com.assignment3.fragments.guest
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.assignment3.databinding.FragmentProfileBinding
+import com.assignment3.databinding.FragmentGuestProfileBinding
 
-class ProfileFragment : Fragment() {
+class GuestProfileFragment : Fragment() {
 
-    private var _binding: FragmentProfileBinding? = null
+    private var _binding: FragmentGuestProfileBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,9 +21,9 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val profileViewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
+        val guestProfileViewModel = ViewModelProvider(this)[GuestProfileViewModel::class.java]
 
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentGuestProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
 

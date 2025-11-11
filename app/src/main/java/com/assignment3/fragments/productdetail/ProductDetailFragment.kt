@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.assignment3.databinding.FragmentProductDetailBinding
 import com.assignment3.models.PRODUCT_ID_EXTRA
 import com.assignment3.models.Product
@@ -39,9 +40,12 @@ class ProductDetailFragment : Fragment() {
             if (product != null) {
                 binding.imgProduct.setImageResource(product.imageUrl)
                 binding.txtProductName.text = product.name
-                binding.txtProductPrice.text = product.price.toString()
+                binding.txtProductPrice.text = "$" + product.price.toString()
             }
+        }
 
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
         }
 
         return root
