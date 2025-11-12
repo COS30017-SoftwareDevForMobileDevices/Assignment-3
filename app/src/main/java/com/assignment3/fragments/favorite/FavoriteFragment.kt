@@ -1,24 +1,24 @@
-package com.assignment3.fragments.home
+package com.assignment3.fragments.favorite
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.assignment3.databinding.FragmentHomeBinding
-import com.assignment3.models.Product
 import com.assignment3.R
-import com.assignment3.adapters.products.ProductCardAdapter
+import com.assignment3.adapters.favorites.FavoriteCardAdapter
+import com.assignment3.databinding.FragmentFavoriteBinding
 import com.assignment3.interfaces.ProductClickListener
-import com.assignment3.models.productList
 import com.assignment3.models.PRODUCT_ID_EXTRA
+import com.assignment3.models.Product
+import com.assignment3.models.productList
 
-class HomeFragment : Fragment(), ProductClickListener {
+class FavoriteFragment : Fragment(), ProductClickListener {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentFavoriteBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -29,18 +29,20 @@ class HomeFragment : Fragment(), ProductClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        val favoriteViewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
 
         populateProducts()
 
-        val homeFragment = this
+        val favoriteFragment = this
         _binding?.recyclerViewProducts?.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = ProductCardAdapter(productList, homeFragment)
+            adapter = FavoriteCardAdapter(productList, favoriteFragment)
         }
+
 
         return root
     }
@@ -48,7 +50,7 @@ class HomeFragment : Fragment(), ProductClickListener {
 
     override fun onClick(product: Product) {
         findNavController().navigate(
-            R.id.action_navigation_home_to_navigation_product_detail,
+            R.id.action_navigation_favorites_to_navigation_product_detail,
             Bundle().apply {
                 putInt(PRODUCT_ID_EXTRA, product.productId)
             }
@@ -63,7 +65,14 @@ class HomeFragment : Fragment(), ProductClickListener {
         productList.add(Product(R.drawable.sneaker, "Jordan 2 High", 239.54, productList.size))
         productList.add(Product(R.drawable.sneaker, "Jordan 3 High", 239.54, productList.size))
         productList.add(Product(R.drawable.sneaker, "Jordan 4 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 5 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 6 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 7 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 8 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 9 High", 239.54, productList.size))
+        productList.add(Product(R.drawable.sneaker, "Jordan 10 High", 239.54, productList.size))
     }
+
 
 
     override fun onDestroyView() {

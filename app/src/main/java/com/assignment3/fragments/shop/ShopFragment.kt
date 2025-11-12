@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.assignment3.R
-import com.assignment3.adapters.CardAdapter
+import com.assignment3.adapters.products.ProductCardAdapter
 import com.assignment3.databinding.FragmentShopBinding
 import com.assignment3.interfaces.ProductClickListener
 import com.assignment3.models.PRODUCT_ID_EXTRA
@@ -39,7 +39,7 @@ class ShopFragment : Fragment(), ProductClickListener {
         val shopFragment = this
         _binding?.recyclerViewProducts?.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = CardAdapter(productList, shopFragment)
+            adapter = ProductCardAdapter(productList, shopFragment)
         }
 
 

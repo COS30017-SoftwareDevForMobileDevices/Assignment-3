@@ -2,8 +2,11 @@
     <string name="app_name">Assignment 3</string>
     <string name="title_home">Home</string>
     <string name="title_shop">Shop</string>
-    <string name="title_favorites">Favorites</string>
+    <string name="title_favorite">Favorites</string>
+    <string name="title_cart">Cart</string>
     <string name="title_profile">Profile</string>
     <string name="title_guest">Guest</string>
     <string name="title_detail">Product Detail</string>
+    <string name="title_login">Login</string>
+    <string name="title_register">Register</string>
 </resources>

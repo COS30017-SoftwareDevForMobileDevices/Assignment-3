@@ -1,11 +1,11 @@
-package com.assignment3.adapters
+package com.assignment3.adapters.products
 
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment3.databinding.ProductCardBinding
 import com.assignment3.interfaces.ProductClickListener
 import com.assignment3.models.Product
 
-class CardViewHolder(
+class ProductCardViewHolder(
     private val productCardBinding: ProductCardBinding,
     private val clickListener: ProductClickListener
 ) : RecyclerView.ViewHolder(productCardBinding.root) {

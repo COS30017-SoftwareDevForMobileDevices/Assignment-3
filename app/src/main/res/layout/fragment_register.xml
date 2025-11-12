@@ -126,7 +126,7 @@
                 app:hintTextColor="#757575"
                 app:endIconMode="password_toggle"
                 app:endIconTint="#757575"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_password"
@@ -153,7 +153,7 @@
                 app:hintTextColor="#757575"
                 app:endIconMode="password_toggle"
                 app:endIconTint="#757575"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_confirm_password"

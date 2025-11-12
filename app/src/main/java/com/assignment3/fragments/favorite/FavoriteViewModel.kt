@@ -1,13 +1,13 @@
-package com.assignment3.fragments.favorites
+package com.assignment3.fragments.favorite
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class FavoritesViewModel : ViewModel() {
+class FavoriteViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is favorites Fragment"
+        value = "This is favorite Fragment"
     }
     val text: LiveData<String> = _text
 }

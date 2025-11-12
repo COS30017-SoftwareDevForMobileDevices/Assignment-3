@@ -32,9 +32,13 @@
 
     <fragment
         android:id="@+id/navigation_favorites"
-        android:name="com.assignment3.fragments.favorites.FavoritesFragment"
-        android:label="@string/title_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        android:name="com.assignment3.fragments.favorite.FavoriteFragment"
+        android:label="@string/title_favorite"
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_navigation_favorites_to_navigation_product_detail"
+            app:destination="@id/navigation_product_detail" />
+    </fragment>
 
 
     <fragment
@@ -56,5 +60,26 @@
         android:name="com.assignment3.fragments.productdetail.ProductDetailFragment"
         android:label="@string/title_detail"
         tools:layout="@layout/fragment_product_detail" />
+
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.assignment3.fragments.auth.LoginFragment"
+        android:label="@string/title_login"
+        tools:layout="@layout/fragment_login" />
+
+
+    <fragment
+        android:id="@+id/navigation_register"
+        android:name="com.assignment3.fragments.auth.RegisterFragment"
+        android:label="@string/title_register"
+        tools:layout="@layout/fragment_register" />
+
+
+    <fragment
+        android:id="@+id/navigation_cart"
+        android:name="com.assignment3.fragments.cart.CartFragment"
+        android:label="@string/title_cart"
+        tools:layout="@layout/fragment_cart" />
 
 </navigation>

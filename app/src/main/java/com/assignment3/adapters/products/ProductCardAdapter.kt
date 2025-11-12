@@ -1,4 +1,4 @@
-package com.assignment3.adapters
+package com.assignment3.adapters.products
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,18 +7,18 @@ import com.assignment3.databinding.ProductCardBinding
 import com.assignment3.interfaces.ProductClickListener
 import com.assignment3.models.Product
 
-class CardAdapter(
+class ProductCardAdapter(
     private val products: List<Product>,
     private val clickListener: ProductClickListener
-) : RecyclerView.Adapter<CardViewHolder>() {
+) : RecyclerView.Adapter<ProductCardViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : CardViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ProductCardViewHolder {
         val from = LayoutInflater.from(parent.context)
         val binding = ProductCardBinding.inflate(from, parent, false)
-        return CardViewHolder(binding, clickListener)
+        return ProductCardViewHolder(binding, clickListener)
     }
 
-    override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductCardViewHolder, position: Int) {
         holder.bindProduct(products[position])
     }
 

@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="Profile"
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,19 +33,19 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+    <!-- Main Profile-->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fillViewport="true"
-        android:background="#F5F5F5"
-        tools:context=".fragments.profile.ProfileFragment">
+        app:layout_constraintTop_toBottomOf="@+id/profile_toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Profile Header Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,7 +53,6 @@
                 android:gravity="center"
                 android:padding="32dp" >
 
-                <!-- Profile Image -->
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/img_profile"
                     android:layout_width="100dp"
@@ -63,7 +62,6 @@
                     android:background="@drawable/bg_user_guest"
                     android:src="@drawable/ic_user_fill" />
 
-                <!-- User Name -->
                 <TextView
                     android:id="@+id/txt_user_name"
                     android:layout_width="wrap_content"
@@ -74,7 +72,6 @@
                     android:textStyle="bold"
                     android:layout_marginTop="16dp"/>
 
-                <!-- User Email -->
                 <TextView
                     android:id="@+id/txt_user_email"
                     android:layout_width="wrap_content"
@@ -86,7 +83,6 @@
 
             </LinearLayout>
 
-            <!-- Menu Items Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,7 +90,6 @@
                 android:layout_marginTop="16dp"
                 android:paddingHorizontal="16dp">
 
-                <!-- My Orders -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_my_orders"
                     android:layout_width="match_parent"
@@ -102,8 +97,7 @@
                     android:layout_marginBottom="12dp"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
-                    app:strokeWidth="0dp"
-                    app:cardBackgroundColor="@android:color/white">
+                    app:strokeWidth="0dp" >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -112,7 +106,6 @@
                         android:padding="14dp"
                         android:gravity="center_vertical">
 
-                        <!-- Icon Container -->
                         <FrameLayout
                             android:layout_width="48dp"
                             android:layout_height="48dp"
@@ -128,7 +121,6 @@
 
                         </FrameLayout>
 
-                        <!-- Text -->
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -138,7 +130,6 @@
                             android:textColor="@android:color/black"
                             android:textSize="16sp"/>
 
-                        <!-- Arrow -->
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
@@ -150,7 +141,6 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Shipping Address -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_shipping_address"
                     android:layout_width="match_parent"
@@ -158,8 +148,7 @@
                     android:layout_marginBottom="12dp"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
-                    app:strokeWidth="0dp"
-                    app:cardBackgroundColor="@android:color/white">
+                    app:strokeWidth="0dp" >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -168,7 +157,6 @@
                         android:orientation="horizontal"
                         android:padding="14dp">
 
-                        <!-- Icon Container -->
                         <FrameLayout
                             android:layout_width="48dp"
                             android:layout_height="48dp"
@@ -184,7 +172,6 @@
 
                         </FrameLayout>
 
-                        <!-- Text -->
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -194,7 +181,6 @@
                             android:textColor="@android:color/black"
                             android:textSize="16sp" />
 
-                        <!-- Arrow -->
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
@@ -208,32 +194,36 @@
 
             </LinearLayout>
 
-            <!-- Spacer -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-
-            <!-- Log Out Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_logout"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_margin="16dp"
-                android:text="Log Out"
-                android:textColor="@color/red_main"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:backgroundTint="#FFE8E8"
-                app:cornerRadius="12dp"
-                app:iconSize="20dp"
-                app:icon="@drawable/ic_logout"
-                app:iconGravity="textStart"
-                app:iconTint="@color/red_main"
-                style="@style/Widget.MaterialComponents.Button"/>
-
         </LinearLayout>
 
     </ScrollView>
+
+
+    <!-- Log Out Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/border_top"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="16dp"
+            android:text="Log Out"
+            android:textColor="@color/red_main"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"
+            app:backgroundTint="#FFE8E8"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_logout"
+            app:iconGravity="textStart"
+            app:iconTint="@color/red_main"
+            style="@style/Widget.MaterialComponents.Button" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,17 +1,16 @@
-package com.assignment3.fragments.favorites
+package com.assignment3.fragments.cart
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
-import com.assignment3.databinding.FragmentFavoritesBinding
+import com.assignment3.databinding.FragmentCartBinding
 
-class FavoritesFragment : Fragment() {
+class CartFragment : Fragment() {
 
-    private var _binding: FragmentFavoritesBinding? = null
+    private var _binding: FragmentCartBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,15 +21,12 @@ class FavoritesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val favoritesViewModel = ViewModelProvider(this)[FavoritesViewModel::class.java]
+        val cartViewModel = ViewModelProvider(this)[CartViewModel::class.java]
 
-        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        _binding = FragmentCartBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textFavorites
-        favoritesViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+
         return root
     }
 
