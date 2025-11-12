@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.assignment3.R
 import com.assignment3.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
@@ -26,7 +28,20 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
+        val previousFragmentId = findNavController().previousBackStackEntry?.destination?.id
+        if (findNavController().previousBackStackEntry != null && previousFragmentId != R.id.navigation_guest) {
+            binding.txtRegister.setOnClickListener {
+                findNavController().navigateUp()
+            }
+        } else {
+            binding.txtRegister.setOnClickListener {
+                findNavController().navigate(R.id.action_navigation_login_to_navigation_register)
+            }
+        }
 
         return root
     }

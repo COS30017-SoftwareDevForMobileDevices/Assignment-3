@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.assignment3.R
 import com.assignment3.databinding.FragmentGuestProfileBinding
 
 class GuestProfileFragment : Fragment() {
@@ -26,10 +28,17 @@ class GuestProfileFragment : Fragment() {
         _binding = FragmentGuestProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.btnLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_guest_to_navigation_login)
+        }
 
+        binding.btnRegister.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_guest_to_navigation_register)
+        }
 
         return root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
