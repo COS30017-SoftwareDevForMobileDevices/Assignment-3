@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.assignment3.R
 import com.assignment3.databinding.FragmentGuestProfileBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class GuestProfileFragment : Fragment() {
 
@@ -27,6 +28,7 @@ class GuestProfileFragment : Fragment() {
 
         _binding = FragmentGuestProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
 
         binding.btnLogin.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_guest_to_navigation_login)

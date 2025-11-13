@@ -60,6 +60,12 @@
 
 
     <fragment
+        android:id="@+id/navigation_auth_redirect"
+        android:name="com.assignment3.fragments.auth.AuthRedirectFragment"
+        android:label="@string/title_profile"/>
+
+
+    <fragment
         android:id="@+id/navigation_profile"
         android:name="com.assignment3.fragments.profile.ProfileFragment"
         android:label="@string/title_profile"
@@ -75,7 +81,6 @@
         <action
             android:id="@+id/action_navigation_guest_to_navigation_register"
             app:destination="@id/navigation_register"
-
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -84,7 +89,6 @@
         <action
             android:id="@+id/action_navigation_guest_to_navigation_login"
             app:destination="@id/navigation_login"
-
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -104,16 +108,7 @@
         android:id="@+id/navigation_login"
         android:name="com.assignment3.fragments.auth.LoginFragment"
         android:label="@string/title_login"
-        tools:layout="@layout/fragment_login" >
-
-        <action
-            android:id="@+id/action_navigation_login_to_navigation_profile"
-            app:destination="@id/navigation_profile"
-
-            app:enterAnim="@anim/slide_in_bottom"
-            app:exitAnim="@anim/slide_out_top"
-            app:popEnterAnim="@anim/slide_in_top"
-            app:popExitAnim="@anim/slide_out_bottom"/>
+        tools:layout="@layout/fragment_login">
 
         <action
             android:id="@+id/action_navigation_login_to_navigation_register"

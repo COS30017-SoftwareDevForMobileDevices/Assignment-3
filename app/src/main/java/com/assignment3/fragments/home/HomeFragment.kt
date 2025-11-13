@@ -37,7 +37,7 @@ class HomeFragment : Fragment(), ProductClickListener {
         populateProducts()
 
         val homeFragment = this
-        _binding?.recyclerViewProducts?.apply {
+        binding.recyclerViewProducts.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = ProductCardAdapter(productList, homeFragment)
         }

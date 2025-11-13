@@ -22,7 +22,7 @@
         android:title="@string/title_cart" />
 
     <item
-        android:id="@+id/navigation_guest"
+        android:id="@+id/navigation_auth_redirect"
         android:icon="@drawable/ic_user_fill"
         android:title="@string/title_profile" />
 

@@ -38,7 +38,7 @@ class FavoriteFragment : Fragment(), ProductClickListener {
         populateProducts()
 
         val favoriteFragment = this
-        _binding?.recyclerViewProducts?.apply {
+        binding.recyclerViewProducts.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = FavoriteCardAdapter(productList, favoriteFragment)
         }

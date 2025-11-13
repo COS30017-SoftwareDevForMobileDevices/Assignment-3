@@ -27,25 +27,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         val navView: BottomNavigationView = binding.bottomNavView
-
         val navController = findNavController(R.id.fragment_activity_main)
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.navigation_product_detail,
                 R.id.navigation_register,
-                R.id.navigation_login  
-                     -> binding.bottomNavView.visibility = View.GONE
+                R.id.navigation_login
+                    -> binding.bottomNavView.visibility = View.GONE
                 else -> binding.bottomNavView.visibility = View.VISIBLE
             }
         }
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_shop, R.id.navigation_favorites, R.id.navigation_cart, R.id.navigation_profile
-            )
-        )
         navView.setupWithNavController(navController)
     }
 }
