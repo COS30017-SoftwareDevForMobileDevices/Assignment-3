@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "817436376412",
+    "project_id": "sneakvue-f4046",
+    "storage_bucket": "sneakvue-f4046.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817436376412:android:dfb9e59e7df93837dbd599",
+        "android_client_info": {
+          "package_name": "com.assignment3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpI7ady-U6O7HyeiQKxnRA8ekXkTHEHJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

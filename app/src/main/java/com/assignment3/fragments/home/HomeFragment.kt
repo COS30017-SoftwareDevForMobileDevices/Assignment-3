@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.assignment3.databinding.FragmentHomeBinding
 import com.assignment3.models.Product
 import com.assignment3.R
 import com.assignment3.adapters.products.ProductCardAdapter
+import com.assignment3.fragments.shop.ShopViewModel
 import com.assignment3.interfaces.ProductClickListener
 import com.assignment3.models.productList
 import com.assignment3.models.PRODUCT_ID_EXTRA
@@ -29,19 +32,39 @@ class HomeFragment : Fragment(), ProductClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        populateProducts()
+        val viewModel = ViewModelProvider(this)[ShopViewModel::class.java]
+        val adapter = ProductCardAdapter(this)
 
-        val homeFragment = this
         binding.recyclerViewProducts.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = ProductCardAdapter(productList, homeFragment)
+            this.adapter = adapter
         }
 
+        // Observe data
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.uiState.collect { state ->
+                adapter.submitList(state.products)
+            }
+        }
+
+        // Initial load
+        viewModel.loadMoreProducts()
+
+        // Scroll listener for pagination
+        binding.recyclerViewProducts.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                val lastVisible = layoutManager.findLastCompletelyVisibleItemPosition()
+                if (lastVisible == adapter.itemCount - 1) {
+                    viewModel.loadMoreProducts()
+                }
+            }
+        })
         return root
     }
 
@@ -50,19 +73,9 @@ class HomeFragment : Fragment(), ProductClickListener {
         findNavController().navigate(
             R.id.action_navigation_home_to_navigation_product_detail,
             Bundle().apply {
-                putInt(PRODUCT_ID_EXTRA, product.productId)
+                putString(PRODUCT_ID_EXTRA, product.productId)
             }
         )
-    }
-
-
-    private fun populateProducts() {
-        productList.clear()
-
-        productList.add(Product(R.drawable.sneaker, "Jordan 1 High", 239.54, productList.size))
-        productList.add(Product(R.drawable.sneaker, "Jordan 2 High", 239.54, productList.size))
-        productList.add(Product(R.drawable.sneaker, "Jordan 3 High", 239.54, productList.size))
-        productList.add(Product(R.drawable.sneaker, "Jordan 4 High", 239.54, productList.size))
     }
 
 

@@ -6,16 +6,15 @@ import com.assignment3.interfaces.ProductClickListener
 import com.assignment3.models.Product
 
 class ProductCardViewHolder(
-    private val productCardBinding: ProductCardBinding,
+    private val binding: ProductCardBinding,
     private val clickListener: ProductClickListener
-) : RecyclerView.ViewHolder(productCardBinding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bindProduct(product: Product) {
-        productCardBinding.imgProduct.setImageResource(product.imageUrl)
-        productCardBinding.txtProductName.text = product.name
-        productCardBinding.txtProductPrice.text = product.price.toString()
+    fun bindProduct(product: Product) = with(binding) {
+        txtProductName.text = product.name
+        txtProductPrice.text = product.price.toString()
 
-        productCardBinding.cardProduct.setOnClickListener {
+        cardProduct.setOnClickListener {
             clickListener.onClick(product)
         }
     }

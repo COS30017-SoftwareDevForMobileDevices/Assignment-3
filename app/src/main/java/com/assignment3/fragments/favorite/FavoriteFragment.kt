@@ -16,7 +16,8 @@ import com.assignment3.models.PRODUCT_ID_EXTRA
 import com.assignment3.models.Product
 import com.assignment3.models.productList
 
-class FavoriteFragment : Fragment(), ProductClickListener {
+//ProductClickListener
+class FavoriteFragment : Fragment() {
 
     private var _binding: FragmentFavoriteBinding? = null
 
@@ -35,44 +36,27 @@ class FavoriteFragment : Fragment(), ProductClickListener {
         val root: View = binding.root
 
 
-        populateProducts()
-
-        val favoriteFragment = this
-        binding.recyclerViewProducts.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = FavoriteCardAdapter(productList, favoriteFragment)
-        }
+//        populateProducts()
+//
+//        val favoriteFragment = this
+//        binding.recyclerViewProducts.apply {
+//            layoutManager = GridLayoutManager(requireContext(), 2)
+//            adapter = FavoriteCardAdapter(productList, favoriteFragment)
+//        }
 
 
         return root
     }
 
 
-    override fun onClick(product: Product) {
-        findNavController().navigate(
-            R.id.action_navigation_favorites_to_navigation_product_detail,
-            Bundle().apply {
-                putInt(PRODUCT_ID_EXTRA, product.productId)
-            }
-        )
-    }
-
-
-    private fun populateProducts() {
-        productList.clear()
-
-        productList.add(Product(R.drawable.sneaker, "Jordan 1 High", 239.54, productList.size))
-        productList.add(Product(R.drawable.sneaker, "Jordan 2 High", 239.54, productList.size))
-        productList.add(Product(R.drawable.sneaker, "Jordan 3 High", 239.54, productList.size))
-        productList.add(Product(R.drawable.sneaker, "Jordan 4 High", 239.54, productList.size))
-        productList.add(Product(R.drawable.sneaker, "Jordan 5 High", 239.54, productList.size))
-        productList.add(Product(R.drawable.sneaker, "Jordan 6 High", 239.54, productList.size))
-        productList.add(Product(R.drawable.sneaker, "Jordan 7 High", 239.54, productList.size))
-        productList.add(Product(R.drawable.sneaker, "Jordan 8 High", 239.54, productList.size))
-        productList.add(Product(R.drawable.sneaker, "Jordan 9 High", 239.54, productList.size))
-        productList.add(Product(R.drawable.sneaker, "Jordan 10 High", 239.54, productList.size))
-    }
-
+//    override fun onClick(product: Product) {
+//        findNavController().navigate(
+//            R.id.action_navigation_favorites_to_navigation_product_detail,
+//            Bundle().apply {
+//                putInt(PRODUCT_ID_EXTRA, product.productId)
+//            }
+//        )
+//    }
 
 
     override fun onDestroyView() {

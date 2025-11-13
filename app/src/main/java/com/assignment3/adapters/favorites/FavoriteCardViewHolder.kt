@@ -12,7 +12,7 @@ class FavoriteCardViewHolder(
 ) : RecyclerView.ViewHolder(productFavoriteBinding.root) {
 
     fun bindProduct(product: Product) {
-        productFavoriteBinding.imgProduct.setImageResource(product.imageUrl)
+        //productFavoriteBinding.imgProduct.setImageResource(product.imageUrl)
         productFavoriteBinding.txtProductName.text = product.name
         productFavoriteBinding.txtProductPrice.text = product.price.toString()
 

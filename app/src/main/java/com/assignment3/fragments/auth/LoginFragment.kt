@@ -56,7 +56,9 @@ class LoginFragment : Fragment() {
             }
         }
 
-
+        binding.txtForgotPassword.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_login_to_navigation_reset_password)
+        }
 
         val previousFragmentId = findNavController().previousBackStackEntry?.destination?.id
         if (findNavController().previousBackStackEntry != null && previousFragmentId != R.id.navigation_guest) {

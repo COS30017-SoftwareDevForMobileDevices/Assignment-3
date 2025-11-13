@@ -35,13 +35,12 @@ class ProductDetailFragment : Fragment() {
         val root: View = binding.root
 
         arguments?.let {
-            val productId = it.getInt(PRODUCT_ID_EXTRA)
+            val productId = it.getString(PRODUCT_ID_EXTRA)
             val product = productFromId(productId)
 
             Log.d("Product Detail", "Product ID: $productId")
 
             if (product != null) {
-                binding.imgProduct.setImageResource(product.imageUrl)
                 binding.txtProductName.text = product.name
                 binding.txtProductPrice.text = "$" + product.price.toString()
             }
@@ -55,7 +54,7 @@ class ProductDetailFragment : Fragment() {
     }
 
 
-    private fun productFromId(productId: Int) : Product? {
+    private fun productFromId(productId: String?) : Product? {
         for (product in productList) {
             if (product.productId == productId) {
                 return product

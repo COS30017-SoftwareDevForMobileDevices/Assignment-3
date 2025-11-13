@@ -2,11 +2,18 @@ package com.assignment3.models
 
 var productList = mutableListOf<Product>()
 
-val PRODUCT_ID_EXTRA = "productExtra"
+const val PRODUCT_ID_EXTRA = "productExtra"
 
-class Product(
-    var imageUrl: Int,
-    var name: String,
-    var price: Double,
-    var productId: Int = -1
+data class Product(
+    var productId: String = "",
+    val name: String = "",
+    val type: String = "",
+    val brand: String = "",
+    val description: String = "",
+    val price: Double = 0.0,
+    val gender: String = "",
+    val category: String = "",
+    val quantity: Int = 0,
+    val createdAt: String = "",
+    val imageUrl: String = ""
 )

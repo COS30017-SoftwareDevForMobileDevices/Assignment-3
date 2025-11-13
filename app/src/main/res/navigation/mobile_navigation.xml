@@ -119,6 +119,15 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
 
+        <action
+            android:id="@+id/action_navigation_login_to_navigation_reset_password"
+            app:destination="@id/navigation_reset_password"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
     </fragment>
 
 
@@ -145,5 +154,12 @@
         android:name="com.assignment3.fragments.cart.CartFragment"
         android:label="@string/title_cart"
         tools:layout="@layout/fragment_cart" />
+
+
+    <fragment
+        android:id="@+id/navigation_reset_password"
+        android:name="com.assignment3.fragments.resetpassword.ResetPasswordFragment"
+        android:label="@string/title_reset_pwd"
+        tools:layout="@layout/fragment_reset_password" />
 
 </navigation>
