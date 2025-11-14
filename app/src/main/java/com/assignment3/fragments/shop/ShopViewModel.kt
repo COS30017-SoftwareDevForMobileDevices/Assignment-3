@@ -1,5 +1,6 @@
 package com.assignment3.fragments.shop
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.assignment3.models.Product
@@ -15,36 +16,52 @@ class ShopViewModel : ViewModel() {
     private val repository = ProductRepository()
     private val _uiState = MutableStateFlow(ShopUiState())
     val uiState: StateFlow<ShopUiState> = _uiState
+
     private var lastVisible: DocumentSnapshot? = null
     private var isLoadingMore = false
     private var isLastPage = false
+    private val fullProductList = mutableListOf<Product>()
 
     init {
+        Log.d("ShopViewModel", "ViewModel INIT → loadMoreProducts()")
         loadMoreProducts()
     }
 
     fun loadMoreProducts() {
-        if (isLoadingMore || isLastPage) return
-        isLoadingMore = true
-        _uiState.update {
-            it.copy(isLoading = true)
+        if (isLoadingMore || isLastPage) {
+            Log.d("ShopViewModel", "Blocked: loading=$isLoadingMore, lastPage=$isLastPage")
+            return
         }
 
-        viewModelScope.launch {
-            val (newProducts, lastDoc) = repository.fetchProducts(lastVisible)
+        Log.d("ShopViewModel", "START loading more...")
+        isLoadingMore = true
+        _uiState.update { it.copy(isLoading = true) }
 
-            if (newProducts.isEmpty()) {
-                isLastPage = true
-            } else {
-                lastVisible = lastDoc
-                _uiState.update { state ->
-                    state.copy(
-                        products = state.products + newProducts,
-                        isLoading = false
-                    )
+        viewModelScope.launch {
+            try {
+                val (newProducts, lastDoc) = repository.fetchProducts(lastVisible)
+                Log.d("ShopViewModel", "Received ${newProducts.size} products")
+
+                if (newProducts.isEmpty()) {
+                    isLastPage = true
+                    Log.d("ShopViewModel", "END OF LIST")
+                } else {
+                    fullProductList.addAll(newProducts)
+                    lastVisible = lastDoc
+                    _uiState.update {
+                        it.copy(
+                            products = fullProductList.toList(),
+                            isLoading = false
+                        )
+                    }
+                    Log.d("ShopViewModel", "Updated UI: ${fullProductList.size} total")
                 }
+            } catch (e: Exception) {
+                Log.e("ShopViewModel", "Error: ${e.message}", e)
+                _uiState.update { it.copy(isLoading = false, error = e.message) }
+            } finally {
+                isLoadingMore = false
             }
-            isLoadingMore = false
         }
     }
 }

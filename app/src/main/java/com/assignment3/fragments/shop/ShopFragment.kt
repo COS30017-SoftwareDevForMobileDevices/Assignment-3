@@ -1,10 +1,13 @@
 package com.assignment3.fragments.shop
 
 import android.os.Bundle
+import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -21,6 +24,10 @@ class ShopFragment : Fragment(), ProductClickListener {
 
     private var _binding: FragmentShopBinding? = null
     private val binding get() = _binding!!
+    private val adapter = ProductCardAdapter(this)
+
+    private val viewModel: ShopViewModel by viewModels()
+    private var savedRecyclerViewState: Parcelable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,40 +35,55 @@ class ShopFragment : Fragment(), ProductClickListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentShopBinding.inflate(inflater, container, false)
-        val root = binding.root
 
-        val viewModel = ViewModelProvider(this)[ShopViewModel::class.java]
-        val adapter = ProductCardAdapter(this)
+        setupRecyclerView()
+        setupObservers()
+        setupPagination()
 
-        binding.recyclerViewProducts.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            this.adapter = adapter
+        // Restore state after the layoutManager is set
+        savedRecyclerViewState?.let { state ->
+            binding.recyclerViewProducts.layoutManager?.onRestoreInstanceState(state)
         }
 
-        // Observe data
+        return binding.root
+    }
+
+    // Reusable RecyclerView with reusable adapter for performance
+    private fun setupRecyclerView() {
+        binding.recyclerViewProducts.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = this@ShopFragment.adapter
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun setupObservers() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.uiState.collect { state ->
                 adapter.submitList(state.products)
             }
         }
+    }
 
-        // Initial load
-        viewModel.loadMoreProducts()
-
-        // Scroll listener for pagination
-        binding.recyclerViewProducts.addOnScrollListener(object :
-            RecyclerView.OnScrollListener() {
+    private fun setupPagination() {
+        binding.recyclerViewProducts.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
+
+                // Skip if scrolling up
+                if (dy <= 0) return
+
                 val layoutManager = recyclerView.layoutManager as GridLayoutManager
-                val lastVisible = layoutManager.findLastCompletelyVisibleItemPosition()
-                if (lastVisible == adapter.itemCount - 1) {
+                val totalItemCount = layoutManager.itemCount
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+
+                // Load if 3 rows of products passed
+                if (lastVisibleItemPosition >= totalItemCount) {
+                    Log.d("Shop Fragment", "Load more...")
                     viewModel.loadMoreProducts()
                 }
             }
         })
-
-        return root
     }
 
 
@@ -76,6 +98,8 @@ class ShopFragment : Fragment(), ProductClickListener {
 
 
     override fun onDestroyView() {
+        // Save state before destruction
+        savedRecyclerViewState = binding.recyclerViewProducts.layoutManager?.onSaveInstanceState()
         super.onDestroyView()
         _binding = null
     }

@@ -1,6 +1,7 @@
 package com.assignment3.repositories
 
 import com.assignment3.models.Product
+import com.assignment3.models.productList
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -29,6 +30,8 @@ class ProductRepository {
                 productId = doc.id
             }
         }
+
+        productList.addAll(products)
 
         // Returns the list of fetched documents and the last document in the list
         val lastDoc = snapshot.documents.lastOrNull()
