@@ -8,29 +8,24 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.assignment3.R
 import com.assignment3.databinding.FragmentRegisterBinding
-import com.assignment3.fragments.guest.GuestProfileFragment
-import com.google.firebase.auth.FirebaseAuth
+import kotlin.getValue
 
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
-    private lateinit var firebaseAuth: FirebaseAuth
+    private val viewModel: AuthViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val registerViewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
-
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -38,22 +33,24 @@ class RegisterFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        firebaseAuth = FirebaseAuth.getInstance()
 
+        // Handle register logic
         binding.btnRegister.setOnClickListener {
-            // val fullName = binding.editName.text.toString()
+            val fullName = binding.editName.text.toString()
             val email = binding.editEmail.text.toString()
             val password = binding.editPassword.text.toString()
             val confirmPassword = binding.editConfirmPassword.text.toString()
 
             // Validation checking
-            if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
+            if (fullName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
                 if (password == confirmPassword) {
-                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-                        if (it.isSuccessful) {
+                    viewModel.register(fullName, email, password)
+                    viewModel.registerResult.observe(viewLifecycleOwner) { result ->
+                        result.onSuccess {
                             findNavController().navigate(R.id.action_navigation_register_to_navigation_login)
-                        } else {
-                            Toast.makeText(requireContext(), it.exception.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                        result.onFailure { e ->
+                            Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
                         }
                     }
                 } else {
@@ -65,9 +62,7 @@ class RegisterFragment : Fragment() {
         }
 
 
-
-
-
+        // Avoid nested navigation between login and register
         val previousFragmentId = findNavController().previousBackStackEntry?.destination?.id
         if (findNavController().previousBackStackEntry != null && previousFragmentId != R.id.navigation_guest) {
             binding.txtLogin.setOnClickListener {
@@ -78,7 +73,6 @@ class RegisterFragment : Fragment() {
                 findNavController().navigate(R.id.action_navigation_register_to_navigation_login)
             }
         }
-
 
         return root
     }

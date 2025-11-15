@@ -55,6 +55,33 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+    <ProgressBar
+        android:id="@+id/progress_bar_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/product_detail_toolbar"/>
+
+
+    <TextView
+        android:id="@+id/txt_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Product not found"
+        android:textColor="#646464"
+        android:letterSpacing="0.1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_detail_toolbar"/>
+
+
     <!-- Main product view-->
     <ScrollView
         android:layout_width="match_parent"
@@ -206,105 +233,134 @@
                     android:scrollbars="none"
                     android:layout_marginBottom="24dp">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        <RadioGroup
+                            android:id="@+id/radio_group_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_size_7"
-                            android:layout_width="70dp"
-                            android:layout_height="56dp"
-                            android:layout_marginEnd="8dp"
-                            android:text="7"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            app:cornerRadius="8dp"
-                            app:strokeColor="#E0E0E0"
-                            app:strokeWidth="1dp"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                            <RadioButton
+                                android:id="@+id/radio_size_7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_button_radio_size"
+                                android:button="@null"
+                                android:text="7"
+                                android:textColor="@drawable/txt_color_radio_size"
+                                android:textSize="16sp"
+                                android:paddingVertical="10dp"
+                                android:paddingHorizontal="25dp"
+                                android:layout_margin="4dp" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_size_7_5"
-                            android:layout_width="70dp"
-                            android:layout_height="56dp"
-                            android:layout_marginEnd="8dp"
-                            android:text="7.5"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            app:cornerRadius="8dp"
-                            app:strokeColor="#E0E0E0"
-                            app:strokeWidth="1dp"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                            <RadioButton
+                                android:id="@+id/radio_size_7.5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_button_radio_size"
+                                android:button="@null"
+                                android:text="7.5"
+                                android:textColor="@drawable/txt_color_radio_size"
+                                android:textSize="16sp"
+                                android:paddingVertical="10dp"
+                                android:paddingHorizontal="25dp"
+                                android:layout_margin="4dp" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_size_8"
-                            android:layout_width="70dp"
-                            android:layout_height="56dp"
-                            android:layout_marginEnd="8dp"
-                            android:text="8"
-                            android:textColor="#FFFFFF"
-                            android:textSize="16sp"
-                            app:backgroundTint="#000000"
-                            app:cornerRadius="8dp"
-                            style="@style/Widget.MaterialComponents.Button"/>
+                            <RadioButton
+                                android:id="@+id/radio_size_8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_button_radio_size"
+                                android:button="@null"
+                                android:text="8"
+                                android:textColor="@drawable/txt_color_radio_size"
+                                android:textSize="16sp"
+                                android:paddingVertical="10dp"
+                                android:paddingHorizontal="25dp"
+                                android:layout_margin="4dp" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_size_8_5"
-                            android:layout_width="70dp"
-                            android:layout_height="56dp"
-                            android:layout_marginEnd="8dp"
-                            android:text="8.5"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            app:cornerRadius="8dp"
-                            app:strokeColor="#E0E0E0"
-                            app:strokeWidth="1dp"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                            <RadioButton
+                                android:id="@+id/radio_size_8.5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_button_radio_size"
+                                android:button="@null"
+                                android:text="8.5"
+                                android:textColor="@drawable/txt_color_radio_size"
+                                android:textSize="16sp"
+                                android:paddingVertical="10dp"
+                                android:paddingHorizontal="25dp"
+                                android:layout_margin="4dp" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_size_9"
-                            android:layout_width="70dp"
-                            android:layout_height="56dp"
-                            android:layout_marginEnd="8dp"
-                            android:text="9"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            app:cornerRadius="8dp"
-                            app:strokeColor="#E0E0E0"
-                            app:strokeWidth="1dp"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                            <RadioButton
+                                android:id="@+id/radio_size_9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_button_radio_size"
+                                android:button="@null"
+                                android:text="9"
+                                android:textColor="@drawable/txt_color_radio_size"
+                                android:textSize="16sp"
+                                android:paddingVertical="10dp"
+                                android:paddingHorizontal="25dp"
+                                android:layout_margin="4dp" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_size_9_5"
-                            android:layout_width="70dp"
-                            android:layout_height="56dp"
-                            android:layout_marginEnd="8dp"
-                            android:text="9.5"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            app:cornerRadius="8dp"
-                            app:strokeColor="#E0E0E0"
-                            app:strokeWidth="1dp"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                            <RadioButton
+                                android:id="@+id/radio_size_9.5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_button_radio_size"
+                                android:button="@null"
+                                android:text="9.5"
+                                android:textColor="@drawable/txt_color_radio_size"
+                                android:textSize="16sp"
+                                android:paddingVertical="10dp"
+                                android:paddingHorizontal="25dp"
+                                android:layout_margin="4dp" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_size_10"
-                            android:layout_width="70dp"
-                            android:layout_height="56dp"
-                            android:text="10"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            app:cornerRadius="8dp"
-                            app:strokeColor="#E0E0E0"
-                            app:strokeWidth="1dp"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+                            <RadioButton
+                                android:id="@+id/radio_size_10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_button_radio_size"
+                                android:button="@null"
+                                android:text="10"
+                                android:textColor="@drawable/txt_color_radio_size"
+                                android:textSize="16sp"
+                                android:paddingVertical="10dp"
+                                android:paddingHorizontal="25dp"
+                                android:layout_margin="4dp" />
 
-                    </LinearLayout>
+                            <RadioButton
+                                android:id="@+id/radio_size_10.5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_button_radio_size"
+                                android:button="@null"
+                                android:text="10.5"
+                                android:textColor="@drawable/txt_color_radio_size"
+                                android:textSize="16sp"
+                                android:paddingVertical="10dp"
+                                android:paddingHorizontal="25dp"
+                                android:layout_margin="4dp" />
+
+                            <RadioButton
+                                android:id="@+id/radio_size_11"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_button_radio_size"
+                                android:button="@null"
+                                android:text="11"
+                                android:textColor="@drawable/txt_color_radio_size"
+                                android:textSize="16sp"
+                                android:paddingVertical="10dp"
+                                android:paddingHorizontal="25dp"
+                                android:layout_margin="4dp" />
+
+                        </RadioGroup>
 
                 </HorizontalScrollView>
 
-                <!-- Product Description Title -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -314,7 +370,6 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="12dp"/>
 
-                <!-- Product Description Text -->
                 <TextView
                     android:id="@+id/txt_product_description"
                     android:layout_width="match_parent"
@@ -324,17 +379,6 @@
                     android:textSize="12sp"
                     android:lineSpacingExtra="4dp"
                     android:layout_marginBottom="8dp"/>
-
-                <!-- Read More Button -->
-                <TextView
-                    android:id="@+id/txt_read_more"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Read More"
-                    android:textColor="#444343"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:paddingVertical="8dp"/>
 
             </LinearLayout>
 

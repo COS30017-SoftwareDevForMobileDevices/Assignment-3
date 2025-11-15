@@ -12,10 +12,14 @@ class ProductCardViewHolder(
 
     fun bindProduct(product: Product) = with(binding) {
         txtProductName.text = product.name
-        txtProductPrice.text = product.price.toString()
+        txtProductPrice.text = "$${product.price.toString()}"
+
+        btnFavorite.setOnClickListener {
+            clickListener.onFavoriteClick(product)
+        }
 
         cardProduct.setOnClickListener {
-            clickListener.onClick(product)
+            clickListener.onProductClick(product)
         }
     }
 }

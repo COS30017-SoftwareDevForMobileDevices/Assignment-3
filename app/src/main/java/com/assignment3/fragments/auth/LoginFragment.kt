@@ -6,20 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.assignment3.R
 import com.assignment3.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+    private val viewModel: AuthViewModel by viewModels()
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreateView(
@@ -27,8 +24,6 @@ class LoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -44,11 +39,13 @@ class LoginFragment : Fragment() {
 
             // Validation checking
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        findNavController().navigate(R.id.navigation_auth_redirect)
-                    } else {
-                        Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_SHORT).show()
+                viewModel.login(email, password)
+                viewModel.loginResult.observe(viewLifecycleOwner) { result ->
+                    result.onSuccess {
+                        findNavController().navigate(R.id.navigation_profile)
+                    }
+                    result.onFailure { e ->
+                        Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
                     }
                 }
             } else {
@@ -56,10 +53,13 @@ class LoginFragment : Fragment() {
             }
         }
 
+
         binding.txtForgotPassword.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_login_to_navigation_reset_password)
         }
 
+
+        // Avoid nested navigation between login and register
         val previousFragmentId = findNavController().previousBackStackEntry?.destination?.id
         if (findNavController().previousBackStackEntry != null && previousFragmentId != R.id.navigation_guest) {
             binding.txtRegister.setOnClickListener {

@@ -45,6 +45,18 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    <ProgressBar
+        android:id="@+id/progress_bar_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/profile_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
     <!-- Main Profile-->
     <ScrollView
         android:layout_width="match_parent"
@@ -74,10 +86,22 @@
                     android:src="@drawable/ic_user_fill" />
 
                 <TextView
+                    android:id="@+id/txt_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="User data not found"
+                    android:textColor="#646464"
+                    android:letterSpacing="0.1"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginTop="16dp"/>
+
+                <TextView
                     android:id="@+id/txt_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Alex Jordan"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -87,7 +111,6 @@
                     android:id="@+id/txt_user_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="alex.jordan@email.com"
                     android:textColor="#757575"
                     android:textSize="16sp"
                     android:layout_marginTop="8dp"/>

@@ -3,11 +3,18 @@ package com.assignment3.fragments.favorite
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.assignment3.repositories.FavoriteRepository
+import kotlinx.coroutines.launch
 
-class FavoriteViewModel : ViewModel() {
+class FavoriteViewModel(
+    private val repository: FavoriteRepository = FavoriteRepository()
+) : ViewModel() {
+    private val _addFavoriteResult = MutableLiveData<Result<Boolean>>()
+    val addFavoriteResult: LiveData<Result<Boolean>> get() = _addFavoriteResult
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is favorite Fragment"
+    fun addProductToFavorite(userId: String, productId: String) = viewModelScope.launch {
+        _addFavoriteResult.value = repository.addProductToFavorite(userId, productId)
     }
-    val text: LiveData<String> = _text
+
 }

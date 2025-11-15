@@ -6,15 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import com.assignment3.R
-import com.assignment3.adapters.favorites.FavoriteCardAdapter
 import com.assignment3.databinding.FragmentFavoriteBinding
-import com.assignment3.interfaces.ProductClickListener
-import com.assignment3.models.PRODUCT_ID_EXTRA
-import com.assignment3.models.Product
-import com.assignment3.models.productList
 
 //ProductClickListener
 class FavoriteFragment : Fragment() {

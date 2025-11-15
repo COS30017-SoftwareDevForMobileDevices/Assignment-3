@@ -1,16 +1,20 @@
-package com.assignment3.fragments.cart
+package com.assignment3.fragments.order
 
+import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.assignment3.R
 import com.assignment3.databinding.FragmentCartBinding
+import com.assignment3.databinding.FragmentOrderBinding
+import com.assignment3.fragments.cart.CartViewModel
 
-class CartFragment : Fragment() {
+class OrderFragment : Fragment() {
 
-    private var _binding: FragmentCartBinding? = null
+    private var _binding: FragmentOrderBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -18,9 +22,9 @@ class CartFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val cartViewModel = ViewModelProvider(this)[CartViewModel::class.java]
+        val orderViewModel = ViewModelProvider(this)[OrderViewModel::class.java]
 
-        _binding = FragmentCartBinding.inflate(inflater, container, false)
+        _binding = FragmentOrderBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
 

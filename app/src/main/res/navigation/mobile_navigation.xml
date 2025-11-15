@@ -24,24 +24,6 @@
 
 
     <fragment
-        android:id="@+id/navigation_shop"
-        android:name="com.assignment3.fragments.shop.ShopFragment"
-        android:label="@string/title_shop"
-        tools:layout="@layout/fragment_shop">
-
-        <action
-            android:id="@+id/action_navigation_shop_to_navigation_product_detail"
-            app:destination="@id/navigation_product_detail"
-
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-
-    </fragment>
-
-
-    <fragment
         android:id="@+id/navigation_favorites"
         android:name="com.assignment3.fragments.favorite.FavoriteFragment"
         android:label="@string/title_favorite"
@@ -161,5 +143,12 @@
         android:name="com.assignment3.fragments.resetpassword.ResetPasswordFragment"
         android:label="@string/title_reset_pwd"
         tools:layout="@layout/fragment_reset_password" />
+
+
+    <fragment
+        android:id="@+id/navigation_order"
+        android:name="com.assignment3.fragments.order.OrderFragment"
+        android:label="fragment_order"
+        tools:layout="@layout/fragment_order" />
 
 </navigation>

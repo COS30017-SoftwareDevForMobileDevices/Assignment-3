@@ -11,13 +11,13 @@ class FavoriteCardViewHolder(
     private val clickListener: ProductClickListener
 ) : RecyclerView.ViewHolder(productFavoriteBinding.root) {
 
-    fun bindProduct(product: Product) {
-        //productFavoriteBinding.imgProduct.setImageResource(product.imageUrl)
-        productFavoriteBinding.txtProductName.text = product.name
+    fun bindProduct(product: Product) = with(productFavoriteBinding)  {
+        //imgProduct.setImageResource(product.imageUrl)
+        txtProductName.text = product.name
         productFavoriteBinding.txtProductPrice.text = product.price.toString()
 
-        productFavoriteBinding.favoriteProduct.setOnClickListener {
-            clickListener.onClick(product)
+        favoriteProduct.setOnClickListener {
+            clickListener.onProductClick(product)
         }
     }
 }
