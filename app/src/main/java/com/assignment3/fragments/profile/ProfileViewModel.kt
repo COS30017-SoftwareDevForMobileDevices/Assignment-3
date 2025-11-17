@@ -32,9 +32,4 @@ class ProfileViewModel(
             _loading.value = false
         }
     }
-
-
-    fun logout() {
-        firebaseAuth.signOut()
-    }
 }

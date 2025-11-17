@@ -16,10 +16,10 @@ import com.assignment3.databinding.FragmentHomeBinding
 import com.assignment3.models.Product
 import com.assignment3.R
 import com.assignment3.adapters.products.ProductCardAdapter
-import com.assignment3.adapters.products.ProductCardViewHolder
 import com.assignment3.fragments.auth.AuthViewModel
 import com.assignment3.fragments.favorite.FavoriteViewModel
 import com.assignment3.interfaces.ProductClickListener
+import com.assignment3.models.PRODUCT_FAVORITE_CHECK
 import com.assignment3.models.PRODUCT_ID_EXTRA
 import kotlinx.coroutines.launch
 
@@ -32,7 +32,6 @@ class HomeFragment : Fragment(), ProductClickListener {
     private val authViewModel: AuthViewModel by viewModels()
 
     private lateinit var adapter: ProductCardAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,15 +67,54 @@ class HomeFragment : Fragment(), ProductClickListener {
 
 
     private fun observeUiState() {
+        // Initial favorites load
+        val userId = authViewModel.firebaseUser?.uid
+        if (userId != null) favoriteViewModel.loadFavorites(userId)
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeViewModel.uiState.collect { state ->
-                    adapter.submitList(state.products.toList()) {
-                        binding.recyclerViewProducts.requestLayout()
-                        binding.progressBarBottom.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+
+                launch {
+                    homeViewModel.uiState.collect { state ->
+                        val products = state.products
+
+                        val favoriteIds = favoriteViewModel.favorites.value ?: emptyList()
+
+                        // Combine products + favorites
+                        val updated = products.map { p ->
+                            p.copy(isFavorite = favoriteIds.contains(p.productId))
+                        }
+
+                        adapter.submitList(updated) {
+                            binding.recyclerViewProducts.requestLayout()
+                            binding.progressBarBottom.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+                        }
+                    }
+                }
+
+                // Observe auth changes and load favorites when user logs in
+                launch {
+                    authViewModel.firebaseUserFlow.collect { user ->
+                        val uId = user?.uid
+                        if (uId != null) {
+                            favoriteViewModel.loadFavorites(uId)
+                        } else {
+                            favoriteViewModel.clearFavorites()
+                        }
                     }
                 }
             }
+        }
+
+        // Observe favorites updates
+        favoriteViewModel.favorites.observe(viewLifecycleOwner) { favIds ->
+            val products = homeViewModel.uiState.value.products
+
+            val updated = products.map { p ->
+                p.copy(isFavorite = favIds.contains(p.productId))
+            }
+
+            adapter.submitList(updated)
         }
     }
 
@@ -86,21 +124,19 @@ class HomeFragment : Fragment(), ProductClickListener {
             R.id.action_navigation_home_to_navigation_product_detail,
             Bundle().apply {
                 putString(PRODUCT_ID_EXTRA, product.productId)
+                putBoolean(PRODUCT_FAVORITE_CHECK, product.isFavorite)
             }
         )
-    }
 
+    }
 
     override fun onFavoriteClick(product: Product) {
         if (authViewModel.isLoggedIn()) {
-            favoriteViewModel.addProductToFavorite(authViewModel.firebaseUser!!.uid, product.productId)
-
-
+            favoriteViewModel.toggleFavorite(authViewModel.firebaseUser!!.uid, product.productId)
         } else {
             Toast.makeText(requireContext(), "Login to perform this", Toast.LENGTH_SHORT).show()
         }
     }
-
 
     override fun onDestroyView() {
         _binding = null

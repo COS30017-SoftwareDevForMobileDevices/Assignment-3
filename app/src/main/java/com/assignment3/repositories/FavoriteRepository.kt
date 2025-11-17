@@ -29,4 +29,45 @@ class FavoriteRepository {
             Result.failure(e)
         }
     }
+
+    suspend fun fetchUserFavorites(userId: String): List<String> {
+        return try {
+            db.collection("favorites")
+                .whereEqualTo("user_id", userId)
+                .get()
+                .await()
+                .documents
+                .map { it.getString("product_id")!! }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    suspend fun getFavoriteDocId(userId: String, productId: String): String? {
+        return try {
+            val snapshot = db.collection("favorites")
+                .whereEqualTo("user_id", userId)
+                .whereEqualTo("product_id", productId)
+                .get()
+                .await()
+
+            if (snapshot.documents.isNotEmpty()) snapshot.documents[0].id else null
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    suspend fun toggleFavorite(userId: String, productId: String): Boolean {
+        val existingId = getFavoriteDocId(userId, productId)
+
+        // Check and uncheck favorite
+        return if (existingId != null) {
+            db.collection("favorites").document(existingId).delete().await()
+            false
+        } else {
+            addProductToFavorite(userId, productId)
+            true
+        }
+    }
+
 }

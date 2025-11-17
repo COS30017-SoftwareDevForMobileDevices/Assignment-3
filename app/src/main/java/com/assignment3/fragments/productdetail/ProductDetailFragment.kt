@@ -18,6 +18,7 @@ import com.assignment3.R
 import com.assignment3.databinding.FragmentProductDetailBinding
 import com.assignment3.fragments.auth.AuthViewModel
 import com.assignment3.fragments.favorite.FavoriteViewModel
+import com.assignment3.models.PRODUCT_FAVORITE_CHECK
 import com.assignment3.models.PRODUCT_ID_EXTRA
 import com.assignment3.models.Product
 import com.assignment3.models.productList
@@ -33,11 +34,13 @@ class ProductDetailFragment : Fragment() {
     private val authViewModel: AuthViewModel by viewModels()
     private val favoriteViewModel: FavoriteViewModel by viewModels()
     private var productId: String? = null
+    private var isFavorite: Boolean? = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         productId = arguments?.getString(PRODUCT_ID_EXTRA)
+        isFavorite = arguments?.getBoolean(PRODUCT_FAVORITE_CHECK)
     }
 
 
@@ -66,7 +69,9 @@ class ProductDetailFragment : Fragment() {
 
         binding.btnFavoriteTop.setOnClickListener {
             if (authViewModel.isLoggedIn()) {
-                favoriteViewModel.addProductToFavorite(authViewModel.firebaseUser!!.uid, productId!!)
+                isFavorite = !isFavorite!!
+                updateFavoriteIcon()
+                favoriteViewModel.toggleFavorite(authViewModel.firebaseUser!!.uid, productId!!)
             } else {
                 Toast.makeText(requireContext(), "Login to perform this", Toast.LENGTH_SHORT).show()
             }
@@ -115,10 +120,20 @@ class ProductDetailFragment : Fragment() {
 
     private fun displayProduct(product: Product) {
         with(binding) {
+            updateFavoriteIcon()
             txtProductName.text = product.name
             txtProductPrice.text = "$${product.price.toString()}"
             txtBrand.text = product.brand
             txtProductDescription.text = product.description
+        }
+    }
+
+
+    private fun updateFavoriteIcon() {
+        if (isFavorite!!) {
+            binding.btnFavoriteTop.setImageResource(R.drawable.ic_favorite_fill_red)
+        } else {
+            binding.btnFavoriteTop.setImageResource(R.drawable.ic_favorite_outline)
         }
     }
 

@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.assignment3.databinding.FragmentProfileBinding
 import com.assignment3.R
+import com.assignment3.fragments.auth.AuthViewModel
 import com.assignment3.models.Product
 import com.assignment3.models.User
 import com.assignment3.repositories.ProfileRepository
@@ -24,7 +25,8 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: ProfileViewModel by viewModels()
+    private val profileViewModel: ProfileViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -41,11 +43,11 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Load data
-        viewModel.loadUserProfile()
+        profileViewModel.loadUserProfile()
 
         // Observe user data
         lifecycleScope.launchWhenStarted {
-            viewModel.user.collect { user ->
+            profileViewModel.user.collect { user ->
                 if (user != null) {
                     binding.txtUserName.text = user.fullName
                     binding.txtUserEmail.text = user.email
@@ -55,13 +57,13 @@ class ProfileFragment : Fragment() {
 
         // Observe loading state
         lifecycleScope.launchWhenStarted {
-            viewModel.loading.collect { isLoading ->
+            profileViewModel.loading.collect { isLoading ->
                 binding.progressBarBottom.visibility = if (isLoading) View.VISIBLE else View.GONE
             }
         }
 
         binding.btnLogout.setOnClickListener {
-            viewModel.logout()
+            authViewModel.logout()
             findNavController().navigate(R.id.navigation_auth_redirect)
         }
     }

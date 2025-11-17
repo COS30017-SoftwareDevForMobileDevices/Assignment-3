@@ -1,6 +1,7 @@
 package com.assignment3.adapters.products
 
 import androidx.recyclerview.widget.RecyclerView
+import com.assignment3.R
 import com.assignment3.databinding.ProductCardBinding
 import com.assignment3.interfaces.ProductClickListener
 import com.assignment3.models.Product
@@ -11,6 +12,12 @@ class ProductCardViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bindProduct(product: Product) = with(binding) {
+        if (product.isFavorite) {
+            btnFavorite.setImageResource(R.drawable.ic_favorite_fill_red)
+        } else {
+            btnFavorite.setImageResource(R.drawable.ic_favorite_outline)
+        }
+
         txtProductName.text = product.name
         txtProductPrice.text = "$${product.price.toString()}"
 
@@ -22,4 +29,5 @@ class ProductCardViewHolder(
             clickListener.onProductClick(product)
         }
     }
+
 }
