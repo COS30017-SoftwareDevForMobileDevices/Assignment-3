@@ -78,7 +78,7 @@ class HomeFragment : Fragment(), ProductClickListener {
                     homeViewModel.uiState.collect { state ->
                         val products = state.products
 
-                        val favoriteIds = favoriteViewModel.favorites.value ?: emptyList()
+                        val favoriteIds = favoriteViewModel.favoritesIds.value ?: emptyList()
 
                         // Combine products + favorites
                         val updated = products.map { p ->
@@ -107,7 +107,7 @@ class HomeFragment : Fragment(), ProductClickListener {
         }
 
         // Observe favorites updates
-        favoriteViewModel.favorites.observe(viewLifecycleOwner) { favIds ->
+        favoriteViewModel.favoritesIds.observe(viewLifecycleOwner) { favIds ->
             val products = homeViewModel.uiState.value.products
 
             val updated = products.map { p ->

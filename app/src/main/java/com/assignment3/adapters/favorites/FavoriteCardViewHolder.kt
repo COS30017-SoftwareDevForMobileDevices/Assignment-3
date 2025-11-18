@@ -1,7 +1,7 @@
 package com.assignment3.adapters.favorites
 
 import androidx.recyclerview.widget.RecyclerView
-import com.assignment3.databinding.ProductCardBinding
+import com.assignment3.R
 import com.assignment3.databinding.ProductFavoriteBinding
 import com.assignment3.interfaces.ProductClickListener
 import com.assignment3.models.Product
@@ -12,16 +12,28 @@ class FavoriteCardViewHolder(
     private val clickListener: ProductClickListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bindProduct(product: Product) = with(binding) {
-        Glide.with(binding.imgProduct.context)
+    fun bindFavorite(product: Product) = with(binding) {
+        Glide.with(imgProduct.context)
             .load(product.imageUrl)
-            .into(binding.imgProduct)
+            .into(imgProduct)
 
         txtProductName.text = product.name
-        binding.txtProductPrice.text = product.price.toString()
+        txtProductPrice.text = product.price.toString()
 
+        // Set the whole card click to go to details
         favoriteProduct.setOnClickListener {
             clickListener.onProductClick(product)
+        }
+
+        if (product.isFavorite) {
+            btnFavorite.setImageResource(R.drawable.ic_favorite_fill_red)
+        } else {
+            btnFavorite.setImageResource(R.drawable.ic_favorite_outline)
+        }
+
+        // Set click listener for toggling favorite
+        btnFavorite.setOnClickListener {
+            clickListener.onFavoriteClick(product)
         }
     }
 }

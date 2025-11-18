@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
-
-    private val repository = ProductRepository()
+class HomeViewModel(
+    private val repository: ProductRepository = ProductRepository()
+) : ViewModel() {
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState
 

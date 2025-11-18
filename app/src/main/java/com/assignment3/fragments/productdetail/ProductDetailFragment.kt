@@ -23,6 +23,7 @@ import com.assignment3.models.PRODUCT_ID_EXTRA
 import com.assignment3.models.Product
 import com.assignment3.models.productList
 import com.assignment3.repositories.ProductRepository
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
 
@@ -121,8 +122,11 @@ class ProductDetailFragment : Fragment() {
     private fun displayProduct(product: Product) {
         with(binding) {
             updateFavoriteIcon()
+            Glide.with(binding.imgProduct.context)
+                .load(product.imageUrl)
+                .into(binding.imgProduct)
             txtProductName.text = product.name
-            txtProductPrice.text = "$${product.price.toString()}"
+            txtProductPrice.text = "$${product.price}"
             txtBrand.text = product.brand
             txtProductDescription.text = product.description
         }

@@ -43,11 +43,10 @@
                 android:layout_height="35dp"
                 android:layout_gravity="top|end"
                 android:layout_margin="12dp"
-                android:background="@drawable/bg_button_cart"
+                android:background="@drawable/bg_button_favorite"
                 android:contentDescription="Add to favorites"
                 android:scaleType="centerInside"
-                android:padding="8dp"
-                android:src="@drawable/ic_cart_red" />
+                android:padding="8dp"  />
 
         </FrameLayout>
 

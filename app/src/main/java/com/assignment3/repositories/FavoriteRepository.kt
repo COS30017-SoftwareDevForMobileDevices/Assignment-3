@@ -1,5 +1,6 @@
 package com.assignment3.repositories
 
+import com.assignment3.models.Product
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import java.time.ZoneId
@@ -30,18 +31,65 @@ class FavoriteRepository {
         }
     }
 
-    suspend fun fetchUserFavorites(userId: String): List<String> {
+    suspend fun fetchUserFavoriteId(userId: String): List<String> {
         return try {
             db.collection("favorites")
                 .whereEqualTo("user_id", userId)
                 .get()
                 .await()
                 .documents
-                .map { it.getString("product_id")!! }
+                .mapNotNull { it.getString("product_id") }
         } catch (e: Exception) {
             emptyList()
         }
     }
+
+
+    suspend fun fetchUserFavorites(userId: String): List<Product> {
+        return try {
+            val favoriteDocs = db.collection("favorites")
+                .whereEqualTo("user_id", userId)
+                .get()
+                .await()
+
+            val productIds = favoriteDocs.documents.mapNotNull {
+                it.getString("product_id")
+            }
+
+            if (productIds.isEmpty()) return emptyList()
+
+            val products = mutableListOf<Product>()
+            for (productId in productIds) {
+                val doc = db.collection("products").document(productId).get().await()
+                if (doc.exists()) {
+                    val product = doc.toObject(Product::class.java)
+                    product?.productId = doc.id
+                    if (product != null) {
+                        products.add(product)
+                    }
+                }
+            }
+            products
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    suspend fun getProduct(productId: String): Product? {
+        return try {
+            val doc = db.collection("products").document(productId).get().await()
+            if (doc.exists()) {
+                val product = doc.toObject(Product::class.java)
+                product?.productId = doc.id
+                product
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
+
 
     suspend fun getFavoriteDocId(userId: String, productId: String): String? {
         return try {
@@ -62,11 +110,15 @@ class FavoriteRepository {
 
         // Check and uncheck favorite
         return if (existingId != null) {
-            db.collection("favorites").document(existingId).delete().await()
-            false
+            try {
+                db.collection("favorites").document(existingId).delete().await()
+                false
+            } catch (e: Exception) {
+                false
+            }
         } else {
-            addProductToFavorite(userId, productId)
-            true
+            val addResult = addProductToFavorite(userId, productId)
+            addResult.isSuccess
         }
     }
 

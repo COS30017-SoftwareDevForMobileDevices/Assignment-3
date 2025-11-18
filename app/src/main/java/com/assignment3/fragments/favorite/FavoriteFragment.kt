@@ -5,50 +5,127 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import com.assignment3.R
+import com.assignment3.adapters.favorites.FavoriteCardAdapter
 import com.assignment3.databinding.FragmentFavoriteBinding
+import com.assignment3.fragments.auth.AuthViewModel
+import com.assignment3.interfaces.ProductClickListener
+import com.assignment3.models.PRODUCT_FAVORITE_CHECK
+import com.assignment3.models.PRODUCT_ID_EXTRA
+import com.assignment3.models.Product
+import kotlinx.coroutines.launch
 
-//ProductClickListener
-class FavoriteFragment : Fragment() {
+class FavoriteFragment : Fragment(), ProductClickListener {
 
     private var _binding: FragmentFavoriteBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+    private val authViewModel: AuthViewModel by viewModels()
+    private val favoriteViewModel: FavoriteViewModel by viewModels()
+
+    private lateinit var adapter: FavoriteCardAdapter
+
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        adapter = FavoriteCardAdapter(this)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val favoriteViewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]
-
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-
-//        populateProducts()
-//
-//        val favoriteFragment = this
-//        binding.recyclerViewProducts.apply {
-//            layoutManager = GridLayoutManager(requireContext(), 2)
-//            adapter = FavoriteCardAdapter(productList, favoriteFragment)
-//        }
-
-
-        return root
+        return binding.root
     }
 
 
-//    override fun onClick(product: Product) {
-//        findNavController().navigate(
-//            R.id.action_navigation_favorites_to_navigation_product_detail,
-//            Bundle().apply {
-//                putInt(PRODUCT_ID_EXTRA, product.productId)
-//            }
-//        )
-//    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById<View>(R.id.container)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(0, 0, 0, systemBars.bottom)
+            insets
+        }
+
+        setupRecycler()
+        observeState()
+
+        // Initial load if logged in
+        if (authViewModel.isLoggedIn()) {
+            favoriteViewModel.loadFavorites(authViewModel.firebaseUser!!.uid)
+        }
+    }
+
+
+    private fun setupRecycler() {
+        binding.recyclerViewProducts.apply {
+            setHasFixedSize(true)
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = this@FavoriteFragment.adapter
+        }
+    }
+
+
+    private fun observeState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+
+                // Observe auth changes to reload favorites
+                launch {
+                    authViewModel.firebaseUserFlow.collect { user ->
+                        val userId = user?.uid
+                        if (userId != null) {
+                            favoriteViewModel.loadFavorites(userId)
+                        } else {
+                            adapter.submitList(emptyList())
+                        }
+                    }
+                }
+
+                // Observe UI state from ViewModel
+                launch {
+                    favoriteViewModel.uiState.collect { state ->
+                        binding.progressBarBottom.visibility =
+                            if (state.isLoading) View.VISIBLE else View.GONE
+
+                        adapter.submitList(state.favorites) {
+                            binding.recyclerViewProducts.requestLayout()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    // Product Click Events
+    override fun onProductClick(product: Product) {
+        findNavController().navigate(
+            R.id.action_navigation_favorites_to_navigation_product_detail,
+            Bundle().apply {
+                putString(PRODUCT_ID_EXTRA, product.productId)
+                putBoolean(PRODUCT_FAVORITE_CHECK, product.isFavorite)
+            }
+        )
+    }
+
+
+    override fun onFavoriteClick(product: Product) {
+        val userId = authViewModel.firebaseUser?.uid ?: return
+        favoriteViewModel.toggleFavorite(userId, product.productId)
+    }
 
 
     override fun onDestroyView() {
