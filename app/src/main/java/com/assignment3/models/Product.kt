@@ -1,5 +1,7 @@
 package com.assignment3.models
 
+import com.google.firebase.firestore.PropertyName
+
 var productList = mutableListOf<Product>()
 
 const val PRODUCT_ID_EXTRA = "productExtra"
@@ -16,6 +18,9 @@ data class Product(
     val category: String = "",
     val quantity: Int = 0,
     val createdAt: String = "",
-    val imageUrl: String = "",
+
+    @get:PropertyName("image_url")
+    @set:PropertyName("image_url")
+    var imageUrl: String = "",
     var isFavorite: Boolean = false
 )

@@ -116,47 +116,10 @@
                         android:id="@+id/img_product"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerInside"
+                        android:scaleType="centerCrop"
                         android:background="#EBEBEB"
                         android:padding="40dp"
-                        android:src="@drawable/sneaker"
                         android:contentDescription="Product Image" />
-
-
-                    <!-- Image Indicator Dots -->
-                    <!--                <LinearLayout-->
-                    <!--                    android:id="@+id/dots_indicator"-->
-                    <!--                    android:layout_width="wrap_content"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    android:layout_gravity="bottom|center_horizontal"-->
-                    <!--                    android:layout_marginBottom="16dp"-->
-                    <!--                    android:orientation="horizontal">-->
-
-                    <!--                    <View-->
-                    <!--                        android:layout_width="8dp"-->
-                    <!--                        android:layout_height="8dp"-->
-                    <!--                        android:layout_margin="4dp"-->
-                    <!--                        android:background="@drawable/dot_selected"/>-->
-
-                    <!--                    <View-->
-                    <!--                        android:layout_width="8dp"-->
-                    <!--                        android:layout_height="8dp"-->
-                    <!--                        android:layout_margin="4dp"-->
-                    <!--                        android:background="@drawable/dot_unselected"/>-->
-
-                    <!--                    <View-->
-                    <!--                        android:layout_width="8dp"-->
-                    <!--                        android:layout_height="8dp"-->
-                    <!--                        android:layout_margin="4dp"-->
-                    <!--                        android:background="@drawable/dot_unselected"/>-->
-
-                    <!--                    <View-->
-                    <!--                        android:layout_width="8dp"-->
-                    <!--                        android:layout_height="8dp"-->
-                    <!--                        android:layout_margin="4dp"-->
-                    <!--                        android:background="@drawable/dot_unselected"/>-->
-
-                    <!--                </LinearLayout>-->
 
                 </FrameLayout>
 

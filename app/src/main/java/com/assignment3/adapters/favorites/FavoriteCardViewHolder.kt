@@ -5,16 +5,20 @@ import com.assignment3.databinding.ProductCardBinding
 import com.assignment3.databinding.ProductFavoriteBinding
 import com.assignment3.interfaces.ProductClickListener
 import com.assignment3.models.Product
+import com.bumptech.glide.Glide
 
 class FavoriteCardViewHolder(
-    private val productFavoriteBinding: ProductFavoriteBinding,
+    private val binding: ProductFavoriteBinding,
     private val clickListener: ProductClickListener
-) : RecyclerView.ViewHolder(productFavoriteBinding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bindProduct(product: Product) = with(productFavoriteBinding)  {
-        //imgProduct.setImageResource(product.imageUrl)
+    fun bindProduct(product: Product) = with(binding) {
+        Glide.with(binding.imgProduct.context)
+            .load(product.imageUrl)
+            .into(binding.imgProduct)
+
         txtProductName.text = product.name
-        productFavoriteBinding.txtProductPrice.text = product.price.toString()
+        binding.txtProductPrice.text = product.price.toString()
 
         favoriteProduct.setOnClickListener {
             clickListener.onProductClick(product)

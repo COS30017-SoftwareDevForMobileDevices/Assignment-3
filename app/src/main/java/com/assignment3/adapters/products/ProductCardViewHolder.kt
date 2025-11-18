@@ -5,6 +5,7 @@ import com.assignment3.R
 import com.assignment3.databinding.ProductCardBinding
 import com.assignment3.interfaces.ProductClickListener
 import com.assignment3.models.Product
+import com.bumptech.glide.Glide
 
 class ProductCardViewHolder(
     private val binding: ProductCardBinding,
@@ -18,8 +19,12 @@ class ProductCardViewHolder(
             btnFavorite.setImageResource(R.drawable.ic_favorite_outline)
         }
 
+        Glide.with(binding.imgProduct.context)
+            .load(product.imageUrl)
+            .into(binding.imgProduct)
+
         txtProductName.text = product.name
-        txtProductPrice.text = "$${product.price.toString()}"
+        txtProductPrice.text = "$${product.price}"
 
         btnFavorite.setOnClickListener {
             clickListener.onFavoriteClick(product)

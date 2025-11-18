@@ -20,7 +20,7 @@
             android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:src="@drawable/sneaker" />
+            android:background="#E2E2E2" />
 
         <TextView
             android:id="@+id/text_view_product_name"

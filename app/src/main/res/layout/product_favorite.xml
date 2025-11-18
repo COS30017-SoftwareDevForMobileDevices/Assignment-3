@@ -33,7 +33,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="Product Image"
-                android:background="@drawable/sneaker" />
+                android:background="#E2E2E2"
+                android:scaleType="centerCrop"/>
 
             <!-- Favorite Button -->
             <ImageButton
