@@ -14,7 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.assignment3.R
-import com.assignment3.adapters.favorites.FavoriteCardAdapter
+import com.assignment3.adapters.products.ProductCardAdapter
 import com.assignment3.databinding.FragmentFavoriteBinding
 import com.assignment3.fragments.auth.AuthViewModel
 import com.assignment3.interfaces.ProductClickListener
@@ -31,13 +31,13 @@ class FavoriteFragment : Fragment(), ProductClickListener {
     private val authViewModel: AuthViewModel by viewModels()
     private val favoriteViewModel: FavoriteViewModel by viewModels()
 
-    private lateinit var adapter: FavoriteCardAdapter
+    private lateinit var adapter: ProductCardAdapter
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = FavoriteCardAdapter(this)
+        adapter = ProductCardAdapter(this)
     }
 
 
@@ -53,7 +53,7 @@ class FavoriteFragment : Fragment(), ProductClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById<View>(R.id.container)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.container)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(0, 0, 0, systemBars.bottom)
             insets
@@ -97,10 +97,8 @@ class FavoriteFragment : Fragment(), ProductClickListener {
                 // Observe UI state from ViewModel
                 launch {
                     favoriteViewModel.uiState.collect { state ->
-                        binding.progressBarBottom.visibility =
-                            if (state.isLoading) View.VISIBLE else View.GONE
-
                         adapter.submitList(state.favorites) {
+                            binding.progressBarBottom.visibility = if (state.isLoading) View.VISIBLE else View.GONE
                             binding.recyclerViewProducts.requestLayout()
                         }
                     }

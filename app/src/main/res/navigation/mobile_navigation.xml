@@ -135,7 +135,18 @@
         android:id="@+id/navigation_cart"
         android:name="com.assignment3.fragments.cart.CartFragment"
         android:label="@string/title_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+
+        <action
+            android:id="@+id/action_navigation_cart_to_navigation_checkout"
+            app:destination="@id/navigation_checkout"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
 
 
     <fragment
@@ -148,7 +159,14 @@
     <fragment
         android:id="@+id/navigation_order"
         android:name="com.assignment3.fragments.order.OrderFragment"
-        android:label="fragment_order"
+        android:label="@string/title_order"
         tools:layout="@layout/fragment_order" />
+
+
+    <fragment
+        android:id="@+id/navigation_checkout"
+        android:name="com.assignment3.fragments.checkout.CheckoutFragment"
+        android:label="@string/title_checkout"
+        tools:layout="@layout/fragment_checkout" />
 
 </navigation>

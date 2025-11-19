@@ -1,25 +1,20 @@
 package com.assignment3.repositories
 
+import android.util.Log
 import com.assignment3.models.Product
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.coroutines.tasks.await
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 
 class FavoriteRepository {
     private val db = FirebaseFirestore.getInstance()
 
     suspend fun addProductToFavorite(userId: String, productId: String): Result<Boolean> {
         return try {
-            val zoned = ZonedDateTime.now(ZoneId.of("UTC+7"))
-            val formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy 'at' h:mm:ss a 'UTC+7'")
-            val formattedCurrentTime = zoned.format(formatter)
-
             val data = mapOf(
                 "user_id" to userId,
                 "product_id" to productId,
-                "created_at" to formattedCurrentTime
+                "created_at" to com.google.firebase.Timestamp.now()
             )
 
             db.collection("favorites").add(data).await()
@@ -49,6 +44,7 @@ class FavoriteRepository {
         return try {
             val favoriteDocs = db.collection("favorites")
                 .whereEqualTo("user_id", userId)
+                .orderBy("created_at", Query.Direction.DESCENDING)
                 .get()
                 .await()
 
@@ -71,6 +67,7 @@ class FavoriteRepository {
             }
             products
         } catch (e: Exception) {
+            Log.e("FirestoreError", "Error fetching favorites", e)
             emptyList()
         }
     }

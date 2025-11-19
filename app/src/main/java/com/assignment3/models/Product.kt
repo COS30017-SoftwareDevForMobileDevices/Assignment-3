@@ -16,11 +16,13 @@ data class Product(
     val price: Double = 0.0,
     val gender: String = "",
     val category: String = "",
-    val quantity: Int = 0,
+    var quantity: Int = 0,
     val createdAt: String = "",
 
     @get:PropertyName("image_url")
     @set:PropertyName("image_url")
     var imageUrl: String = "",
+
+    var size: Double = 0.0,
     var isFavorite: Boolean = false
 )

@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
     implementation(libs.glide)
+    implementation(libs.androidx.recyclerview)
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.compiler)
     testImplementation(libs.junit)

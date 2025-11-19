@@ -1,31 +1,141 @@
 package com.assignment3.fragments.cart
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
+import com.assignment3.R
+import com.assignment3.adapters.orders.CartCardAdapter
+import com.assignment3.adapters.products.ProductCardAdapter
 import com.assignment3.databinding.FragmentCartBinding
+import com.assignment3.fragments.auth.AuthViewModel
+import com.assignment3.interfaces.CartClickListener
+import com.assignment3.repositories.CartRepository
+import kotlinx.coroutines.launch
 
-class CartFragment : Fragment() {
+class CartFragment : Fragment(), CartClickListener {
 
     private var _binding: FragmentCartBinding? = null
     private val binding get() = _binding!!
+    private val cartViewModel: CartViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
+    private val repository: CartRepository = CartRepository()
+
+    private lateinit var adapter: CartCardAdapter
+
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        adapter = CartCardAdapter(this)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val cartViewModel = ViewModelProvider(this)[CartViewModel::class.java]
-
         _binding = FragmentCartBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-
-        return root
+        return binding.root
     }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.container)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(0, 0, 0, systemBars.bottom)
+            insets
+        }
+
+        setupRecycler()
+        observeState()
+
+        // Initial load if logged in
+        if (authViewModel.isLoggedIn()) {
+            cartViewModel.loadAllCartProducts(authViewModel.firebaseUser!!.uid)
+        }
+    }
+
+
+    private fun setupRecycler() {
+        binding.recyclerCartItems.apply {
+            setHasFixedSize(true)
+            layoutManager = GridLayoutManager(requireContext(), 1)
+            adapter = this@CartFragment.adapter
+        }
+    }
+
+
+    private fun observeState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                // Observe auth changes
+                launch {
+                    authViewModel.firebaseUserFlow.collect { user ->
+                        user?.uid?.let { cartViewModel.loadAllCartProducts(it) }
+                    }
+                }
+
+                // Observe list data
+                launch {
+                    cartViewModel.cartUIState.collect { state ->
+                        binding.progressBarBottom.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+                        adapter.submitList(state.cartItems) {
+                            binding.recyclerCartItems.requestLayout()
+                        }
+                        Log.d("Cart Fragment", state.cartItems.toString())
+                    }
+                }
+            }
+        }
+    }
+
+
+    override fun onIncreaseClick(cartItemId: String) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val result = repository.increaseQuantity(cartItemId)
+            if (result.isSuccess) {
+                cartViewModel.loadAllCartProducts(authViewModel.firebaseUser!!.uid)
+            } else {
+
+            }
+        }
+    }
+
+    override fun onDecreaseClick(cartItemId: String) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val result = repository.decreaseQuantity(cartItemId)
+            if (result.isSuccess) {
+                cartViewModel.loadAllCartProducts(authViewModel.firebaseUser!!.uid)
+            } else {
+                // Handle error
+            }
+        }
+    }
+
+    override fun onDeleteClick(cartItemId: String) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val result = repository.deleteCartItem(cartItemId)
+            if (result.isSuccess) {
+                cartViewModel.loadAllCartProducts(authViewModel.firebaseUser!!.uid)
+            } else {
+                // Handle error
+            }
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

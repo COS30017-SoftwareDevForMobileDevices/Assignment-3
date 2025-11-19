@@ -7,22 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.assignment3.R
 import com.assignment3.databinding.FragmentProductDetailBinding
 import com.assignment3.fragments.auth.AuthViewModel
+import com.assignment3.fragments.cart.CartViewModel
 import com.assignment3.fragments.favorite.FavoriteViewModel
 import com.assignment3.models.PRODUCT_FAVORITE_CHECK
 import com.assignment3.models.PRODUCT_ID_EXTRA
 import com.assignment3.models.Product
-import com.assignment3.models.productList
-import com.assignment3.repositories.ProductRepository
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
@@ -31,9 +32,10 @@ class ProductDetailFragment : Fragment() {
 
     private var _binding: FragmentProductDetailBinding? = null
     private val binding get() = _binding!!
-    private val repository = ProductRepository()
     private val authViewModel: AuthViewModel by viewModels()
     private val favoriteViewModel: FavoriteViewModel by viewModels()
+    private val productDetailViewModel: ProductDetailViewModel by viewModels()
+    private val cartViewModel: CartViewModel by viewModels()
     private var productId: String? = null
     private var isFavorite: Boolean? = false
 
@@ -79,7 +81,22 @@ class ProductDetailFragment : Fragment() {
         }
 
         binding.btnAddToCart.setOnClickListener {
+            if (authViewModel.isLoggedIn()) {
+                val checkedId = binding.radioGroupSize.checkedRadioButtonId
 
+                if (checkedId == -1) {
+                    Toast.makeText(requireContext(), "Please select a size", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                val checkedRadioSize: RadioButton = binding.root.findViewById(checkedId)
+                val selectedSize = checkedRadioSize.text.toString().toDouble()
+
+                cartViewModel.addCartItem(authViewModel.firebaseUser!!.uid, productId!!, selectedSize)
+                Toast.makeText(requireContext(), "Added successfully, check your cart!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Login to perform this", Toast.LENGTH_SHORT).show()
+            }
         }
 
         return binding.root
@@ -89,32 +106,32 @@ class ProductDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Apply insets
         ViewCompat.setOnApplyWindowInsetsListener(view.findViewById<View>(R.id.container)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(0, 0, 0, systemBars.bottom)
             insets
         }
 
+        // Observe product from ViewModel
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                productDetailViewModel.product.collect { product ->
+                    if (product != null) {
+                        binding.progressBarBottom.visibility = View.GONE
+                        displayProduct(product)
+                    }
+                }
+            }
+        }
+
+        // Fetch product
         productId?.let {
-            fetchProductDetails(it)
+            binding.progressBarBottom.visibility = View.VISIBLE
+            productDetailViewModel.fetchProductById(it)
         } ?: run {
             binding.txtError.text = "No product ID provided"
             binding.txtError.visibility = View.VISIBLE
-        }
-    }
-
-
-    private fun fetchProductDetails(id: String) {
-        binding.progressBarBottom.visibility = View.VISIBLE
-        viewLifecycleOwner.lifecycleScope.launch {
-            val product = repository.fetchProductById(id)
-            binding.progressBarBottom.visibility = View.GONE
-            if (product != null) {
-                displayProduct(product)
-                binding.txtError.visibility = View.GONE
-            } else {
-                binding.txtError.visibility = View.VISIBLE
-            }
         }
     }
 
