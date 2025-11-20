@@ -8,5 +8,9 @@ data class User(
 
     @get:PropertyName("full_name")
     @set:PropertyName("full_name")
-    var fullName: String = ""
+    var fullName: String = "",
+
+    @get:PropertyName("shipping_addresses")
+    @set:PropertyName("shipping_addresses")
+    var shippingAddresses: List<ShippingAddress> = emptyList()
 )

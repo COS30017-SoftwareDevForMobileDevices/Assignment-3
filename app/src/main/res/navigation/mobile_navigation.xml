@@ -51,7 +51,18 @@
         android:id="@+id/navigation_profile"
         android:name="com.assignment3.fragments.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_shipping"
+            app:destination="@id/navigation_shipping"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
 
 
     <fragment
@@ -168,5 +179,11 @@
         android:name="com.assignment3.fragments.checkout.CheckoutFragment"
         android:label="@string/title_checkout"
         tools:layout="@layout/fragment_checkout" />
+
+    <fragment
+        android:id="@+id/navigation_shipping"
+        android:name="com.assignment3.fragments.profile.shipping.ShippingFragment"
+        android:label="@string/title_shipping"
+        tools:layout="@layout/fragment_shipping" />
 
 </navigation>

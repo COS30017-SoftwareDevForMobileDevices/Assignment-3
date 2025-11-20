@@ -13,4 +13,5 @@
     <string name="title_register">Register</string>
     <string name="title_reset_pwd">Reset Password</string>
     <string name="title_checkout">Checkout</string>
+    <string name="title_shipping">Shipping information</string>
 </resources>

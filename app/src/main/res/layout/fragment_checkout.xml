@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:id="@+id/container">
 
     <!-- Top Navigation Bar -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,7 +73,7 @@
                 android:id="@+id/txt_order_items_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="Order Items"
                 android:textColor="#000000"
@@ -85,25 +85,24 @@
 
             <!-- RecyclerView for Order Items -->
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_order_items"
+                android:id="@+id/recycler_checkout_items"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_order_items_title"
                 tools:itemCount="3"
-                tools:listitem="@layout/item_order" />
+                tools:listitem="@layout/product_checkout" />
 
             <!-- Shipping Information Section -->
             <TextView
                 android:id="@+id/txt_shipping_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:text="Shipping Information"
                 android:textColor="#000000"
@@ -111,13 +110,13 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/btn_change"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_order_items" />
+                app:layout_constraintTop_toBottomOf="@id/recycler_checkout_items" />
 
             <TextView
                 android:id="@+id/btn_change"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="16dp"
                 android:text="Change"
                 android:textColor="#FF0000"
                 android:textSize="14sp"
@@ -130,7 +129,7 @@
                 android:id="@+id/img_phone"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:src="@drawable/ic_phone"
                 android:contentDescription="Phone"
@@ -143,7 +142,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="16dp"
                 android:text="+1 (555) 123-4567"
                 android:textColor="#000000"
                 android:textSize="14sp"
@@ -157,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="2dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="16dp"
                 android:text="Phone Number"
                 android:textColor="#999999"
                 android:textSize="12sp"
@@ -170,7 +169,7 @@
                 android:id="@+id/img_location"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:src="@drawable/ic_location"
                 android:contentDescription="Location"
@@ -183,7 +182,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="16dp"
                 android:text="123 Sneakerhead Ave. Apt 4B"
                 android:textColor="#000000"
                 android:textSize="14sp"
@@ -197,7 +196,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="2dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="16dp"
                 android:text="New York, NY 10001"
                 android:textColor="#999999"
                 android:textSize="12sp"
@@ -210,7 +209,7 @@
                 android:id="@+id/txt_payment_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:text="Payment Method"
                 android:textColor="#000000"
@@ -233,12 +232,11 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="16dp">
 
                     <RadioButton
-                        android:id="@+id/rb_coin_balance"
+                        android:id="@+id/rb_kicks_coin"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_button_radio_coin"
@@ -265,8 +263,8 @@
                         android:textSize="14sp"
                         android:layout_marginEnd="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/rb_coin_balance"
-                        app:layout_constraintBottom_toBottomOf="@id/rb_coin_balance"/>
+                        app:layout_constraintTop_toTopOf="@id/rb_kicks_coin"
+                        app:layout_constraintBottom_toBottomOf="@id/rb_kicks_coin"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -275,8 +273,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="12dp">
 
                     <RadioButton
@@ -323,7 +320,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/border_top"
-        android:padding="16dp"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/scroll_view"
         app:layout_constraintEnd_toEndOf="parent"
@@ -405,15 +403,15 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="14dp"
-            android:layout_marginBottom="64dp"
             android:text="Pay now"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
             app:backgroundTint="@color/red_main"
-            app:cornerRadius="8dp"
+            app:cornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_total_label"
             style="@style/Widget.MaterialComponents.Button"/>
 

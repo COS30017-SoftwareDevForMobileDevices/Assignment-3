@@ -5,9 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.assignment3.fragments.favorite.FavoriteViewModel
 import com.assignment3.models.CartItem
-import com.assignment3.models.Product
 import com.assignment3.repositories.CartRepository
 import com.assignment3.repositories.FavoriteRepository
 import kotlinx.coroutines.flow.MutableStateFlow

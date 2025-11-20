@@ -44,6 +44,19 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    <TextView
+        android:id="@+id/txt_no_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nothing here, please login"
+        android:textColor="#767676"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
     <!-- Cart Items RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_cart_items"
@@ -71,8 +84,8 @@
         android:textColor="@android:color/white"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:backgroundTint="@color/red_main"
-        app:cornerRadius="8dp"
+        app:backgroundTint="@drawable/bg_button_state"
+        app:cornerRadius="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

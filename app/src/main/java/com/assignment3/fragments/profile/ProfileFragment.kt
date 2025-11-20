@@ -1,6 +1,7 @@
 package com.assignment3.fragments.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +36,13 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+
+        binding.cardShippingAddress.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_navigation_profile_to_navigation_shipping
+            )
+        }
+
         return binding.root
     }
 
@@ -52,6 +60,7 @@ class ProfileFragment : Fragment() {
                     binding.txtUserName.text = user.fullName
                     binding.txtUserEmail.text = user.email
                 }
+                Log.d("Profile Fragment", user.toString())
             }
         }
 

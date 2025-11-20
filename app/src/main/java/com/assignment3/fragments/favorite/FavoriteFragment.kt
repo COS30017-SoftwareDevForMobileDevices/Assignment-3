@@ -88,7 +88,10 @@ class FavoriteFragment : Fragment(), ProductClickListener {
                         val userId = user?.uid
                         if (userId != null) {
                             favoriteViewModel.loadFavorites(userId)
+                            binding.txtNoLogin.visibility = View.GONE
                         } else {
+                            favoriteViewModel.clearFavorites()
+                            binding.txtNoLogin.visibility = View.VISIBLE
                             adapter.submitList(emptyList())
                         }
                     }

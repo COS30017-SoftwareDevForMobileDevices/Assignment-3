@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.viewModels
@@ -13,6 +14,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.assignment3.R
 import com.assignment3.adapters.orders.CartCardAdapter
@@ -20,6 +22,8 @@ import com.assignment3.adapters.products.ProductCardAdapter
 import com.assignment3.databinding.FragmentCartBinding
 import com.assignment3.fragments.auth.AuthViewModel
 import com.assignment3.interfaces.CartClickListener
+import com.assignment3.models.PRODUCT_FAVORITE_CHECK
+import com.assignment3.models.PRODUCT_ID_EXTRA
 import com.assignment3.repositories.CartRepository
 import kotlinx.coroutines.launch
 
@@ -47,6 +51,17 @@ class CartFragment : Fragment(), CartClickListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCartBinding.inflate(inflater, container, false)
+
+        binding.btnCheckout.setOnClickListener {
+            val currentCartItems = cartViewModel.cartUIState.value.cartItems
+            findNavController().navigate(
+                R.id.action_navigation_cart_to_navigation_checkout,
+                Bundle().apply {
+                    putParcelableArrayList("cart_items", ArrayList(currentCartItems))
+                }
+            )
+        }
+
         return binding.root
     }
 
@@ -84,7 +99,13 @@ class CartFragment : Fragment(), CartClickListener {
                 // Observe auth changes
                 launch {
                     authViewModel.firebaseUserFlow.collect { user ->
-                        user?.uid?.let { cartViewModel.loadAllCartProducts(it) }
+                        if (user?.uid != null) {
+                            cartViewModel.loadAllCartProducts(user.uid)
+                            binding.txtNoLogin.visibility = View.GONE
+                        } else {
+                            cartViewModel.clearCartItems()
+                            binding.txtNoLogin.visibility = View.VISIBLE
+                        }
                     }
                 }
 
@@ -95,6 +116,7 @@ class CartFragment : Fragment(), CartClickListener {
                         adapter.submitList(state.cartItems) {
                             binding.recyclerCartItems.requestLayout()
                         }
+                        binding.btnCheckout.isEnabled = !state.isLoading && state.cartItems.isNotEmpty()
                         Log.d("Cart Fragment", state.cartItems.toString())
                     }
                 }
@@ -109,7 +131,7 @@ class CartFragment : Fragment(), CartClickListener {
             if (result.isSuccess) {
                 cartViewModel.loadAllCartProducts(authViewModel.firebaseUser!!.uid)
             } else {
-
+                Toast.makeText(requireContext(), "An error occurred, try again later!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -120,7 +142,7 @@ class CartFragment : Fragment(), CartClickListener {
             if (result.isSuccess) {
                 cartViewModel.loadAllCartProducts(authViewModel.firebaseUser!!.uid)
             } else {
-                // Handle error
+                Toast.makeText(requireContext(), "An error occurred, try again later!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -131,7 +153,7 @@ class CartFragment : Fragment(), CartClickListener {
             if (result.isSuccess) {
                 cartViewModel.loadAllCartProducts(authViewModel.firebaseUser!!.uid)
             } else {
-                // Handle error
+                Toast.makeText(requireContext(), "An error occurred, try again later!", Toast.LENGTH_SHORT).show()
             }
         }
     }

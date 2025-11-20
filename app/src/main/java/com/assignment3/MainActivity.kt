@@ -35,6 +35,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_register,
                 R.id.navigation_login,
                 R.id.navigation_reset_password,
+                R.id.navigation_checkout,
+                R.id.navigation_shipping
                     -> binding.bottomNavView.visibility = View.GONE
                 else -> binding.bottomNavView.visibility = View.VISIBLE
             }
