@@ -28,11 +28,15 @@ class ShippingViewModel(
         viewModelScope.launch {
             try {
                 val addresses = repository.getShippingAddresses(userId)
+
+                val defaultAddress = addresses.firstOrNull { it.isDefault }
+
                 _shippingUIState.update {
                     it.copy(
                         isLoading = false,
                         error = null,
-                        addresses = addresses
+                        addresses = addresses,
+                        defaultAddress = defaultAddress
                     )
                 }
             } catch (e: Exception) {
@@ -44,6 +48,12 @@ class ShippingViewModel(
                 }
             }
         }
+    }
+
+
+    // Get default address
+    fun getDefaultAddress(): ShippingAddress? {
+        return shippingUIState.value.defaultAddress
     }
 
 
@@ -146,6 +156,7 @@ class ShippingViewModel(
 
 data class ShippingUIState(
     val addresses: List<ShippingAddress> = emptyList(),
+    val defaultAddress: ShippingAddress? = ShippingAddress(),
     val isLoading: Boolean = false,
     val error: String? = null
 )

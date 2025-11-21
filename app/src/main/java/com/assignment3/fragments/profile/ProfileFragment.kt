@@ -59,6 +59,7 @@ class ProfileFragment : Fragment() {
                 if (user != null) {
                     binding.txtUserName.text = user.fullName
                     binding.txtUserEmail.text = user.email
+                    binding.txtUserBalance.text = "Your balance: $${user.walletBalance}"
                 }
                 Log.d("Profile Fragment", user.toString())
             }

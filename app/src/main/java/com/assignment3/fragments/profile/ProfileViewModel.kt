@@ -32,4 +32,22 @@ class ProfileViewModel(
             _loading.value = false
         }
     }
+
+
+    fun updateWallet(amount: Long) {
+        val uid = firebaseAuth.currentUser?.uid ?: return
+
+        viewModelScope.launch {
+            _loading.value = true
+
+            val success = repository.updateWalletBalance(uid, amount)
+
+            if (success) {
+                // Refresh user profile so UI updates immediately
+                _user.value = repository.getUserInfoById(uid)
+            }
+
+            _loading.value = false
+        }
+    }
 }

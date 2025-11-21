@@ -16,7 +16,8 @@ class AuthRepository {
 
             val data = mapOf(
                 "full_name" to fullName,
-                "email" to user.email
+                "email" to user.email,
+                "wallet_balance" to 10000
             )
 
             db.collection("users").document(user.uid).set(data).await()

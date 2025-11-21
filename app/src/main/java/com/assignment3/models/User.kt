@@ -12,5 +12,9 @@ data class User(
 
     @get:PropertyName("shipping_addresses")
     @set:PropertyName("shipping_addresses")
-    var shippingAddresses: List<ShippingAddress> = emptyList()
+    var shippingAddresses: List<ShippingAddress> = emptyList(),
+
+    @get:PropertyName("wallet_balance")
+    @set:PropertyName("wallet_balance")
+    var walletBalance: Long = 0L
 )

@@ -124,85 +124,155 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/txt_shipping_title" />
 
-            <!-- Phone Number -->
-            <ImageView
-                android:id="@+id/img_phone"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_phone"
-                android:contentDescription="Phone"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/shipping_info_container"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_shipping_title"
-                app:tint="#666666" />
+                app:layout_constraintTop_toBottomOf="@id/txt_shipping_title">
+
+                <!-- Shipping name -->
+                <ImageView
+                    android:id="@+id/img_user"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:paddingTop="7dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_user_fill"
+                    android:contentDescription="User"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#666666" />
+
+                <TextView
+                    android:id="@+id/txt_shipping_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Gia Huy"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_user"
+                    app:layout_constraintTop_toTopOf="@id/img_user" />
+
+                <TextView
+                    android:id="@+id/txt_name_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Shipping Name"
+                    android:textColor="#999999"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_user"
+                    app:layout_constraintTop_toBottomOf="@id/txt_shipping_name" />
+
+                <!-- Phone Number -->
+                <ImageView
+                    android:id="@+id/img_phone"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:paddingTop="7dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_phone"
+                    android:contentDescription="Phone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_name_label"
+                    app:tint="#666666" />
+
+                <TextView
+                    android:id="@+id/txt_phone_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="+1 (555) 123-4567"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_phone"
+                    app:layout_constraintTop_toTopOf="@id/img_phone" />
+
+                <TextView
+                    android:id="@+id/txt_phone_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Phone Number"
+                    android:textColor="#999999"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_phone"
+                    app:layout_constraintTop_toBottomOf="@id/txt_phone_number" />
+
+                <!-- Address -->
+                <ImageView
+                    android:id="@+id/img_location"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:paddingTop="7dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_location"
+                    android:contentDescription="Location"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_phone_label"
+                    app:tint="#666666" />
+
+                <TextView
+                    android:id="@+id/txt_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="123 Sneakerhead Ave. Apt 4B"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_location"
+                    app:layout_constraintTop_toTopOf="@id/img_location" />
+
+                <TextView
+                    android:id="@+id/txt_city"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Viet Nam, VN 700000"
+                    android:textColor="#999999"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_location"
+                    app:layout_constraintTop_toBottomOf="@id/txt_address" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
             <TextView
-                android:id="@+id/txt_phone_number"
-                android:layout_width="0dp"
+                android:id="@+id/txt_no_shipping"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="16dp"
-                android:text="+1 (555) 123-4567"
-                android:textColor="#000000"
+                android:layout_marginTop="20dp"
+                android:text="No Shipping Information Yet"
+                android:visibility="gone"
+                android:textColor="#5B5B5B"
                 android:textSize="14sp"
+                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/img_phone"
-                app:layout_constraintTop_toTopOf="@id/img_phone" />
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shipping_info_container" />
 
-            <TextView
-                android:id="@+id/txt_phone_label"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="16dp"
-                android:text="Phone Number"
-                android:textColor="#999999"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/img_phone"
-                app:layout_constraintTop_toBottomOf="@id/txt_phone_number" />
-
-            <!-- Address -->
-            <ImageView
-                android:id="@+id/img_location"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_location"
-                android:contentDescription="Location"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_phone_label"
-                app:tint="#666666" />
-
-            <TextView
-                android:id="@+id/txt_address"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="16dp"
-                android:text="123 Sneakerhead Ave. Apt 4B"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/img_location"
-                app:layout_constraintTop_toTopOf="@id/img_location" />
-
-            <TextView
-                android:id="@+id/txt_city"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="16dp"
-                android:text="New York, NY 10001"
-                android:textColor="#999999"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/img_location"
-                app:layout_constraintTop_toBottomOf="@id/txt_address" />
 
             <!-- Payment Method Section -->
             <TextView
@@ -216,7 +286,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_city" />
+                app:layout_constraintTop_toBottomOf="@id/txt_no_shipping" />
 
             <!-- Coin Balance -->
             <RadioGroup
@@ -227,47 +297,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_payment_title">
-
-                <!-- Kicks coin -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="16dp">
-
-                    <RadioButton
-                        android:id="@+id/rb_kicks_coin"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_button_radio_coin"
-                        android:button="@null"
-                        android:checked="true"
-                        android:drawableStart="@drawable/ic_verified"
-                        android:drawableTint="@android:color/holo_blue_dark"
-                        android:drawablePadding="12dp"
-                        android:gravity="center_vertical"
-                        android:padding="16dp"
-                        android:text="Kicks Coin"
-                        android:textColor="@drawable/txt_color_radio_size"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-                    <TextView
-                        android:id="@+id/txt_coin_amount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$25.00"
-                        android:textColor="#999999"
-                        android:textSize="14sp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/rb_kicks_coin"
-                        app:layout_constraintBottom_toBottomOf="@id/rb_kicks_coin"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                 <!-- Dollar Balance -->
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -282,6 +311,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_button_radio_coin"
                         android:button="@null"
+                        android:checked="true"
                         android:drawableStart="@drawable/ic_monetization"
                         android:drawableTint="@android:color/holo_green_dark"
                         android:drawablePadding="12dp"
@@ -397,6 +427,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/txt_total_label" />
 
+        <TextView
+            android:id="@+id/txt_insufficient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Insufficient Value"
+            android:visibility="gone"
+            android:textColor="@color/red_main"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_total_label" />
+
         <!-- Pay Now Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_pay"
@@ -407,12 +451,12 @@
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:backgroundTint="@color/red_main"
+            app:backgroundTint="@drawable/bg_button_state"
             app:cornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_total_label"
+            app:layout_constraintTop_toBottomOf="@id/txt_insufficient"
             style="@style/Widget.MaterialComponents.Button"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

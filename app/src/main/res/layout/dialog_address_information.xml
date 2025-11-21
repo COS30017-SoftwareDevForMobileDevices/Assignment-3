@@ -28,7 +28,7 @@
             android:id="@+id/edit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textNoSuggestions"
+            android:inputType="text"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:paddingVertical="16dp"/>
@@ -56,7 +56,7 @@
             android:id="@+id/edit_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textNoSuggestions"
+            android:inputType="text"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:paddingVertical="16dp"/>

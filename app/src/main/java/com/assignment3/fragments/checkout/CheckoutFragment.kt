@@ -21,6 +21,8 @@ import kotlinx.coroutines.launch
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.Lifecycle
 import com.assignment3.fragments.auth.AuthViewModel
+import com.assignment3.fragments.profile.ProfileViewModel
+import com.assignment3.fragments.profile.shipping.ShippingViewModel
 import com.assignment3.models.CartItem
 import kotlin.math.round
 
@@ -30,7 +32,9 @@ class CheckoutFragment : Fragment() {
     private val binding get() = _binding!!
     private val cartViewModel: CartViewModel by viewModels()
     private val checkoutViewModel: CheckoutViewModel by viewModels()
+    private val shippingViewModel: ShippingViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
+    private val profileViewModel: ProfileViewModel by viewModels()
     private var subTotal = 0.0
     private var cartItems: ArrayList<CartItem>? = null
 
@@ -55,13 +59,6 @@ class CheckoutFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        binding.rbKicksCoin.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) binding.rbDollarBalance.isChecked = false
-        }
-
-        binding.rbDollarBalance.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) binding.rbKicksCoin.isChecked = false
-        }
 
         binding.btnPay.setOnClickListener {
             // Use the adapter's current list as the cart items to checkout
@@ -76,9 +73,16 @@ class CheckoutFragment : Fragment() {
                 Toast.makeText(requireContext(), "No items to checkout", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            profileViewModel.updateWallet((subTotal + 10).toLong())
 
             // Start checkout flow
             checkoutViewModel.checkout(items, userId)
+        }
+
+        binding.btnChange.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_navigation_checkout_to_navigation_shipping
+            )
         }
 
         return binding.root
@@ -98,7 +102,66 @@ class CheckoutFragment : Fragment() {
         setupRecycler()
         loadCartItems()
         observeCheckoutState()
+        loadUserInfo()
     }
+
+
+    private fun loadUserInfo() {
+        val userId = authViewModel.firebaseUser?.uid ?: return
+
+        shippingViewModel.getShippingAddresses(userId)
+        profileViewModel.loadUserProfile()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+
+                // Collect shipping flow
+                launch {
+                    shippingViewModel.shippingUIState.collect { state ->
+
+                        val defaultAddress = state.defaultAddress
+
+                        if (defaultAddress != null) {
+                            binding.shippingInfoContainer.visibility = View.VISIBLE
+                            binding.txtNoShipping.visibility = View.GONE
+
+                            binding.txtShippingName.text = defaultAddress.name
+                            binding.txtAddress.text = defaultAddress.address
+                            binding.txtPhoneNumber.text = defaultAddress.phone
+
+                            binding.btnPay.isEnabled = true
+                        } else {
+                            binding.shippingInfoContainer.visibility = View.GONE
+                            binding.txtNoShipping.visibility = View.VISIBLE
+                            binding.btnPay.isEnabled = false
+                        }
+
+                        state.error?.let {
+                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                
+                // Collect user profile flow (WALLET BALANCE)
+                launch {
+                    profileViewModel.user.collect { user ->
+                        val balance = user?.walletBalance ?: 0L
+                        binding.txtDollarAmount.text = "$$balance"
+
+                        if (balance >= subTotal + 10) {
+                            binding.btnPay.isEnabled = true
+                            binding.txtInsufficient.visibility = View.GONE
+                        } else {
+                            binding.btnPay.isEnabled = false
+                            binding.txtInsufficient.visibility = View.VISIBLE
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
 
     private fun setupRecycler() {

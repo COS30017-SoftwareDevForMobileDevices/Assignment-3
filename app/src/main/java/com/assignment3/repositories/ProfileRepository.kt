@@ -2,6 +2,7 @@ package com.assignment3.repositories
 
 import com.assignment3.models.ShippingAddress
 import com.assignment3.models.User
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
@@ -21,6 +22,20 @@ class ProfileRepository {
             null
         }
     }
+
+
+    // Update Wallet balance
+    suspend fun updateWalletBalance(userId: String, amount: Long): Boolean {
+        return try {
+            usersCollection.document(userId)
+                .update("wallet_balance", FieldValue.increment(-amount))
+                .await()
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
 
 
     // Get all shipping addresses from embedded list
