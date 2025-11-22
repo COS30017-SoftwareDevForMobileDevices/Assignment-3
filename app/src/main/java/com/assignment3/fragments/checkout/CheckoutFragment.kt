@@ -23,6 +23,7 @@ import com.assignment3.fragments.auth.AuthViewModel
 import com.assignment3.fragments.profile.ProfileViewModel
 import com.assignment3.fragments.profile.shipping.ShippingViewModel
 import com.assignment3.models.CartItem
+import com.assignment3.models.ShippingAddress
 import kotlin.math.round
 
 class CheckoutFragment : Fragment() {
@@ -39,6 +40,9 @@ class CheckoutFragment : Fragment() {
     private var cartItems: ArrayList<CartItem>? = null
 
     private lateinit var adapter: CheckoutAdapter
+
+    // Store default address for checkout
+    private var defaultShippingAddress: ShippingAddress? = null
 
     // Flags for UI logic
     private var hasShipping = false
@@ -63,20 +67,7 @@ class CheckoutFragment : Fragment() {
         }
 
         binding.btnPay.setOnClickListener {
-            val userId = authViewModel.firebaseUser?.uid
-            if (userId == null) {
-                Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val items = adapter.currentList
-            if (items.isEmpty()) {
-                Toast.makeText(requireContext(), "No items to checkout", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            profileViewModel.updateWallet((subTotal + 10).toLong())
-            checkoutViewModel.checkout(items, userId)
+            handlePayment()
         }
 
         binding.btnChange.setOnClickListener {
@@ -105,6 +96,29 @@ class CheckoutFragment : Fragment() {
     }
 
 
+    private fun handlePayment() {
+        val userId = authViewModel.firebaseUser?.uid
+        if (userId == null) {
+            Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val items = adapter.currentList
+        if (items.isEmpty()) {
+            Toast.makeText(requireContext(), "No items to checkout", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Get buyer info from default shipping address
+        val buyerName = defaultShippingAddress?.name ?: ""
+        val buyerAddress = defaultShippingAddress?.address ?: ""
+        val buyerPhone = defaultShippingAddress?.phone ?: ""
+
+        profileViewModel.updateWallet((subTotal + 10).toLong())
+        checkoutViewModel.checkout(items, userId, buyerName, buyerAddress, buyerPhone)
+    }
+
+
     private fun loadUserInfo() {
         val userId = authViewModel.firebaseUser?.uid ?: return
 
@@ -121,6 +135,7 @@ class CheckoutFragment : Fragment() {
 
                         if (defaultAddress != null) {
                             hasShipping = true
+                            defaultShippingAddress = defaultAddress
 
                             binding.shippingInfoContainer.visibility = View.VISIBLE
                             binding.txtNoShipping.visibility = View.GONE
@@ -131,6 +146,7 @@ class CheckoutFragment : Fragment() {
 
                         } else {
                             hasShipping = false
+                            defaultShippingAddress = null
 
                             binding.shippingInfoContainer.visibility = View.GONE
                             binding.txtNoShipping.visibility = View.VISIBLE
@@ -144,7 +160,7 @@ class CheckoutFragment : Fragment() {
                     }
                 }
 
-                // Wallet Collector
+                // Wallet collector
                 launch {
                     profileViewModel.user.collect { user ->
                         val balance = user?.walletBalance ?: 0L
@@ -165,7 +181,7 @@ class CheckoutFragment : Fragment() {
         }
     }
 
-    // Centralized Button Logic
+
     private fun updatePayButtonState() {
         binding.btnPay.isEnabled = hasShipping && hasEnoughBalance
     }
@@ -178,6 +194,7 @@ class CheckoutFragment : Fragment() {
             adapter = this@CheckoutFragment.adapter
         }
     }
+
 
     private fun loadCartItems() {
         if (cartItems != null && cartItems!!.isNotEmpty()) {
@@ -193,11 +210,11 @@ class CheckoutFragment : Fragment() {
         }
     }
 
+
     private fun observeCheckoutState() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 checkoutViewModel.checkoutUIState.collect { state ->
-
                     binding.btnPay.isEnabled = !state.isLoading
 
                     if (state.isSuccess) {
@@ -215,6 +232,7 @@ class CheckoutFragment : Fragment() {
             }
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

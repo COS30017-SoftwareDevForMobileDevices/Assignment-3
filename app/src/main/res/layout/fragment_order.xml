@@ -8,7 +8,6 @@
     android:id="@+id/container"
     tools:context=".fragments.order.OrderFragment">
 
-
     <!-- Top Navigation Bar -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/order_toolbar"
@@ -43,7 +42,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <TextView
         android:id="@+id/txt_no_login"
         android:layout_width="wrap_content"
@@ -56,7 +54,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
 
     <TextView
         android:id="@+id/txt_no_order"
@@ -71,7 +68,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Tab Layout -->
+    <!-- Tab Layout with 4 tabs -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
@@ -97,6 +94,10 @@
             android:layout_height="wrap_content"
             android:text="Processing" />
 
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Waiting" />
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -111,5 +112,27 @@
         app:layout_constraintTop_toBottomOf="@id/tab_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/order_row" />
+
+    <!-- FAB for marking all as processing (visible only in Waiting tab) -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_mark_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_check_all"
+            android:contentDescription="Mark all as processing"
+            android:visibility="gone"
+            app:fabCustomSize="50dp"
+            app:tint="@color/white"
+            app:backgroundTint="@color/red_main"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

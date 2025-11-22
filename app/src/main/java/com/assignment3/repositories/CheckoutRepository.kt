@@ -1,29 +1,45 @@
 package com.assignment3.repositories
 
 import com.assignment3.models.CartItem
+import com.assignment3.models.ShippingAddress
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
 class CheckoutRepository {
     private val db = FirebaseFirestore.getInstance()
 
-    suspend fun cartItemToOrder(cartItemList: List<CartItem>, userId: String): Result<Boolean> {
+    suspend fun cartItemToOrder(
+        cartItemList: List<CartItem>,
+        userId: String,
+        buyerName: String,
+        buyerAddress: String,
+        buyerPhone: String
+    ): Result<Boolean> {
         return try {
             if (cartItemList.isEmpty()) return Result.success(false)
 
             val batch = db.batch()
 
-            // Create order document
-            val orderRef = db.collection("orders").document()
+            // Group cart items by seller (product owner)
+            val itemsBySeller = cartItemList.groupBy { it.product.ownerId }
 
-            val orderData = mapOf(
-                "user_id" to userId,
-                "status" to "pending",
-                "created_at" to com.google.firebase.Timestamp.now(),
-                "order_items" to cartItemList,
-            )
+            // Create separate order for each seller
+            for ((sellerId, sellerItems) in itemsBySeller) {
+                val orderRef = db.collection("orders").document()
 
-            batch.set(orderRef, orderData)
+                val orderData = mapOf(
+                    "user_id" to userId,
+                    "seller_id" to sellerId,
+                    "buyer_name" to buyerName,
+                    "buyer_address" to buyerAddress,
+                    "buyer_phone" to buyerPhone,
+                    "status" to "pending",
+                    "created_at" to com.google.firebase.Timestamp.now(),
+                    "order_items" to sellerItems
+                )
+
+                batch.set(orderRef, orderData)
+            }
 
             // Delete all cart items for this user
             val cartSnapshot = db.collection("carts")
@@ -35,7 +51,6 @@ class CheckoutRepository {
                 batch.delete(doc.reference)
             }
 
-            // Commit all operations atomically
             batch.commit().await()
 
             Result.success(true)

@@ -5,15 +5,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.assignment3.databinding.OrderRowBinding
+import com.assignment3.interfaces.OrderClickListener
 import com.assignment3.models.OrderItem
 
-class OrderAdapter : ListAdapter<OrderItem, OrderViewHolder>(OrderDiffCallback()) {
+class OrderAdapter(
+    private val clickListener: OrderClickListener? = null,
+    private val isSellerView: Boolean = false
+) : ListAdapter<OrderItem, OrderViewHolder>(OrderDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
         val binding = OrderRowBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return OrderViewHolder(binding)
+        return OrderViewHolder(binding, clickListener, isSellerView)
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {

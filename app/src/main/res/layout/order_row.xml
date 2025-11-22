@@ -15,6 +15,7 @@
         android:orientation="vertical"
         android:padding="12dp">
 
+        <!-- Order header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,6 +44,7 @@
 
         </LinearLayout>
 
+        <!-- Status badge (clickable in seller view) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_status"
             android:layout_width="wrap_content"
@@ -57,11 +59,99 @@
             app:cornerRadius="7dp"
             app:strokeWidth="0dp"
             app:backgroundTint="#EBECFF"
-            app:layout_constraintTop_toBottomOf="@id/txt_view_product_name"
-            app:layout_constraintEnd_toEndOf="parent"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
-        <!-- Nested RecyclerView -->
+        <!-- Buyer info section (visible only in Waiting view) -->
+        <LinearLayout
+            android:id="@+id/buyer_info_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:background="@drawable/bg_buyer_info"
+            android:padding="10dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buyer Information"
+                android:textColor="#666666"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="4dp">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_user_fill"
+                    app:tint="#888888"
+                    android:layout_marginEnd="6dp"/>
+
+                <TextView
+                    android:id="@+id/txt_buyer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="John Doe"
+                    android:textColor="#333333"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="4dp">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_location"
+                    app:tint="#888888"
+                    android:layout_marginEnd="6dp"/>
+
+                <TextView
+                    android:id="@+id/txt_buyer_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="123 Main St"
+                    android:textColor="#333333"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_phone"
+                    app:tint="#888888"
+                    android:layout_marginEnd="6dp"/>
+
+                <TextView
+                    android:id="@+id/txt_buyer_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+1234567890"
+                    android:textColor="#333333"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Nested RecyclerView for order items -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_order_items"
             android:layout_width="match_parent"
@@ -77,6 +167,7 @@
             android:layout_marginVertical="12dp"
             android:background="#C2C2C2"/>
 
+        <!-- Total section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

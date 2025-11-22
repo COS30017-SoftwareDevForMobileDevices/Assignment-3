@@ -18,40 +18,40 @@ class CheckoutViewModel(
     val checkoutUIState: StateFlow<CheckoutUIState> = _checkoutUIState
 
 
-    // Move all cart items → order (with order_items subcollection)
-    fun checkout(cartItems: List<CartItem>, userId: String) {
+    // Checkout with buyer info for seller to see
+    fun checkout(
+        cartItems: List<CartItem>,
+        userId: String,
+        buyerName: String,
+        buyerAddress: String,
+        buyerPhone: String
+    ) {
         _checkoutUIState.update { it.copy(isLoading = true, error = null, isSuccess = false) }
 
         viewModelScope.launch {
-            val result = repository.cartItemToOrder(cartItems, userId)
+            val result = repository.cartItemToOrder(
+                cartItems,
+                userId,
+                buyerName,
+                buyerAddress,
+                buyerPhone
+            )
 
             if (result.isSuccess) {
                 _checkoutUIState.update {
-                    it.copy(
-                        isLoading = false,
-                        isSuccess = true,
-                        error = null
-                    )
+                    it.copy(isLoading = false, isSuccess = true, error = null)
                 }
-
-                Log.d("Checkout VM", "Checkout success for user $userId")
+                Log.d("CheckoutVM", "Checkout success for user $userId")
             } else {
                 _checkoutUIState.update {
-                    it.copy(
-                        isLoading = false,
-                        isSuccess = false,
-                        error = result.exceptionOrNull()?.message
-                    )
+                    it.copy(isLoading = false, isSuccess = false, error = result.exceptionOrNull()?.message)
                 }
-
-                Log.e("Checkout VM", "Checkout error: ${result.exceptionOrNull()?.message}")
+                Log.e("CheckoutVM", "Checkout error: ${result.exceptionOrNull()?.message}")
             }
         }
     }
 
 
-
-    // Reset success state after checkout completes
     fun resetCheckoutState() {
         _checkoutUIState.update { it.copy(isSuccess = false, error = null) }
     }
