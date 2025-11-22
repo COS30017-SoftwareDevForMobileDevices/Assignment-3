@@ -15,17 +15,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.assignment3.databinding.FragmentHomeBinding
 import com.assignment3.models.Product
 import com.assignment3.R
-import com.assignment3.adapters.products.ProductCardAdapter
+import com.assignment3.adapters.shop.ShopAdapter
 import com.assignment3.fragments.auth.AuthViewModel
 import com.assignment3.fragments.favorite.FavoriteViewModel
-import com.assignment3.interfaces.ProductClickListener
+import com.assignment3.interfaces.ShopClickListener
 import com.assignment3.models.PRODUCT_FAVORITE_CHECK
 import com.assignment3.models.PRODUCT_ID_EXTRA
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
 
 
-class HomeFragment : Fragment(), ProductClickListener {
+class HomeFragment : Fragment(), ShopClickListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -33,11 +33,11 @@ class HomeFragment : Fragment(), ProductClickListener {
     private val favoriteViewModel: FavoriteViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
 
-    private lateinit var adapter: ProductCardAdapter
+    private lateinit var adapter: ShopAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = ProductCardAdapter(this)
+        adapter = ShopAdapter(this)
     }
 
 

@@ -13,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.assignment3.R
-import com.assignment3.adapters.checkout.CheckoutCardAdapter
+import com.assignment3.adapters.checkout.CheckoutAdapter
 import com.assignment3.databinding.FragmentCheckoutBinding
 import com.assignment3.fragments.cart.CartViewModel
 import kotlinx.coroutines.launch
@@ -38,7 +38,7 @@ class CheckoutFragment : Fragment() {
     private var subTotal = 0.0
     private var cartItems: ArrayList<CartItem>? = null
 
-    private lateinit var adapter: CheckoutCardAdapter
+    private lateinit var adapter: CheckoutAdapter
 
     // Flags for UI logic
     private var hasShipping = false
@@ -47,7 +47,7 @@ class CheckoutFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = CheckoutCardAdapter()
+        adapter = CheckoutAdapter()
     }
 
 

@@ -1,16 +1,16 @@
-package com.assignment3.adapters.products
+package com.assignment3.adapters.shop
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.assignment3.databinding.ProductCardBinding
-import com.assignment3.interfaces.ProductClickListener
+import com.assignment3.interfaces.ShopClickListener
 import com.assignment3.models.Product
 
-class ProductCardAdapter(
-    private val clickListener: ProductClickListener
-) : ListAdapter<Product, ShopViewHolder>(ProductDiffCallback()) {
+class ShopAdapter(
+    private val clickListener: ShopClickListener
+) : ListAdapter<Product, ShopViewHolder>(ShopDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -24,7 +24,7 @@ class ProductCardAdapter(
 }
 
 // DiffUtil callback – tells RecyclerView how to compare items
-class ProductDiffCallback : DiffUtil.ItemCallback<Product>() {
+class ShopDiffCallback : DiffUtil.ItemCallback<Product>() {
     override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean =
         oldItem.productId == newItem.productId
 

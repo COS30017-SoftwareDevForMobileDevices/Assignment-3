@@ -62,6 +62,15 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
 
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_product"
+            app:destination="@id/navigation_product"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
     </fragment>
 
 
@@ -196,5 +205,11 @@
         android:name="com.assignment3.fragments.profile.shipping.ShippingFragment"
         android:label="@string/title_shipping"
         tools:layout="@layout/fragment_shipping" />
+
+    <fragment
+        android:id="@+id/navigation_product"
+        android:name="com.assignment3.fragments.profile.product.ProductFragment"
+        android:label="@string/title_product"
+        tools:layout="@layout/fragment_product" />
 
 </navigation>

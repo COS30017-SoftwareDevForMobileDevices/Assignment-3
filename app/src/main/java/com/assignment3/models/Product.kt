@@ -10,12 +10,11 @@ const val PRODUCT_FAVORITE_CHECK = "isFavorite"
 @Parcelize
 data class Product(
     var productId: String = "",
+    var ownerId: String = "",
     val name: String = "",
     val brand: String = "",
     val description: String = "",
-    val price: Double = 0.0,
-    val gender: String = "",
-    val category: String = "",
+    val price: Double = 0.0,  
     var createdAt: String = "",
 
     @get:PropertyName("image_url")

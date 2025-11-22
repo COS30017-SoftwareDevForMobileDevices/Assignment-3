@@ -16,7 +16,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.assignment3.R
-import com.assignment3.adapters.carts.CartCardAdapter
+import com.assignment3.adapters.cart.CartAdapter
 import com.assignment3.databinding.FragmentCartBinding
 import com.assignment3.fragments.auth.AuthViewModel
 import com.assignment3.interfaces.CartClickListener
@@ -31,13 +31,13 @@ class CartFragment : Fragment(), CartClickListener {
     private val authViewModel: AuthViewModel by viewModels()
     private val repository: CartRepository = CartRepository()
 
-    private lateinit var adapter: CartCardAdapter
+    private lateinit var adapter: CartAdapter
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = CartCardAdapter(this)
+        adapter = CartAdapter(this)
     }
 
 

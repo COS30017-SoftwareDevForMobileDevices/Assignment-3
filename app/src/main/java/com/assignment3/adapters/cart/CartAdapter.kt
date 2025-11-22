@@ -1,4 +1,4 @@
-package com.assignment3.adapters.carts
+package com.assignment3.adapters.cart
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import com.assignment3.databinding.ProductCartBinding
 import com.assignment3.interfaces.CartClickListener
 import com.assignment3.models.CartItem
 
-class CartCardAdapter(
+class CartAdapter(
     private val clickListener: CartClickListener
 ) : ListAdapter<CartItem, CartViewHolder>(CartDiffCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {

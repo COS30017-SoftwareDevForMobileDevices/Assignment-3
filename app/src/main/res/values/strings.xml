@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Assignment 3</string>
+
+    <!-- Fragment Titles -->
     <string name="title_home">Home</string>
     <string name="title_shop">Shop</string>
     <string name="title_order">Order</string>
@@ -13,5 +15,11 @@
     <string name="title_register">Register</string>
     <string name="title_reset_pwd">Reset Password</string>
     <string name="title_checkout">Checkout</string>
-    <string name="title_shipping">Shipping information</string>
+    <string name="title_shipping">Shipping Information</string>
+    <string name="title_product">Product</string>
+
+
+    <!-- Placeholder Text -->
+
+
 </resources>

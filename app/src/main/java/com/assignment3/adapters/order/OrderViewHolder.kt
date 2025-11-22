@@ -1,4 +1,4 @@
-package com.assignment3.adapters.orders
+package com.assignment3.adapters.order
 
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +15,12 @@ class OrderViewHolder(
         txtOrderId.text = "Order #${order.orderId}"
         btnStatus.text = order.status
         txtDate.text = order.createAt
+
+        val totalPrice = order.items.sumOf {
+            it.product.price * it.quantity
+        }
+
+        txtTotalAmount.text = "$$totalPrice"
 
         if (order.status == "pending") {
             btnStatus.setBackgroundColor(ContextCompat.getColor(root.context, R.color.bg_blue_status))

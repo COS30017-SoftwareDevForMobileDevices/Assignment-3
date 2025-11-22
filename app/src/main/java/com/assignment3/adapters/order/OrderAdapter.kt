@@ -1,4 +1,4 @@
-package com.assignment3.adapters.orders
+package com.assignment3.adapters.order
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

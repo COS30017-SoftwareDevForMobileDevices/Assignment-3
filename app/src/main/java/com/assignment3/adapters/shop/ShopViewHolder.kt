@@ -1,15 +1,15 @@
-package com.assignment3.adapters.products
+package com.assignment3.adapters.shop
 
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment3.R
 import com.assignment3.databinding.ProductCardBinding
-import com.assignment3.interfaces.ProductClickListener
+import com.assignment3.interfaces.ShopClickListener
 import com.assignment3.models.Product
 import com.bumptech.glide.Glide
 
 class ShopViewHolder(
     private val binding: ProductCardBinding,
-    private val clickListener: ProductClickListener
+    private val clickListener: ShopClickListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bindProduct(product: Product) = with(binding) {

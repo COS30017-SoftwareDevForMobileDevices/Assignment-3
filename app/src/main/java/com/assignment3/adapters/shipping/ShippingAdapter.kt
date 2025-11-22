@@ -8,7 +8,7 @@ import com.assignment3.databinding.ShippingInformationBinding
 import com.assignment3.interfaces.ShippingClickListener
 import com.assignment3.models.ShippingAddress
 
-class ShippingCardAdapter(
+class ShippingAdapter(
     private val clickListener: ShippingClickListener
 ) : ListAdapter<ShippingAddress, ShippingViewHolder>(ShippingDiffCallBack()) {
 

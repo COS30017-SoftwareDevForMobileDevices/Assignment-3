@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.assignment3.adapters.orders.OrderAdapter
+import com.assignment3.adapters.order.OrderAdapter
 import com.assignment3.databinding.FragmentOrderBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth

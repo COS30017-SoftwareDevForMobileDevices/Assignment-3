@@ -1,4 +1,4 @@
-package com.assignment3.adapters.orders
+package com.assignment3.adapters.order
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -16,7 +16,7 @@ class OrderItemsAdapter(
 
         fun bind(item: CartItem) {
             binding.txtViewProductName.text = item.product.name
-            binding.txtViewPrice.text = "$${item.product.price}"
+            binding.txtViewPrice.text = "$${item.product.price * item.quantity}"
             binding.txtViewSize.text = "Size: ${item.size}"
             binding.txtViewQuantity.text = "x${item.quantity}"
 

@@ -14,16 +14,16 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.assignment3.R
-import com.assignment3.adapters.products.ProductCardAdapter
+import com.assignment3.adapters.shop.ShopAdapter
 import com.assignment3.databinding.FragmentFavoriteBinding
 import com.assignment3.fragments.auth.AuthViewModel
-import com.assignment3.interfaces.ProductClickListener
+import com.assignment3.interfaces.ShopClickListener
 import com.assignment3.models.PRODUCT_FAVORITE_CHECK
 import com.assignment3.models.PRODUCT_ID_EXTRA
 import com.assignment3.models.Product
 import kotlinx.coroutines.launch
 
-class FavoriteFragment : Fragment(), ProductClickListener {
+class FavoriteFragment : Fragment(), ShopClickListener {
 
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
@@ -31,13 +31,13 @@ class FavoriteFragment : Fragment(), ProductClickListener {
     private val authViewModel: AuthViewModel by viewModels()
     private val favoriteViewModel: FavoriteViewModel by viewModels()
 
-    private lateinit var adapter: ProductCardAdapter
+    private lateinit var adapter: ShopAdapter
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = ProductCardAdapter(this)
+        adapter = ShopAdapter(this)
     }
 
 

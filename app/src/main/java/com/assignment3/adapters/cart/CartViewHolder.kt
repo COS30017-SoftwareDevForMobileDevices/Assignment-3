@@ -1,4 +1,4 @@
-package com.assignment3.adapters.carts
+package com.assignment3.adapters.cart
 
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment3.databinding.ProductCartBinding

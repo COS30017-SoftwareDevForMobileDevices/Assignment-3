@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.assignment3.adapters.shipping.ShippingCardAdapter
+import com.assignment3.adapters.shipping.ShippingAdapter
 import com.assignment3.databinding.FragmentShippingBinding
 import android.util.Log
 import android.widget.Toast
@@ -27,7 +27,6 @@ import com.assignment3.fragments.auth.AuthViewModel
 import com.assignment3.interfaces.ShippingClickListener
 import com.assignment3.models.ShippingAddress
 import com.google.android.material.textfield.TextInputEditText
-import com.google.type.Color
 
 class ShippingFragment : Fragment(), ShippingClickListener {
 
@@ -36,13 +35,13 @@ class ShippingFragment : Fragment(), ShippingClickListener {
     private val shippingViewModel: ShippingViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
 
-    private lateinit var adapter: ShippingCardAdapter
+    private lateinit var adapter: ShippingAdapter
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = ShippingCardAdapter(this)
+        adapter = ShippingAdapter(this)
     }
 
 

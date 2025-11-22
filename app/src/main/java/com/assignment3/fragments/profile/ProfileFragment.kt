@@ -39,6 +39,12 @@ class ProfileFragment : Fragment() {
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
+        binding.cardProductManage.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_navigation_profile_to_navigation_product
+            )
+        }
+
         binding.cardShippingAddress.setOnClickListener {
             findNavController().navigate(
                 R.id.action_navigation_profile_to_navigation_shipping

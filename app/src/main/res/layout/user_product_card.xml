@@ -15,9 +15,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Product Image -->
         <ImageView
-            android:id="@+id/ivProductImage"
+            android:id="@+id/img_product"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
@@ -25,16 +24,14 @@
             tools:src="@drawable/ic_launcher_background"
             android:contentDescription="Product Image" />
 
-        <!-- Product Info Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Stock Status -->
             <TextView
-                android:id="@+id/tvStockStatus"
+                android:id="@+id/txt_brand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fear of God"
@@ -44,9 +41,8 @@
                 android:textStyle="bold"
                 android:letterSpacing="0.05" />
 
-            <!-- Product Title -->
             <TextView
-                android:id="@+id/tvProductTitle"
+                android:id="@+id/txt_product_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -55,9 +51,8 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <!-- Product Description -->
             <TextView
-                android:id="@+id/tvProductDescription"
+                android:id="@+id/txt_product_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -67,9 +62,8 @@
                 android:maxLines="1"
                 android:ellipsize="end" />
 
-            <!-- Price -->
             <TextView
-                android:id="@+id/tvPrice"
+                android:id="@+id/txt_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -80,7 +74,6 @@
 
         </LinearLayout>
 
-        <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -93,9 +86,8 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <!-- Edit Button -->
             <LinearLayout
-                android:id="@+id/btnEdit"
+                android:id="@+id/btn_edit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -110,7 +102,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/ic_edit"
-                    android:tint="#000000"
+                    app:tint="#DAC505"
                     android:contentDescription="Edit" />
 
                 <TextView
@@ -118,21 +110,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="Edit"
-                    android:textColor="#000000"
+                    android:textColor="#CBB116"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
-            <!-- Vertical Divider -->
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="#E0E0E0" />
 
-            <!-- Delete Button -->
             <LinearLayout
-                android:id="@+id/btnDelete"
+                android:id="@+id/btn_delete"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -147,7 +137,6 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/ic_delete"
-                    android:tint="#F44336"
                     android:contentDescription="Delete" />
 
                 <TextView
@@ -155,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="Delete"
-                    android:textColor="#F44336"
+                    android:textColor="#CB0B0B"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
