@@ -40,7 +40,6 @@ class HomeFragment : Fragment(), ShopClickListener {
         adapter = ShopAdapter(this)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,7 +52,6 @@ class HomeFragment : Fragment(), ShopClickListener {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -61,6 +59,11 @@ class HomeFragment : Fragment(), ShopClickListener {
         observeUiState()
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Reload products when fragment becomes visible again
+        homeViewModel.loadProducts()
+    }
 
     private fun setupRecyclerView() {
         binding.recyclerViewProducts.apply {
@@ -70,9 +73,7 @@ class HomeFragment : Fragment(), ShopClickListener {
         }
     }
 
-
     private fun observeUiState() {
-        // Initial favorites load
         val userId = authViewModel.firebaseUser?.uid
         if (userId != null) favoriteViewModel.loadFavorites(userId)
 
@@ -82,10 +83,8 @@ class HomeFragment : Fragment(), ShopClickListener {
                 launch {
                     homeViewModel.uiState.collect { state ->
                         val products = state.products
-
                         val favoriteIds = favoriteViewModel.favoritesIds.value ?: emptyList()
 
-                        // Combine products + favorites
                         val updated = products.map { p ->
                             p.copy(isFavorite = favoriteIds.contains(p.productId))
                         }
@@ -97,7 +96,6 @@ class HomeFragment : Fragment(), ShopClickListener {
                     }
                 }
 
-                // Observe auth changes and load favorites when user logs in
                 launch {
                     authViewModel.firebaseUserFlow.collect { user ->
                         val uId = user?.uid
@@ -111,7 +109,6 @@ class HomeFragment : Fragment(), ShopClickListener {
             }
         }
 
-        // Observe favorites updates
         favoriteViewModel.favoritesIds.observe(viewLifecycleOwner) { favIds ->
             val products = homeViewModel.uiState.value.products
 
@@ -123,7 +120,6 @@ class HomeFragment : Fragment(), ShopClickListener {
         }
     }
 
-
     override fun onProductClick(product: Product) {
         findNavController().navigate(
             R.id.action_navigation_home_to_navigation_product_detail,
@@ -132,7 +128,6 @@ class HomeFragment : Fragment(), ShopClickListener {
                 putBoolean(PRODUCT_FAVORITE_CHECK, product.isFavorite)
             }
         )
-
     }
 
     override fun onFavoriteClick(product: Product) {
@@ -143,14 +138,12 @@ class HomeFragment : Fragment(), ShopClickListener {
         }
     }
 
-
     private fun setupGifBackground() {
         Glide.with(this)
             .asGif()
             .load(R.raw.just_do_it)
             .into(binding.backgroundGif)
     }
-
 
     override fun onDestroyView() {
         _binding = null

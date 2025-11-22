@@ -19,7 +19,7 @@ class HomeViewModel(
         loadProducts()
     }
 
-    private fun loadProducts() {
+    fun loadProducts() {
         _uiState.update { it.copy(isLoading = true) }
 
         viewModelScope.launch {

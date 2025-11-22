@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.assignment3.databinding.UserProductCardBinding
 import com.assignment3.interfaces.ProductClickListener
 import com.assignment3.models.Product
+import com.bumptech.glide.Glide
 
 class ProductViewHolder(
     private val binding: UserProductCardBinding,
@@ -11,6 +12,10 @@ class ProductViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bindProductManage(product: Product) = with(binding) {
+        Glide.with(imgProduct.context)
+            .load(product.imageUrl)
+            .into(imgProduct)
+
         txtProductTitle.text = product.name
         txtProductDescription.text = product.description
         txtPrice.text = "$${product.price}"
