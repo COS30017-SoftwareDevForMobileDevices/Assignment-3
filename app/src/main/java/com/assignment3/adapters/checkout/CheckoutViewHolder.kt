@@ -6,7 +6,7 @@ import com.assignment3.models.CartItem
 import com.bumptech.glide.Glide
 import kotlin.math.round
 
-class CheckoutCardViewHolder(
+class CheckoutViewHolder(
     private val binding: ProductCheckoutBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 

@@ -8,7 +8,7 @@
 
     <!-- Top Navigation Bar -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/shipping_toolbar"
+        android:id="@+id/product_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
@@ -27,10 +27,10 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
-            android:id="@+id/txt_shipping_title"
+            android:id="@+id/txt_product_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Shipping Infomation"
+            android:text="Manage Product"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -54,14 +54,14 @@
 
     <!-- RecyclerView for Product Grid -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_shipping"
+        android:id="@+id/recycler_view_product"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
         android:paddingHorizontal="16dp"
         android:paddingBottom="40dp"
-        tools:listitem="@layout/shipping_information"
-        app:layout_constraintTop_toBottomOf="@+id/shipping_toolbar"
+        tools:listitem="@layout/user_product_card"
+        app:layout_constraintTop_toBottomOf="@+id/product_toolbar"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

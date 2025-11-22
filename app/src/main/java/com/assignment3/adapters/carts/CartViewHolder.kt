@@ -6,7 +6,7 @@ import com.assignment3.interfaces.CartClickListener
 import com.assignment3.models.CartItem
 import com.bumptech.glide.Glide
 
-class CartCardViewHolder(
+class CartViewHolder(
     private val binding: ProductCartBinding,
     private val clickListener: CartClickListener
 ) : RecyclerView.ViewHolder(binding.root) {

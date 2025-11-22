@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.ListAdapter
 import com.assignment3.databinding.ProductCheckoutBinding
 import com.assignment3.models.CartItem
 
-class CheckoutCardAdapter() : ListAdapter<CartItem, CheckoutCardViewHolder>(CheckoutDiffCallBack()) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CheckoutCardViewHolder {
+class CheckoutCardAdapter() : ListAdapter<CartItem, CheckoutViewHolder>(CheckoutDiffCallBack()) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CheckoutViewHolder {
         val binding = ProductCheckoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CheckoutCardViewHolder(binding)
+        return CheckoutViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CheckoutCardViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CheckoutViewHolder, position: Int) {
         holder.bindProductCheckout(getItem(position))
     }
 }

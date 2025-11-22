@@ -72,7 +72,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="32dp" >
+                android:paddingTop="32dp"
+                android:paddingBottom="16dp">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/img_profile"
@@ -113,82 +114,115 @@
                     android:textSize="16sp"
                     android:layout_marginTop="8dp"/>
 
-                <TextView
-                    android:id="@+id/txt_user_balance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#3E3E3E"
-                    android:textSize="16sp"
-                    android:layout_marginTop="8dp"/>
-
             </LinearLayout>
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_balance"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingHorizontal="16dp">
+                android:layout_height="wrap_content" 
+                android:layout_marginHorizontal="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0.5dp"
+                app:strokeWidth="0dp">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_your_product"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="1dp"
-                    app:strokeWidth="0dp" >
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="14dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/txt_balance"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="14dp">
+                        android:textColor="#8B8B8B"
+                        android:text="Your Balance"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
 
-                        <FrameLayout
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:background="@drawable/bg_icon"
-                            android:backgroundTint="#FAF6D9">
+                    <TextView
+                        android:id="@+id/txt_user_balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:paddingTop="8dp"
+                        android:letterSpacing="0.05"
+                        android:textStyle="bold"
+                        android:textSize="32sp" />
 
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_gravity="center"
-                                android:contentDescription="Your product"
-                                android:src="@drawable/ic_shopping_basket"
-                                app:tint="#B66D00" />
+                </LinearLayout>
 
-                        </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_weight="1"
-                            android:text="Your Product"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="24dp"
+                android:background="#C2C2C2"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_your_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginHorizontal="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0.5dp"
+                app:strokeWidth="0dp" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
+
+                    <FrameLayout
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_icon"
+                        android:backgroundTint="#FAF6D9">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:contentDescription="Navigate"
-                            android:src="@drawable/ic_keyboard_arrow_right"
-                            app:tint="#757575" />
+                            android:layout_gravity="center"
+                            android:contentDescription="Your product"
+                            android:src="@drawable/ic_shopping_basket"
+                            app:tint="#B66D00" />
 
-                    </LinearLayout>
+                    </FrameLayout>
 
-                </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:text="Manage Product"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
 
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="Navigate"
+                        android:src="@drawable/ic_keyboard_arrow_right"
+                        app:tint="#757575" />
 
-                <com.google.android.material.card.MaterialCardView
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_shipping_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="1dp"
+                    android:layout_marginHorizontal="16dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0.5dp"
                     app:strokeWidth="0dp" >
 
                     <LinearLayout
@@ -233,8 +267,6 @@
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
-
-            </LinearLayout>
 
         </LinearLayout>
 

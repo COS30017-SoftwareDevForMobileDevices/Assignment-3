@@ -18,7 +18,7 @@ class CheckoutRepository {
 
             val orderData = mapOf(
                 "user_id" to userId,
-                "status" to "processing",
+                "status" to "pending",
                 "created_at" to com.google.firebase.Timestamp.now(),
                 "order_items" to cartItemList,
             )

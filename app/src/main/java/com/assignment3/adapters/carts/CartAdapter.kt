@@ -10,13 +10,13 @@ import com.assignment3.models.CartItem
 
 class CartCardAdapter(
     private val clickListener: CartClickListener
-) : ListAdapter<CartItem, CartCardViewHolder>(CartDiffCallBack()) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartCardViewHolder {
+) : ListAdapter<CartItem, CartViewHolder>(CartDiffCallBack()) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val binding = ProductCartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CartCardViewHolder(binding, clickListener)
+        return CartViewHolder(binding, clickListener)
     }
 
-    override fun onBindViewHolder(holder: CartCardViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         holder.bindProductCart(getItem(position))
     }
 }

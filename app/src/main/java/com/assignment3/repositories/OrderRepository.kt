@@ -4,11 +4,15 @@ import android.util.Log
 import com.assignment3.models.CartItem
 import com.assignment3.models.OrderItem
 import com.assignment3.models.Product
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class OrderRepository {
+
     private val db = FirebaseFirestore.getInstance()
 
     suspend fun getAllOrderProducts(userId: String): List<OrderItem> {
@@ -19,43 +23,58 @@ class OrderRepository {
                 .get()
                 .await()
 
-            Log.d("OrderRepo", "Fetched ${orderDocs.documents.size} orders")
+            Log.d("OrderRepo", "Fetched ${orderDocs.documents.size} orders for user $userId")
 
             orderDocs.documents.mapNotNull { doc ->
-                val orderId = doc.id
-                val status = doc.getString("status") ?: return@mapNotNull null
+                val status = doc.getString("status") ?: run {
+                    Log.w("OrderRepo", "Order ${doc.id} missing status")
+                    return@mapNotNull null
+                }
 
-                val orderItemsRaw = doc.get("order_items") as? List<Map<String, Any>> ?: emptyList()
+                val firebaseTimestamp: Timestamp = doc.getTimestamp("created_at")!!
+                val date = firebaseTimestamp.toDate()
 
-                val orderItems = orderItemsRaw.map { item ->
+                val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+                val formattedDate = outputFormat.format(date)
 
-                    val productMap = item["product"] as Map<String, Any>
 
-                    val product = Product(
-                        name = productMap["name"] as String,
-                        brand = productMap["brand"] as String,
-                        category = productMap["category"] as String,
-                        imageUrl = productMap["image_url"] as String,
-                        price = (productMap["price"] as Number).toDouble()
-                    )
+                // order_items is an array
+                val rawItems = doc.get("order_items") as? List<Map<String, Any>> ?: emptyList()
 
-                    CartItem(
-                        cartId = item["cart_id"] as String,
-                        product = product,
-                        quantity = (item["quantity"] as Number).toInt(),
-                        size = (item["size"] as Number).toDouble()
-                    )
+                val cartItems = rawItems.mapNotNull { itemMap ->
+                    try {
+                        val cartId = itemMap["cart_id"] as? String ?: ""
+                        val quantity = (itemMap["quantity"] as? Long ?: 0L).toInt()
+                        val size = (itemMap["size"] as? Long ?: 0L).toDouble()
+
+                        // product is a map
+                        val productMap = itemMap["product"] as? Map<String, Any>
+
+                        // Map productMap to the Product model.
+                         val product = Product(
+                             productId = productMap?.get("productId") as? String ?: "",
+                             name = productMap?.get("name") as? String ?: "",
+                             brand = productMap?.get("brand") as? String ?: "",
+                             price = productMap?.get("price") as? Double ?: 0.0,
+                             imageUrl = productMap?.get("image_url") as? String ?: ""
+                         )
+
+                         CartItem(cartId, product, quantity, size)
+                    } catch (e: Exception) {
+                        Log.w("OrderRepo", "Error mapping order_items element: ${e.message}")
+                        null
+                    }
                 }
 
                 OrderItem(
-                    orderId = orderId,
-                    orderItems = orderItems,
-                    status = status
+                    orderId = doc.id,
+                    items = cartItems,
+                    status = status,
+                    createAt = formattedDate
                 )
             }
-
         } catch (e: Exception) {
-            Log.e("OrderRepo", "Failed to fetch: ${e.message}")
+            Log.e("Order Repo", "Failed to fetch orders: ${e.message}", e)
             emptyList()
         }
     }

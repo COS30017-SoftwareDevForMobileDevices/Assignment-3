@@ -7,7 +7,7 @@ import com.assignment3.databinding.ShippingInformationBinding
 import com.assignment3.interfaces.ShippingClickListener
 import com.assignment3.models.ShippingAddress
 
-class ShippingCardViewHolder(
+class ShippingViewHolder(
     private val binding: ShippingInformationBinding,
     private val clickListener: ShippingClickListener
 ) : RecyclerView.ViewHolder(binding.root) {

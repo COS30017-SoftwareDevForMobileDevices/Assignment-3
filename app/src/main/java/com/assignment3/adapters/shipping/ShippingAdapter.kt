@@ -10,14 +10,14 @@ import com.assignment3.models.ShippingAddress
 
 class ShippingCardAdapter(
     private val clickListener: ShippingClickListener
-) : ListAdapter<ShippingAddress, ShippingCardViewHolder>(ShippingDiffCallBack()) {
+) : ListAdapter<ShippingAddress, ShippingViewHolder>(ShippingDiffCallBack()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShippingCardViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShippingViewHolder {
         val binding = ShippingInformationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ShippingCardViewHolder(binding, clickListener)
+        return ShippingViewHolder(binding, clickListener)
     }
 
-    override fun onBindViewHolder(holder: ShippingCardViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ShippingViewHolder, position: Int) {
         holder.bindShippingInformation(getItem(position))
     }
 }

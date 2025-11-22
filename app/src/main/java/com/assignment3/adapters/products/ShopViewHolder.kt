@@ -7,7 +7,7 @@ import com.assignment3.interfaces.ProductClickListener
 import com.assignment3.models.Product
 import com.bumptech.glide.Glide
 
-class ProductCardViewHolder(
+class ShopViewHolder(
     private val binding: ProductCardBinding,
     private val clickListener: ProductClickListener
 ) : RecyclerView.ViewHolder(binding.root) {

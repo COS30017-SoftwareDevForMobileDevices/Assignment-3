@@ -10,15 +10,15 @@ import com.assignment3.models.Product
 
 class ProductCardAdapter(
     private val clickListener: ProductClickListener
-) : ListAdapter<Product, ProductCardViewHolder>(ProductDiffCallback()) {
+) : ListAdapter<Product, ShopViewHolder>(ProductDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductCardViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ProductCardBinding.inflate(inflater, parent, false)
-        return ProductCardViewHolder(binding, clickListener)
+        return ShopViewHolder(binding, clickListener)
     }
 
-    override fun onBindViewHolder(holder: ProductCardViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ShopViewHolder, position: Int) {
         holder.bindProduct(getItem(position))
     }
 }

@@ -21,6 +21,8 @@ import com.assignment3.repositories.ProfileRepository
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
+import java.util.Locale
 
 class ProfileFragment : Fragment() {
 
@@ -59,7 +61,7 @@ class ProfileFragment : Fragment() {
                 if (user != null) {
                     binding.txtUserName.text = user.fullName
                     binding.txtUserEmail.text = user.email
-                    binding.txtUserBalance.text = "Your balance: $${user.walletBalance}"
+                    binding.txtUserBalance.text = "$${NumberFormat.getNumberInstance(Locale.US).format(user.walletBalance)}"
                 }
                 Log.d("Profile Fragment", user.toString())
             }

@@ -1,58 +1,42 @@
 package com.assignment3.fragments.order
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.assignment3.models.OrderItem
 import com.assignment3.repositories.OrderRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class OrderViewModel(
-    private val repository: OrderRepository = OrderRepository()
-) : ViewModel() {
+enum class OrderFilter {
+    ALL, PENDING, PROCESSING
+}
 
-    private val _orderUIState = MutableStateFlow(OrderUIState())
-    val orderUIState: StateFlow<OrderUIState> = _orderUIState
+class OrderViewModel : ViewModel() {
 
-    private val _orderIds = MutableLiveData<List<String>>()
-    val orderIds: LiveData<List<String>> get() = _orderIds
+    private val repository = OrderRepository()
 
+    private val _allOrders = MutableLiveData<List<OrderItem>>(emptyList())
+    val allOrders: LiveData<List<OrderItem>> get() = _allOrders
 
-    fun loadAllOrderProducts(userId: String) {
-        _orderUIState.update { it.copy(isLoading = true) }
+    private val _filteredOrders = MutableLiveData<List<OrderItem>>(emptyList())
+    val filteredOrders: LiveData<List<OrderItem>> get() = _filteredOrders
 
+    fun loadOrders(userId: String) {
         viewModelScope.launch {
-            val orders: List<OrderItem> = repository.getAllOrderProducts(userId)
-
-            _orderIds.value = orders.map { it.orderId }
-
-            _orderUIState.update { state ->
-                state.copy(
-                    orderItems = orders.map { it.copy() },
-                    isLoading = false,
-                    error = null
-                )
-            }
-
-            _orderUIState.collect { state ->
-                Log.d("Order VM", state.orderItems.toString())
-            }
+            val orders = repository.getAllOrderProducts(userId)
+            _allOrders.value = orders
+            applyFilter(OrderFilter.ALL)
         }
     }
 
-    fun clearOrders() {
-        _orderIds.value = emptyList()
-        _orderUIState.update { it.copy(orderItems = emptyList()) }
+    fun applyFilter(filter: OrderFilter) {
+        val list = _allOrders.value.orEmpty()
+
+        _filteredOrders.value = when (filter) {
+            OrderFilter.ALL -> list
+            OrderFilter.PENDING -> list.filter { it.status.equals("pending", ignoreCase = true) }
+            OrderFilter.PROCESSING -> list.filter { it.status.equals("processing", ignoreCase = true) }
+        }
     }
 }
-
-data class OrderUIState(
-    val orderItems: List<OrderItem> = emptyList(),
-    val isLoading: Boolean = false,
-    val error: String? = null
-)
