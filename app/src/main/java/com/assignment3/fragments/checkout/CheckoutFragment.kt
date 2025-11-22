@@ -2,7 +2,6 @@ package com.assignment3.fragments.checkout
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,11 +34,15 @@ class CheckoutFragment : Fragment() {
     private val shippingViewModel: ShippingViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
     private val profileViewModel: ProfileViewModel by viewModels()
+
     private var subTotal = 0.0
     private var cartItems: ArrayList<CartItem>? = null
 
     private lateinit var adapter: CheckoutCardAdapter
 
+    // Flags for UI logic
+    private var hasShipping = false
+    private var hasEnoughBalance = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,9 +62,7 @@ class CheckoutFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-
         binding.btnPay.setOnClickListener {
-            // Use the adapter's current list as the cart items to checkout
             val userId = authViewModel.firebaseUser?.uid
             if (userId == null) {
                 Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
@@ -73,16 +74,13 @@ class CheckoutFragment : Fragment() {
                 Toast.makeText(requireContext(), "No items to checkout", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            profileViewModel.updateWallet((subTotal + 10).toLong())
 
-            // Start checkout flow
+            profileViewModel.updateWallet((subTotal + 10).toLong())
             checkoutViewModel.checkout(items, userId)
         }
 
         binding.btnChange.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_navigation_checkout_to_navigation_shipping
-            )
+            findNavController().navigate(R.id.action_navigation_checkout_to_navigation_shipping)
         }
 
         return binding.root
@@ -91,6 +89,7 @@ class CheckoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.container)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(0, 0, 0, systemBars.bottom)
@@ -115,13 +114,14 @@ class CheckoutFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
 
-                // Collect shipping flow
+                // Shipping collector
                 launch {
                     shippingViewModel.shippingUIState.collect { state ->
-
                         val defaultAddress = state.defaultAddress
 
                         if (defaultAddress != null) {
+                            hasShipping = true
+
                             binding.shippingInfoContainer.visibility = View.VISIBLE
                             binding.txtNoShipping.visibility = View.GONE
 
@@ -129,12 +129,14 @@ class CheckoutFragment : Fragment() {
                             binding.txtAddress.text = defaultAddress.address
                             binding.txtPhoneNumber.text = defaultAddress.phone
 
-                            binding.btnPay.isEnabled = true
                         } else {
+                            hasShipping = false
+
                             binding.shippingInfoContainer.visibility = View.GONE
                             binding.txtNoShipping.visibility = View.VISIBLE
-                            binding.btnPay.isEnabled = false
                         }
+
+                        updatePayButtonState()
 
                         state.error?.let {
                             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
@@ -142,26 +144,31 @@ class CheckoutFragment : Fragment() {
                     }
                 }
 
-                
-                // Collect user profile flow (WALLET BALANCE)
+                // Wallet Collector
                 launch {
                     profileViewModel.user.collect { user ->
                         val balance = user?.walletBalance ?: 0L
                         binding.txtDollarAmount.text = "$$balance"
 
                         if (balance >= subTotal + 10) {
-                            binding.btnPay.isEnabled = true
+                            hasEnoughBalance = true
                             binding.txtInsufficient.visibility = View.GONE
                         } else {
-                            binding.btnPay.isEnabled = false
+                            hasEnoughBalance = false
                             binding.txtInsufficient.visibility = View.VISIBLE
                         }
+
+                        updatePayButtonState()
                     }
                 }
             }
         }
     }
 
+    // Centralized Button Logic
+    private fun updatePayButtonState() {
+        binding.btnPay.isEnabled = hasShipping && hasEnoughBalance
+    }
 
 
     private fun setupRecycler() {
@@ -172,7 +179,6 @@ class CheckoutFragment : Fragment() {
         }
     }
 
-
     private fun loadCartItems() {
         if (cartItems != null && cartItems!!.isNotEmpty()) {
             adapter.submitList(cartItems) {
@@ -181,37 +187,28 @@ class CheckoutFragment : Fragment() {
             subTotal = cartItems!!.sumOf { it.product.price * it.quantity }
             binding.txtSubtotalAmount.text = "$${round(subTotal)}"
             binding.txtTotalAmount.text = "$${round(subTotal + 10)}"
-            binding.btnPay.isEnabled = true
         } else {
             binding.btnPay.isEnabled = false
-            // Show a message or empty state
             Toast.makeText(requireContext(), "No cart items received", Toast.LENGTH_SHORT).show()
         }
     }
 
-
-    // Observe checkout UI state to react to loading / success / error
     private fun observeCheckoutState() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 checkoutViewModel.checkoutUIState.collect { state ->
-                    // Disable Pay button when checkout is loading
-                    binding.btnPay.isEnabled = !state.isLoading
 
-                    if (state.isLoading) {
-                        Log.d("Checkout Fragment", "Checkout in progress...")
-                    }
+                    binding.btnPay.isEnabled = !state.isLoading
 
                     if (state.isSuccess) {
                         Toast.makeText(requireContext(), "Order placed successfully", Toast.LENGTH_SHORT).show()
-                        // Clear local cart UI and navigate up
                         cartViewModel.clearCartItems()
                         checkoutViewModel.resetCheckoutState()
                         findNavController().navigateUp()
                     }
 
-                    state.error?.let { err ->
-                        Toast.makeText(requireContext(), "Checkout failed: $err", Toast.LENGTH_LONG).show()
+                    state.error?.let {
+                        Toast.makeText(requireContext(), "Checkout failed: $it", Toast.LENGTH_LONG).show()
                         checkoutViewModel.resetCheckoutState()
                     }
                 }

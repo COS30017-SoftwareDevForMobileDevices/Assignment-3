@@ -21,7 +21,9 @@ import com.assignment3.fragments.favorite.FavoriteViewModel
 import com.assignment3.interfaces.ProductClickListener
 import com.assignment3.models.PRODUCT_FAVORITE_CHECK
 import com.assignment3.models.PRODUCT_ID_EXTRA
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
+
 
 class HomeFragment : Fragment(), ProductClickListener {
 
@@ -45,6 +47,9 @@ class HomeFragment : Fragment(), ProductClickListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        setupGifBackground()
+
         return binding.root
     }
 
@@ -137,6 +142,15 @@ class HomeFragment : Fragment(), ProductClickListener {
             Toast.makeText(requireContext(), "Login to perform this", Toast.LENGTH_SHORT).show()
         }
     }
+
+
+    private fun setupGifBackground() {
+        Glide.with(this)
+            .asGif()
+            .load(R.raw.just_do_it)
+            .into(binding.backgroundGif)
+    }
+
 
     override fun onDestroyView() {
         _binding = null

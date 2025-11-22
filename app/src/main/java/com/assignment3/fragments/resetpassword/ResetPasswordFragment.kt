@@ -17,9 +17,6 @@ import com.google.firebase.auth.FirebaseAuth
 class ResetPasswordFragment : Fragment() {
 
     private var _binding: FragmentResetPasswordBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var firebaseAuth: FirebaseAuth
 

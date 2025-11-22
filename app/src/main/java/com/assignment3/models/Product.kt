@@ -4,8 +4,6 @@ import android.os.Parcelable
 import com.google.firebase.firestore.PropertyName
 import kotlinx.android.parcel.Parcelize
 
-var productList = mutableListOf<Product>()
-
 const val PRODUCT_ID_EXTRA = "productExtra"
 const val PRODUCT_FAVORITE_CHECK = "isFavorite"
 
@@ -18,7 +16,7 @@ data class Product(
     val price: Double = 0.0,
     val gender: String = "",
     val category: String = "",
-    val createdAt: String = "",
+    var createdAt: String = "",
 
     @get:PropertyName("image_url")
     @set:PropertyName("image_url")

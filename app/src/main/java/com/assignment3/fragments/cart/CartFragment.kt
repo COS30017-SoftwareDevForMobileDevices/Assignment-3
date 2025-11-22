@@ -11,19 +11,15 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.assignment3.R
-import com.assignment3.adapters.orders.CartCardAdapter
-import com.assignment3.adapters.products.ProductCardAdapter
+import com.assignment3.adapters.carts.CartCardAdapter
 import com.assignment3.databinding.FragmentCartBinding
 import com.assignment3.fragments.auth.AuthViewModel
 import com.assignment3.interfaces.CartClickListener
-import com.assignment3.models.PRODUCT_FAVORITE_CHECK
-import com.assignment3.models.PRODUCT_ID_EXTRA
 import com.assignment3.repositories.CartRepository
 import kotlinx.coroutines.launch
 

@@ -41,25 +41,19 @@ class RegisterFragment : Fragment() {
             val password = binding.editPassword.text.toString()
             val confirmPassword = binding.editConfirmPassword.text.toString()
 
-            // Validation checking
-            if (fullName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
-                if (password == confirmPassword) {
-                    viewModel.register(fullName, email, password)
-                    viewModel.registerResult.observe(viewLifecycleOwner) { result ->
-                        result.onSuccess {
-                            findNavController().navigate(R.id.action_navigation_register_to_navigation_login)
-                        }
-                        result.onFailure { e ->
-                            Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                } else {
-                    Toast.makeText(requireContext(), "Password is not matching", Toast.LENGTH_SHORT).show()
-                }
-            } else {
+            if (fullName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(requireContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            if (password != confirmPassword) {
+                Toast.makeText(requireContext(), "Password is not matching", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            viewModel.register(fullName, email, password)
         }
+
 
 
         // Avoid nested navigation between login and register
@@ -86,6 +80,16 @@ class RegisterFragment : Fragment() {
             v.setPadding(0, 0, 0, systemBars.bottom)
             insets
         }
+
+        viewModel.registerResult.observe(viewLifecycleOwner) { result ->
+            result.onSuccess {
+                findNavController().navigate(R.id.action_navigation_register_to_navigation_login)
+            }
+            result.onFailure { e ->
+                Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
 

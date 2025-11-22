@@ -11,9 +11,10 @@ class AuthRepository {
 
     suspend fun register(fullName: String, email: String, password: String): Result<Boolean> {
         return try {
-            val auth = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-            val user = auth.user ?: return Result.failure(Exception("User not created"))
+            val authResult = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+            val user = authResult.user ?: return Result.failure(Exception("User not created"))
 
+            // Write only if password is fully accepted
             val data = mapOf(
                 "full_name" to fullName,
                 "email" to user.email,
@@ -28,6 +29,7 @@ class AuthRepository {
             Result.failure(e)
         }
     }
+
 
 
     suspend fun login(email: String, password: String): Result<Boolean> {
