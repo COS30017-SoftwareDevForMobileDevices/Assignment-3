@@ -1,5 +1,6 @@
 package com.assignment3.adapters.cart
 
+import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment3.databinding.ProductCartBinding
 import com.assignment3.interfaces.CartClickListener
@@ -11,6 +12,7 @@ class CartViewHolder(
     private val clickListener: CartClickListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    @SuppressLint("SetTextI18n")
     fun bindProductCart(cartItem: CartItem) = with(binding) {
         Glide.with(binding.imgProduct.context)
             .load(cartItem.product.imageUrl)

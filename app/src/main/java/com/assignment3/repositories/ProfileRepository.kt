@@ -1,5 +1,6 @@
 package com.assignment3.repositories
 
+import android.util.Log
 import com.assignment3.models.ShippingAddress
 import com.assignment3.models.User
 import com.google.firebase.firestore.FieldValue
@@ -19,6 +20,7 @@ class ProfileRepository {
             if (!snapshot.exists()) return null
             snapshot.toObject(User::class.java)
         } catch (e: Exception) {
+            Log.d("Profile Repo", e.toString())
             null
         }
     }
@@ -32,6 +34,7 @@ class ProfileRepository {
                 .await()
             true
         } catch (e: Exception) {
+            Log.d("Profile Repo", e.toString())
             false
         }
     }
@@ -44,6 +47,7 @@ class ProfileRepository {
             val user = getUserInfoById(userId)
             user?.shippingAddresses?.reversed() ?: emptyList()
         } catch (e: Exception) {
+            Log.d("Profile Repo", e.toString())
             emptyList()
         }
     }
@@ -75,6 +79,7 @@ class ProfileRepository {
             userRef.update("shipping_addresses", updatedList).await()
             true
         } catch (e: Exception) {
+            Log.d("Profile Repo", e.toString())
             false
         }
     }
@@ -99,6 +104,7 @@ class ProfileRepository {
             userRef.update("shipping_addresses", updatedList).await()
             true
         } catch (e: Exception) {
+            Log.d("Profile Repo", e.toString())
             false
         }
     }
@@ -129,6 +135,7 @@ class ProfileRepository {
             userRef.update("shipping_addresses", finalList).await()
             true
         } catch (e: Exception) {
+            Log.d("Profile Repo", e.toString())
             false
         }
     }
@@ -152,6 +159,7 @@ class ProfileRepository {
             userRef.update("shipping_addresses", updatedAddresses).await()
             true
         } catch (e: Exception) {
+            Log.d("Profile Repo", e.toString())
             false
         }
     }

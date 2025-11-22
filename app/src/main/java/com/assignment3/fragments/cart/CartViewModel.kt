@@ -1,7 +1,6 @@
 package com.assignment3.fragments.cart
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -21,7 +20,6 @@ class CartViewModel(
     val cartUIState: StateFlow<CartUIState> = _cartUIState
 
     private val _cartProduct = MutableLiveData<List<String>>()
-    val cartProduct: LiveData<List<String>> get() = _cartProduct
 
 
     fun loadAllCartProducts(userId: String) {

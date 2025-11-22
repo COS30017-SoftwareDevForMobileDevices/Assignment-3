@@ -1,26 +1,18 @@
 package com.assignment3.fragments.profile
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.assignment3.databinding.FragmentProfileBinding
 import com.assignment3.R
 import com.assignment3.fragments.auth.AuthViewModel
-import com.assignment3.models.Product
-import com.assignment3.models.User
-import com.assignment3.repositories.ProfileRepository
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -55,6 +47,7 @@ class ProfileFragment : Fragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

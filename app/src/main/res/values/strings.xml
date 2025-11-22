@@ -4,22 +4,120 @@
     <!-- Fragment Titles -->
     <string name="title_home">Home</string>
     <string name="title_shop">Shop</string>
-    <string name="title_order">Order</string>
+    <string name="title_order">My Order</string>
     <string name="title_favorite">Favorites</string>
-    <string name="title_cart">Cart</string>
+    <string name="title_cart">My Cart</string>
     <string name="title_auth">Auth</string>
     <string name="title_profile">Profile</string>
     <string name="title_guest">Guest</string>
-    <string name="title_detail">Product Detail</string>
+    <string name="title_detail">Detail</string>
     <string name="title_login">Login</string>
     <string name="title_register">Register</string>
-    <string name="title_reset_pwd">Reset Password</string>
+    <string name="title_reset_password">Reset Password</string>
     <string name="title_checkout">Checkout</string>
     <string name="title_shipping">Shipping Information</string>
-    <string name="title_product">Product</string>
+    <string name="title_product">Manage Product</string>
 
+    <!-- Placeholder text -->
+    <string name="txt_name_placeholder">Name</string>
+    <string name="txt_address_placeholder">Address</string>
+    <string name="txt_phone_placeholder">Phone</string>
+    <string name="txt_product_name_placeholder">Product name</string>
+    <string name="txt_brand_placeholder">Brand</string>
+    <string name="txt_price_placeholder">Price</string>
+    <string name="txt_description_placeholder">Description</string>
+    <string name="txt_image_url_placeholder">Image URL (Leave blank for placeholder)</string>
+    <string name="txt_no_login_placeholder">Nothing here, please login</string>
+    <string name="txt_back_placeholder">Back</string>
+    <string name="txt_no_shipping">No Shipping Information Yet</string>
+    <string name="txt_subtotal_placeholder">Subtotal</string>
+    <string name="txt_total_placeholder">Total Payment</string>
+    <string name="txt_insufficient_placeholder">Insufficient Value</string>
+    <string name="txt_email_placeholder">Email</string>
+    <string name="txt_password_placeholder">Password</string>
+    <string name="txt_no_order">No Order Yet</string>
+    <string name="txt_add_placeholder">Add</string>
+    <string name="txt_no_product">Product not found</string>
+    <string name="txt_no_user">User data not found</string>
+    <string name="txt_navigate_placeholder">Navigate</string>
+    <string name="txt_quantity_placeholder">Quantity</string>
+    <string name="txt_date_placeholder">01–01–2025</string>
+    <string name="txt_user_placeholder">User</string>
 
-    <!-- Placeholder Text -->
+    <!-- Buttons -->
+    <string name="btn_checkout">Proceed to Checkout</string>
+    <string name="btn_change">Change</string>
+    <string name="btn_pay">Pay now</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_add_to_cart">Add to Cart</string>
+    <string name="btn_submit">Submit</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_decrease">Decrease</string>
+    <string name="btn_increase">Increase</string>
+    <string name="btn_edit">Edit</string>
 
+    <!-- Checkout -->
+    <string name="checkout_order_item">Order Items</string>
+    <string name="checkout_shipping_info">Shipping Information</string>
+    <string name="checkout_shipping_name">Shipping Name</string>
+    <string name="checkout_phone_number">Phone Number</string>
+    <string name="checkout_address_info">Viet Nam, VN 700000</string>
+    <string name="checkout_payment_method">Payment Method</string>
+    <string name="checkout_dollar_balance">Dollar Balance</string>
+    <string name="checkout_shipping_price">Shipping</string>
 
+    <!-- Guest -->
+    <string name="guest_join_community">Join the community</string>
+    <string name="guest_community_sub">Track your orders, save your favorites, and get exclusive access to our drops.</string>
+
+    <!-- Home -->
+    <string name="home_app_name">KICKS</string>
+    <string name="home_title">Summer \'25 Drop</string>
+    <string name="home_subtitle">The latest styles have arrived. Get them before\\nthey\'re gone.</string>
+    <string name="home_featured_kicks">Featured Kicks</string>
+
+    <!-- Login -->
+    <string name="login_title">Welcome Back</string>
+    <string name="login_subtitle">Login to your account to continue</string>
+    <string name="login_forgot_password">Forgot Password?</string>
+    <string name="login_dont_have_account">Don\'t have an account?</string>
+
+    <!-- Order -->
+    <string name="order_tab_all">All</string>
+    <string name="order_tab_pending">Pending</string>
+    <string name="order_tab_processing">Processing</string>
+    <string name="order_tab_waiting">Waiting</string>
+    <string name="order_mark_processing">Mark all as processing</string>
+    <string name="order_with_id">Order #123</string>
+    <string name="order_buyer_info">Buyer Information</string>
+
+    <!-- Detail page -->
+    <string name="detail_select_size">Select Size</string>
+    <string name="detail_size_guide">Size Guide</string>
+    <string name="detail_size_7">7</string>
+    <string name="detail_size_7.5">7.5</string>
+    <string name="detail_size_8">8</string>
+    <string name="detail_size_8.5">8.5</string>
+    <string name="detail_size_9">9</string>
+    <string name="detail_size_9.5">9.5</string>
+    <string name="detail_size_10">10</string>
+    <string name="detail_size_10.5">10.5</string>
+    <string name="detail_size_11">11</string>
+    <string name="detail_product_description">Product Description</string>
+
+    <!-- Profile -->
+    <string name="profile_balance">Your Balance</string>
+
+    <!-- Register -->
+    <string name="register_full_name">Enter your full name *</string>
+    <string name="register_email">Enter your email *</string>
+    <string name="register_password">Enter your password *</string>
+    <string name="register_password_confirm">Confirm your password *</string>
+    <string name="register_already_account">Already have an account?</string>
+
+    <!-- Reset -->
+    <string name="reset_title">Reset your password</string>
+    <string name="reset_subtitle">Enter your email address and we will send you an email to reset your password.</string>
 </resources>

@@ -172,7 +172,7 @@
     <fragment
         android:id="@+id/navigation_reset_password"
         android:name="com.assignment3.fragments.resetpassword.ResetPasswordFragment"
-        android:label="@string/title_reset_pwd"
+        android:label="@string/title_reset_password"
         tools:layout="@layout/fragment_reset_password" />
 
 

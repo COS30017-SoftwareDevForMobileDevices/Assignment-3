@@ -21,7 +21,7 @@
             android:id="@+id/tv_cart_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Cart"
+            android:text="@string/title_cart"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -48,13 +48,13 @@
         android:id="@+id/txt_no_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nothing here, please login"
+        android:text="@string/txt_no_login_placeholder"
         android:textColor="#767676"
         android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <!-- Cart Items RecyclerView -->
@@ -75,22 +75,22 @@
     <!-- Proceed to Checkout Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_checkout"
+        style="@style/Widget.MaterialComponents.Button"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="14dp"
         android:layout_marginBottom="64dp"
-        android:text="Proceed to Checkout"
+        android:text="@string/btn_checkout"
         android:textColor="@android:color/white"
         android:textSize="14sp"
         android:textStyle="bold"
         app:backgroundTint="@drawable/bg_button_state"
         app:cornerRadius="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_cart_items"
-        style="@style/Widget.MaterialComponents.Button"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_cart_items" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

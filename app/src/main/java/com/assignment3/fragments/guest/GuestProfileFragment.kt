@@ -5,11 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.assignment3.R
 import com.assignment3.databinding.FragmentGuestProfileBinding
-import com.google.firebase.auth.FirebaseAuth
+
 
 class GuestProfileFragment : Fragment() {
 
@@ -24,8 +23,6 @@ class GuestProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val guestProfileViewModel = ViewModelProvider(this)[GuestProfileViewModel::class.java]
-
         _binding = FragmentGuestProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 

@@ -21,7 +21,7 @@
             android:id="@+id/tv_guest_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile"
+            android:text="@string/title_profile"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -46,7 +46,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="16dp" >
+                android:padding="16dp"
+                tools:ignore="UselessParent">
 
                 <!-- Profile Image -->
                 <com.google.android.material.imageview.ShapeableImageView
@@ -62,48 +63,48 @@
                     android:id="@+id/txt_join_community"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Join the community"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/guest_join_community"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="16dp"/>
+                    android:textStyle="bold" />
 
                 <!-- User Email -->
                 <TextView
                     android:id="@+id/txt_join_community_sub"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Track your orders, save your favorites, and get exclusive access to our drops."
-                    android:textColor="#757575"
-                    android:textSize="14sp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="30dp"/>
+                    android:layout_marginBottom="30dp"
+                    android:gravity="center"
+                    android:text="@string/guest_community_sub"
+                    android:textColor="#757575"
+                    android:textSize="14sp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_login"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="LogIn"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/btn_login"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="4dp"
                     app:backgroundTint="@color/red_main"
-                    app:cornerRadius="12dp"
-                    style="@style/Widget.MaterialComponents.Button" />
+                    app:cornerRadius="12dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_register"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="Register"
+                    android:text="@string/btn_register"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:backgroundTint="@color/black"
-                    app:cornerRadius="12dp"
-                    style="@style/Widget.MaterialComponents.Button" />
+                    app:cornerRadius="12dp" />
 
             </LinearLayout>
 

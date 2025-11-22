@@ -51,12 +51,6 @@ class ShippingViewModel(
     }
 
 
-    // Get default address
-    fun getDefaultAddress(): ShippingAddress? {
-        return shippingUIState.value.defaultAddress
-    }
-
-
     // Add address
     fun addShippingAddress(userId: String, address: ShippingAddress) {
         _shippingUIState.update { it.copy(isLoading = true, error = null) }

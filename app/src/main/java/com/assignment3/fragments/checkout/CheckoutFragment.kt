@@ -1,5 +1,6 @@
 package com.assignment3.fragments.checkout
 
+import android.annotation.SuppressLint
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -119,6 +120,7 @@ class CheckoutFragment : Fragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun loadUserInfo() {
         val userId = authViewModel.firebaseUser?.uid ?: return
 
@@ -196,6 +198,7 @@ class CheckoutFragment : Fragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun loadCartItems() {
         if (cartItems != null && cartItems!!.isNotEmpty()) {
             adapter.submitList(cartItems) {

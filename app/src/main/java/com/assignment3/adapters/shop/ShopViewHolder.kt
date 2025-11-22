@@ -1,5 +1,6 @@
 package com.assignment3.adapters.shop
 
+import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment3.R
 import com.assignment3.databinding.ProductCardBinding
@@ -12,6 +13,7 @@ class ShopViewHolder(
     private val clickListener: ShopClickListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    @SuppressLint("SetTextI18n")
     fun bindProduct(product: Product) = with(binding) {
         if (product.isFavorite) {
             btnFavorite.setImageResource(R.drawable.ic_favorite_fill_red)

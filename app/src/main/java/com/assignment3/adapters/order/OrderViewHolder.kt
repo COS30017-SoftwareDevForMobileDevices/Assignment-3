@@ -1,5 +1,6 @@
 package com.assignment3.adapters.order
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ class OrderViewHolder(
     private val isSellerView: Boolean
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    @SuppressLint("SetTextI18n")
     fun bind(order: OrderItem) = with(binding) {
         txtOrderId.text = "Order #${order.orderId.takeLast(6)}"
         btnStatus.text = order.status

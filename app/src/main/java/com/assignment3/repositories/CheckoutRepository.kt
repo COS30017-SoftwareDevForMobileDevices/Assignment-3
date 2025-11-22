@@ -1,7 +1,6 @@
 package com.assignment3.repositories
 
 import com.assignment3.models.CartItem
-import com.assignment3.models.ShippingAddress
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 

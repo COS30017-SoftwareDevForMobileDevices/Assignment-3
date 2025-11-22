@@ -2,15 +2,11 @@ package com.assignment3.fragments.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.assignment3.models.Product
 import com.assignment3.models.User
-import com.assignment3.repositories.ProductRepository
 import com.assignment3.repositories.ProfileRepository
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(

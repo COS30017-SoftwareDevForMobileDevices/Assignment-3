@@ -35,6 +35,7 @@ class FavoriteRepository {
                 .documents
                 .mapNotNull { it.getString("product_id") }
         } catch (e: Exception) {
+            Log.d("Favorite Repo", e.toString())
             emptyList()
         }
     }
@@ -83,6 +84,7 @@ class FavoriteRepository {
                 null
             }
         } catch (e: Exception) {
+            Log.d("Favorite Repo", e.toString())
             null
         }
     }
@@ -98,6 +100,7 @@ class FavoriteRepository {
 
             if (snapshot.documents.isNotEmpty()) snapshot.documents[0].id else null
         } catch (e: Exception) {
+            Log.d("Favorite Repo", e.toString())
             null
         }
     }
@@ -111,6 +114,7 @@ class FavoriteRepository {
                 db.collection("favorites").document(existingId).delete().await()
                 false
             } catch (e: Exception) {
+                Log.d("Favorite Repo", e.toString())
                 false
             }
         } else {

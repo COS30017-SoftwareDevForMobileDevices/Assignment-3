@@ -31,7 +31,7 @@
                 android:id="@+id/img_product"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="Product Image"
+                android:contentDescription="@string/txt_product_name_placeholder"
                 android:background="#E2E2E2"
                 android:scaleType="centerCrop"/>
 
@@ -43,7 +43,7 @@
                 android:layout_gravity="top|end"
                 android:layout_margin="12dp"
                 android:background="@drawable/bg_button_favorite"
-                android:contentDescription="Add to favorites"
+                android:contentDescription="@string/txt_add_placeholder"
                 android:scaleType="centerInside"
                 android:padding="8dp"
                 android:src="@drawable/ic_favorite_outline" />

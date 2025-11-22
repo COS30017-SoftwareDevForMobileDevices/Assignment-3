@@ -39,7 +39,7 @@
                 android:id="@+id/txt_brand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fear of God"
+                tools:text="Fear of God"
                 android:textColor="#4CAF50"
                 android:textAllCaps="true"
                 android:textSize="12sp"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Essential Logo Hoodie"
+                tools:text="Essential Logo Hoodie"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Oversized fit, cotton blend..."
+                tools:text="Oversized fit, cotton blend..."
                 android:textColor="#757575"
                 android:textSize="14sp"
                 android:maxLines="1"
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="$180.00"
+                tools:text="$180.00"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -108,13 +108,13 @@
                     android:layout_height="18dp"
                     android:src="@drawable/ic_edit"
                     app:tint="#DAC505"
-                    android:contentDescription="Edit" />
+                    android:contentDescription="@string/btn_edit" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Edit"
+                    android:text="@string/btn_edit"
                     android:textColor="#CBB116"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -142,13 +142,13 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/ic_delete"
-                    android:contentDescription="Delete" />
+                    android:contentDescription="@string/btn_delete" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Delete"
+                    android:text="@string/btn_delete"
                     android:textColor="#CB0B0B"
                     android:textSize="14sp"
                     android:textStyle="bold" />

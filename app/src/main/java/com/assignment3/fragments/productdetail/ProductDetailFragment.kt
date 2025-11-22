@@ -1,7 +1,7 @@
 package com.assignment3.fragments.productdetail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -103,11 +103,12 @@ class ProductDetailFragment : Fragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Apply insets
-        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById<View>(R.id.container)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.container)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(0, 0, 0, systemBars.bottom)
             insets
@@ -136,6 +137,7 @@ class ProductDetailFragment : Fragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun displayProduct(product: Product) {
         with(binding) {
             updateFavoriteIcon()

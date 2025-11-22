@@ -22,7 +22,7 @@
             android:id="@+id/tv_profile_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile"
+            android:text="@string/title_profile"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -36,7 +36,7 @@
             android:layout_width="22dp"
             android:layout_height="44dp"
             android:background="@android:color/transparent"
-            android:contentDescription="Back"
+            android:contentDescription="@string/txt_back_placeholder"
             android:src="@drawable/ic_logout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -88,14 +88,14 @@
                     android:id="@+id/txt_error"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="User data not found"
-                    android:textColor="#646464"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
                     android:letterSpacing="0.1"
+                    android:text="@string/txt_no_user"
+                    android:textColor="#646464"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:gravity="center"
-                    android:visibility="gone"
-                    android:layout_marginTop="16dp"/>
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/txt_user_name"
@@ -136,10 +136,10 @@
                         android:id="@+id/txt_balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/profile_balance"
                         android:textColor="#8B8B8B"
-                        android:text="Your Balance"
-                        android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txt_user_balance"
@@ -189,7 +189,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_gravity="center"
-                            android:contentDescription="Your product"
+                            android:contentDescription="@string/title_product"
                             android:src="@drawable/ic_shopping_basket"
                             app:tint="#B66D00" />
 
@@ -200,14 +200,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Manage Product"
+                        android:text="@string/title_product"
                         android:textColor="@android:color/black"
                         android:textSize="16sp" />
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:contentDescription="Navigate"
+                        android:contentDescription="@string/txt_navigate_placeholder"
                         android:src="@drawable/ic_keyboard_arrow_right"
                         app:tint="#757575" />
 
@@ -242,7 +242,7 @@
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center"
-                                android:contentDescription="Shipping Address"
+                                android:contentDescription="@string/title_shipping"
                                 android:src="@drawable/ic_location_fill"
                                 app:tint="#76B600" />
 
@@ -253,14 +253,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
-                            android:text="Shipping Address"
+                            android:text="@string/title_shipping"
                             android:textColor="@android:color/black"
                             android:textSize="16sp" />
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:contentDescription="Navigate"
+                            android:contentDescription="@string/txt_navigate_placeholder"
                             android:src="@drawable/ic_keyboard_arrow_right"
                             app:tint="#757575" />
 

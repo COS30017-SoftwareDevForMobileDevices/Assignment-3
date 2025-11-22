@@ -1,5 +1,6 @@
 package com.assignment3.adapters.product
 
+import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment3.databinding.UserProductCardBinding
 import com.assignment3.interfaces.ProductClickListener
@@ -11,6 +12,7 @@ class ProductViewHolder(
     private val clickListener: ProductClickListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    @SuppressLint("SetTextI18n")
     fun bindProductManage(product: Product) = with(binding) {
         Glide.with(imgProduct.context)
             .load(product.imageUrl)

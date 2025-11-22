@@ -26,10 +26,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Order #123"
+                android:text="@string/order_with_id"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txt_date"
@@ -37,10 +37,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
+                android:text="@string/txt_date_placeholder"
                 android:textColor="@color/black"
-                android:text="01-01-2025"
-                android:textStyle="italic|bold"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textStyle="italic|bold" />
 
         </LinearLayout>
 
@@ -53,13 +53,14 @@
             android:layout_marginBottom="10dp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="Pending"
+            android:text="@string/order_tab_pending"
             android:textSize="9sp"
             android:textColor="#1943F3"
             app:cornerRadius="7dp"
             app:strokeWidth="0dp"
             app:backgroundTint="#EBECFF"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            tools:ignore="SmallSp" />
 
         <!-- Buyer info section (visible only in Waiting view) -->
         <LinearLayout
@@ -75,30 +76,32 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Buyer Information"
+                android:layout_marginBottom="6dp"
+                android:text="@string/order_buyer_info"
                 android:textColor="#666666"
                 android:textSize="11sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="6dp"/>
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="14dp"
                     android:layout_height="14dp"
+                    android:layout_marginEnd="6dp"
+                    android:contentDescription="@string/txt_user_placeholder"
                     android:src="@drawable/ic_user_fill"
-                    app:tint="#888888"
-                    android:layout_marginEnd="6dp"/>
+                    app:tint="#888888" />
 
                 <TextView
                     android:id="@+id/txt_buyer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="John Doe"
+                    android:text="@string/txt_name_placeholder"
                     android:textColor="#333333"
                     android:textSize="12sp" />
 
@@ -108,11 +111,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="14dp"
                     android:layout_height="14dp"
+                    android:contentDescription="@string/txt_address_placeholder"
                     android:src="@drawable/ic_location"
                     app:tint="#888888"
                     android:layout_marginEnd="6dp"/>
@@ -121,7 +126,7 @@
                     android:id="@+id/txt_buyer_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="123 Main St"
+                    android:text="@string/txt_address_placeholder"
                     android:textColor="#333333"
                     android:textSize="12sp" />
 
@@ -130,11 +135,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="14dp"
                     android:layout_height="14dp"
+                    android:contentDescription="@string/txt_phone_placeholder"
                     android:src="@drawable/ic_phone"
                     app:tint="#888888"
                     android:layout_marginEnd="6dp"/>
@@ -143,7 +150,7 @@
                     android:id="@+id/txt_buyer_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+1234567890"
+                    android:text="@string/txt_phone_placeholder"
                     android:textColor="#333333"
                     android:textSize="12sp" />
 
@@ -179,7 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Total"
+                android:text="@string/txt_total_placeholder"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -191,7 +198,7 @@
                 android:gravity="end"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="$1000"
+                android:text="@string/txt_price_placeholder"
                 android:textSize="14sp" />
 
         </LinearLayout>

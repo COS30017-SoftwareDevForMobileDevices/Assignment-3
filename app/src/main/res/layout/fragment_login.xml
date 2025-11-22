@@ -22,7 +22,7 @@
             android:layout_width="22dp"
             android:layout_height="44dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Back"
+            android:contentDescription="@string/txt_back_placeholder"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +32,7 @@
             android:id="@+id/tv_login_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="@string/title_login"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -64,52 +64,52 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/ic_handshake"
-                android:contentDescription="App Logo"
+                android:contentDescription="@string/txt_brand_placeholder"
                 android:layout_marginBottom="24dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome Back"
-                android:textColor="@android:color/black"
-                android:textAllCaps="true"
+                android:layout_marginBottom="8dp"
                 android:letterSpacing="0.1"
+                android:text="@string/login_title"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Login to your account to continue"
+                android:layout_marginBottom="32dp"
+                android:text="@string/login_subtitle"
                 android:textColor="#757575"
-                android:textSize="14sp"
-                android:layout_marginBottom="32dp"/>
+                android:textSize="14sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/text_input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:layout_marginBottom="16dp"
+                android:hint="@string/txt_email_placeholder"
                 app:boxBackgroundMode="outline"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
                 app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="#E0E0E0"
-                app:hintTextColor="#757575"
                 app:endIconMode="clear_text"
                 app:endIconTint="#757575"
-                android:layout_marginBottom="16dp">
+                app:hintTextColor="#757575">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
+                    android:paddingVertical="16dp"
                     android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:paddingVertical="16dp"/>
+                    android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,26 +117,26 @@
                 android:id="@+id/text_input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/txt_password_placeholder"
                 app:boxBackgroundMode="outline"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
                 app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="#E0E0E0"
-                app:hintTextColor="#757575"
                 app:endIconMode="password_toggle"
                 app:endIconTint="#757575"
-                android:layout_marginBottom="8dp">
+                app:hintTextColor="#757575">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
+                    android:paddingVertical="16dp"
                     android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:paddingVertical="16dp"/>
+                    android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -144,18 +144,18 @@
                 android:id="@+id/txt_forgot_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Forgot Password?"
+                android:layout_marginBottom="24dp"
+                android:gravity="end"
+                android:text="@string/login_forgot_password"
                 android:textColor="#FF0000"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:gravity="end"
-                android:layout_marginBottom="24dp"/>
+                android:textStyle="bold" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="Login"
+                android:text="@string/btn_login"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -174,15 +174,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Don't have an account? "
+                    android:layout_marginEnd="3dp"
+                    android:text="@string/login_dont_have_account"
                     android:textColor="#757575"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txt_register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Register"
+                    android:text="@string/btn_register"
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="14sp"
                     android:textStyle="bold"

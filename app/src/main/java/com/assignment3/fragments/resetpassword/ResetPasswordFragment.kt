@@ -6,12 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.assignment3.R
-import com.assignment3.databinding.FragmentCartBinding
 import com.assignment3.databinding.FragmentResetPasswordBinding
-import com.assignment3.fragments.cart.CartViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class ResetPasswordFragment : Fragment() {

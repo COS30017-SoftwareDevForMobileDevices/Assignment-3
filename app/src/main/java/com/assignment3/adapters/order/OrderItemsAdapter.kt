@@ -1,5 +1,6 @@
 package com.assignment3.adapters.order
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ class OrderItemsAdapter(
     inner class ItemViewHolder(private val binding: ItemOrderProductBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(item: CartItem) {
             binding.txtViewProductName.text = item.product.name
             binding.txtViewPrice.text = "$${item.product.price * item.quantity}"
