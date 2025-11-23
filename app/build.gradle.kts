@@ -67,10 +67,24 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.compiler)
-    testImplementation(libs.junit)
+
+    // Android Instrumentation (Espresso) tests
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Local unit tests (Robolectric and LiveData support)
+    testImplementation(libs.junit)
     testImplementation(libs.robolectric)
     testImplementation(libs.androidx.core)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.core.testing)
+
+    // Navigation testing
+    androidTestImplementation(libs.androidx.navigation.testing)
+    testImplementation(libs.androidx.navigation.testing)
+
+    // Mockito-inline
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
+    testImplementation(libs.mockito.kotlin)
 }

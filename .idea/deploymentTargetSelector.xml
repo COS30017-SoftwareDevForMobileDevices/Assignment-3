@@ -13,16 +13,10 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="ProfileEspressoTest">
+      <SelectionState runConfigName="MainFragmentsTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="RegisterEspressoTest">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="LoginEspressoTest">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="RegisterFragmentEspressoTest">
+      <SelectionState runConfigName="favoriteFragment_showsLoginPrompt_whenNotLoggedIn()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
@@ -28,8 +29,19 @@ class FavoriteFragment : Fragment(), ShopClickListener {
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
 
-    private val authViewModel: AuthViewModel by viewModels()
-    private val favoriteViewModel: FavoriteViewModel by viewModels()
+    /**
+     * Allows test to inject Fake ViewModelFactory.
+     * The app ignores this unless tests set it.
+     */
+    var testViewModelFactory: ViewModelProvider.Factory? = null
+
+    private val authViewModel: AuthViewModel by viewModels {
+        testViewModelFactory ?: defaultViewModelProviderFactory
+    }
+
+    private val favoriteViewModel: FavoriteViewModel by viewModels {
+        testViewModelFactory ?: defaultViewModelProviderFactory
+    }
 
     private lateinit var adapter: ShopAdapter
 
