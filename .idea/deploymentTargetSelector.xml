@@ -16,9 +16,6 @@
       <SelectionState runConfigName="MainFragmentsTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="favoriteFragment_showsLoginPrompt_whenNotLoggedIn()">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
     </selectionStates>
   </component>
 </project>

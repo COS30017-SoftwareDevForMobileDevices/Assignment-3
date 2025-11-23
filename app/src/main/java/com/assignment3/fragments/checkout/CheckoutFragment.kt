@@ -207,6 +207,7 @@ class CheckoutFragment : Fragment() {
             subTotal = cartItems!!.sumOf { it.product.price * it.quantity }
             binding.txtSubtotalAmount.text = "$${round(subTotal)}"
             binding.txtTotalAmount.text = "$${round(subTotal + 10)}"
+            binding.txtShippingAmount.text = "$10"
         } else {
             binding.btnPay.isEnabled = false
             Toast.makeText(requireContext(), "No cart items received", Toast.LENGTH_SHORT).show()
