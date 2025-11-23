@@ -30,7 +30,7 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
-            android:id="@+id/tv_register_title"
+            android:id="@+id/txt_register_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_register"
