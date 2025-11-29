@@ -14,6 +14,8 @@ android {
         applicationId = "com.assignment3"
         minSdk = 27
         targetSdk = 36
+
+        // Version code and name for each updates
         versionCode = 1
         versionName = "1.0"
 
