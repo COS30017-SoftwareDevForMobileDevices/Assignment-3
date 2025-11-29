@@ -73,10 +73,11 @@
     <string name="guest_community_sub">Track your orders, save your favorites, and get exclusive access to our drops.</string>
 
     <!-- Home -->
-    <string name="home_app_name">KICKS</string>
-    <string name="home_title">Summer \'25 Drop</string>
-    <string name="home_subtitle">The latest styles have arrived. Get them before\\nthey\'re gone.</string>
-    <string name="home_featured_kicks">Featured Kicks</string>
+    <string name="home_app_name_1">Swin</string>
+    <string name="home_app_name_2">Style</string>
+    <string name="home_title">Swinburne Summer \'25 Drop</string>
+    <string name="home_subtitle">The latest Swinburne stuffs have arrived. Get them before\\nthey\'re gone.</string>
+    <string name="home_main_product_title">Featured Products</string>
 
     <!-- Login -->
     <string name="login_title">Welcome Back</string>

@@ -12,22 +12,16 @@ class ProductRepository {
     private val collectionRef = db.collection("products")
 
     private val placeholderImages = listOf(
-        "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/636ed63f-f78f-400d-9b38-91b3e4249187/NIKE+AIR+MAX+95.png",
-        "https://static.nike.com/a/images/w_1280,q_auto,f_auto/ba6d6a6c-36ec-4782-be43-f2cb0a0f6b16/air-max-95-og-neon-yellow-release-date.jpg",
-        "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/c543e01d-9128-410e-a62f-436416e1834a/W+NIKE+AIR+MAX+95+BIG+BUBBLE.png",
-        "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/9694818a-cf82-43e8-81f3-58f432c0f7b6/G.T.+JUMP+ACADEMY+EP.png",
-        "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/01f63791-c733-4e2b-9df5-7cab44dba920/M+NIKE+COURT+LITE+4.png",
-        "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/6188443e-71b7-49f2-b0c3-619dd3ef039a/NIKE+UPLIFT+SC.png",
-        "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/9e0de4e1-6862-4d96-9821-94050582defe/M+NIKE+AIR+ZOOM+TR+1.png",
-        "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/47b7945e-a379-4c24-b9df-98f4eef178e5/NIKE+AIR+MAX+PLUS.png",
-        "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/63c4596a-ca9a-4a56-82f3-0387903ed5f1/AIR+ZOOM+PEGASUS+41.png",
-        "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/9c3f5d2c-2a33-4e11-8bf7-cddad6e14121/NIKE+RUN+DEFY.png",
-        "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/db94d306-2abb-43e0-bc9e-4c2a6837ef98/G.T.+CUT+3+SE+%28GS%29.png",
-        "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/285df0bb-f4c3-420e-8b4f-d57c1431abf2/W+NIKE+INTERACT+RUN+EASYON.png",
-        "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/e7f0dcb1-be59-4e8d-8732-508108065339/NIKE+AIR+ZOOM+G.T.+JUMP+2+EP.png",
-        "https://static.nike.com/a/images/t_default/273e8141-944b-4d82-9619-9f4870053d2d/TEAM+HUSTLE+D+11+%28GS%29.png",
-        "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/75bc7c02-f18c-43d3-9456-2d00bb6d5e30/NIKE+JOURNEY+RUN.png",
-        "https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/642cec04-9407-4c94-9c2b-b03843a85caa/JA+2+%28GS%29.png",
+        "https://res.cloudinary.com/dcpcirmy7/image/upload/v1764325843/1_f6rlgk.png",
+        "https://res.cloudinary.com/dcpcirmy7/image/upload/v1764325793/2_tav5xv.png",
+        "https://res.cloudinary.com/dcpcirmy7/image/upload/v1764325793/3_wjekjn.png",
+        "https://res.cloudinary.com/dcpcirmy7/image/upload/v1764325793/4_qgpsry.png",
+        "https://res.cloudinary.com/dcpcirmy7/image/upload/v1764325797/5_cfk7ym.png",
+        "https://res.cloudinary.com/dcpcirmy7/image/upload/v1764325795/6_c3jmky.png",
+        "https://res.cloudinary.com/dcpcirmy7/image/upload/v1764325795/7_phpkmg.png",
+        "https://res.cloudinary.com/dcpcirmy7/image/upload/v1764325795/8_hlzojy.png",
+        "https://res.cloudinary.com/dcpcirmy7/image/upload/v1764325796/9_xqto2i.png",
+        "https://res.cloudinary.com/dcpcirmy7/image/upload/v1764325795/10_ll66zq.png"
     )
 
     suspend fun fetchAllProducts(): List<Product> {

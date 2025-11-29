@@ -141,7 +141,7 @@ class HomeFragment : Fragment(), ShopClickListener {
     private fun setupGifBackground() {
         Glide.with(this)
             .asGif()
-            .load(R.raw.just_do_it)
+            .load(R.raw.swinburne_intro)
             .into(binding.backgroundGif)
     }
 

@@ -33,7 +33,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/txt_product_name_placeholder"
                 android:background="#E2E2E2"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerInside"/>
 
             <!-- Favorite Button -->
             <ImageButton

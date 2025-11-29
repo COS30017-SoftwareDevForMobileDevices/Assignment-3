@@ -17,15 +17,27 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txt_app_title"
+            android:id="@+id/txt_app_title_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/home_app_name"
-            android:textColor="#000000"
+            android:text="@string/home_app_name_1"
+            android:textColor="@color/red_main"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_app_title_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_app_name_2"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txt_app_title_1"
             app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -66,36 +78,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:background="@color/black"
+                        android:background="@color/white"
                         android:adjustViewBounds="true"
                         android:contentDescription="@null" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="32dp">
-
-                        <TextView
-                            android:id="@+id/txt_hero_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/home_title"
-                            android:textColor="#FFFFFF"
-                            android:textSize="32sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/txt_hero_subtitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/home_subtitle"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp" />
-
-                    </LinearLayout>
 
                 </FrameLayout>
 
@@ -109,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
-                android:text="@string/home_featured_kicks"
+                android:text="@string/home_main_product_title"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
