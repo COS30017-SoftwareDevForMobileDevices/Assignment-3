@@ -13,7 +13,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:contentDescription="@string/title_product"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         android:background="#F5F5F5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

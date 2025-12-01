@@ -55,6 +55,12 @@ class OrderFragment : Fragment(), OrderClickListener {
             viewModel.loadBuyerOrders(uid)
             viewModel.loadSellerOrders(uid)
         }
+
+        // Re-select previous tab
+        binding.tabLayout.getTabAt(viewModel.tabPosition!!)?.select()
+
+        // Re-apply UI state + filter
+        applyTabState(viewModel.tabPosition!!)
     }
 
 
@@ -75,35 +81,42 @@ class OrderFragment : Fragment(), OrderClickListener {
     private fun setupTabs() {
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                when (tab?.position) {
-                    0 -> {
-                        switchToBuyerAdapter()
-                        viewModel.applyFilter(OrderFilter.ALL)
-                        binding.fabMarkAll.visibility = View.GONE
-                    }
-                    1 -> {
-                        switchToBuyerAdapter()
-                        viewModel.applyFilter(OrderFilter.PENDING)
-                        binding.fabMarkAll.visibility = View.GONE
-                    }
-                    2 -> {
-                        switchToBuyerAdapter()
-                        viewModel.applyFilter(OrderFilter.PROCESSING)
-                        binding.fabMarkAll.visibility = View.GONE
-                    }
-                    3 -> {
-                        switchToSellerAdapter()
-                        Log.d("Order Fragment", "In Waiting Tab")
-                        viewModel.applyFilter(OrderFilter.WAITING)
-                        binding.fabMarkAll.visibility = View.VISIBLE
-                    }
-                }
+                val pos = tab?.position ?: return
+                viewModel.tabPosition = pos
+                applyTabState(pos)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
     }
+
+
+    private fun applyTabState(position: Int) {
+        when (position) {
+            0 -> {
+                switchToBuyerAdapter()
+                viewModel.applyFilter(OrderFilter.ALL)
+                binding.fabMarkAll.visibility = View.GONE
+            }
+            1 -> {
+                switchToBuyerAdapter()
+                viewModel.applyFilter(OrderFilter.PENDING)
+                binding.fabMarkAll.visibility = View.GONE
+            }
+            2 -> {
+                switchToBuyerAdapter()
+                viewModel.applyFilter(OrderFilter.PROCESSING)
+                binding.fabMarkAll.visibility = View.GONE
+            }
+            3 -> {
+                switchToSellerAdapter()
+                viewModel.applyFilter(OrderFilter.WAITING)
+                binding.fabMarkAll.visibility = View.VISIBLE
+            }
+        }
+    }
+
 
 
     private fun setupFab() {

@@ -39,6 +39,9 @@ class OrderViewModel : ViewModel() {
     private val _updateResult = MutableLiveData<Result<Boolean>?>()
     val updateResult: LiveData<Result<Boolean>?> get() = _updateResult
 
+    // Tab position
+    var tabPosition: Int? = 0;
+
 
     // Load orders where user is the buyer
     fun loadBuyerOrders(userId: String) {

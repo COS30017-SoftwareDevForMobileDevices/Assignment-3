@@ -22,7 +22,7 @@
         android:layout_height="60dp"
         android:background="#F5F5F5"
         android:contentDescription="@string/txt_product_name_placeholder"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
