@@ -125,4 +125,11 @@ class OrderViewModel : ViewModel() {
     fun clearUpdateResult() {
         _updateResult.value = null
     }
+
+
+    fun clearAllData() {
+        _filteredOrders.value = emptyList()
+        _buyerOrders.value = emptyList()
+        _sellerOrders.value = emptyList()
+    }
 }

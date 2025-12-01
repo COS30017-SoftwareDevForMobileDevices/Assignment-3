@@ -1,7 +1,6 @@
 package com.assignment3.fragments.order
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,11 +22,11 @@ class OrderFragment : Fragment(), OrderClickListener {
 
     private val viewModel: OrderViewModel by viewModels()
 
-    // Two adapters: one for buyer view, one for seller view
     private lateinit var buyerAdapter: OrderAdapter
     private lateinit var sellerAdapter: OrderAdapter
 
     private var currentUserId: String? = null
+
 
 
     override fun onCreateView(
@@ -44,23 +43,35 @@ class OrderFragment : Fragment(), OrderClickListener {
 
         currentUserId = FirebaseAuth.getInstance().currentUser?.uid
 
+
+        if (currentUserId == null) {
+            showLoggedOutState()
+            return
+        }
+
         setupAdapters()
         setupRecycler()
         setupTabs()
         setupFab()
         observeData()
 
-        // Load initial data
-        currentUserId?.let { uid ->
-            viewModel.loadBuyerOrders(uid)
-            viewModel.loadSellerOrders(uid)
-        }
+        // Load orders
+        viewModel.loadBuyerOrders(currentUserId!!)
+        viewModel.loadSellerOrders(currentUserId!!)
 
-        // Re-select previous tab
+        // Restore tab selection
         binding.tabLayout.getTabAt(viewModel.tabPosition!!)?.select()
-
-        // Re-apply UI state + filter
         applyTabState(viewModel.tabPosition!!)
+    }
+
+    // UI STATE FOR LOGGED OUT USER
+    private fun showLoggedOutState() {
+        viewModel.clearAllData()
+
+        binding.recyclerViewOrders.visibility = View.GONE
+        binding.fabMarkAll.visibility = View.GONE
+        binding.progressBar.visibility = View.GONE
+        binding.txtNoLogin.visibility = View.VISIBLE
     }
 
 
@@ -92,6 +103,13 @@ class OrderFragment : Fragment(), OrderClickListener {
     }
 
 
+    private fun setupFab() {
+        binding.fabMarkAll.setOnClickListener {
+            showMarkAllConfirmDialog()
+        }
+    }
+
+
     private fun applyTabState(position: Int) {
         when (position) {
             0 -> {
@@ -118,14 +136,6 @@ class OrderFragment : Fragment(), OrderClickListener {
     }
 
 
-
-    private fun setupFab() {
-        binding.fabMarkAll.setOnClickListener {
-            showMarkAllConfirmDialog()
-        }
-    }
-
-
     private fun switchToBuyerAdapter() {
         if (binding.recyclerViewOrders.adapter != buyerAdapter) {
             binding.recyclerViewOrders.adapter = buyerAdapter
@@ -140,26 +150,24 @@ class OrderFragment : Fragment(), OrderClickListener {
     }
 
 
+    // Observe ViewModel data
     private fun observeData() {
-        // Observe filtered orders
         viewModel.filteredOrders.observe(viewLifecycleOwner) { orders ->
             val currentFilter = viewModel.currentFilter.value
+
             if (currentFilter == OrderFilter.WAITING) {
                 sellerAdapter.submitList(orders)
             } else {
                 buyerAdapter.submitList(orders)
             }
 
-            // Show empty state
             binding.txtNoOrder.visibility = if (orders.isEmpty()) View.VISIBLE else View.GONE
         }
 
-        // Observe loading state
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 
-        // Observe update result
         viewModel.updateResult.observe(viewLifecycleOwner) { result ->
             result?.let {
                 if (it.isSuccess && it.getOrNull() == true) {
@@ -173,7 +181,7 @@ class OrderFragment : Fragment(), OrderClickListener {
     }
 
 
-    // Handle status badge click from seller view
+    // Status Update Dialog
     override fun onStatusClick(orderId: String) {
         showStatusConfirmDialog(orderId)
     }
@@ -189,9 +197,7 @@ class OrderFragment : Fragment(), OrderClickListener {
                 }
                 dialog.dismiss()
             }
-            .setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss()
-            }
+            .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
             .show()
     }
 
@@ -213,9 +219,7 @@ class OrderFragment : Fragment(), OrderClickListener {
                 }
                 dialog.dismiss()
             }
-            .setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss()
-            }
+            .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
             .show()
     }
 
