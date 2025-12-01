@@ -204,12 +204,12 @@
                             android:gravity="center_vertical">
 
                             <RadioButton
-                                android:id="@+id/radio_size_7"
+                                android:id="@+id/radio_size_xs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_button_radio_size"
                                 android:button="@null"
-                                android:text="@string/detail_size_7"
+                                android:text="@string/detail_size_xs"
                                 android:checked="true"
                                 android:textColor="@drawable/txt_color_radio_size"
                                 android:textSize="16sp"
@@ -218,12 +218,12 @@
                                 android:layout_margin="4dp" />
 
                             <RadioButton
-                                android:id="@+id/radio_size_7.5"
+                                android:id="@+id/radio_size_s"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_button_radio_size"
                                 android:button="@null"
-                                android:text="@string/detail_size_7.5"
+                                android:text="@string/detail_size_s"
                                 android:textColor="@drawable/txt_color_radio_size"
                                 android:textSize="16sp"
                                 android:paddingVertical="10dp"
@@ -231,12 +231,12 @@
                                 android:layout_margin="4dp" />
 
                             <RadioButton
-                                android:id="@+id/radio_size_8"
+                                android:id="@+id/radio_size_m"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_button_radio_size"
                                 android:button="@null"
-                                android:text="@string/detail_size_8"
+                                android:text="@string/detail_size_m"
                                 android:textColor="@drawable/txt_color_radio_size"
                                 android:textSize="16sp"
                                 android:paddingVertical="10dp"
@@ -244,12 +244,12 @@
                                 android:layout_margin="4dp" />
 
                             <RadioButton
-                                android:id="@+id/radio_size_8.5"
+                                android:id="@+id/radio_size_l"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_button_radio_size"
                                 android:button="@null"
-                                android:text="@string/detail_size_8.5"
+                                android:text="@string/detail_size_l"
                                 android:textColor="@drawable/txt_color_radio_size"
                                 android:textSize="16sp"
                                 android:paddingVertical="10dp"
@@ -257,12 +257,12 @@
                                 android:layout_margin="4dp" />
 
                             <RadioButton
-                                android:id="@+id/radio_size_9"
+                                android:id="@+id/radio_size_xl"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_button_radio_size"
                                 android:button="@null"
-                                android:text="@string/detail_size_9"
+                                android:text="@string/detail_size_xl"
                                 android:textColor="@drawable/txt_color_radio_size"
                                 android:textSize="16sp"
                                 android:paddingVertical="10dp"
@@ -270,12 +270,12 @@
                                 android:layout_margin="4dp" />
 
                             <RadioButton
-                                android:id="@+id/radio_size_9.5"
+                                android:id="@+id/radio_size_xxl"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_button_radio_size"
                                 android:button="@null"
-                                android:text="@string/detail_size_9.5"
+                                android:text="@string/detail_size_xxl"
                                 android:textColor="@drawable/txt_color_radio_size"
                                 android:textSize="16sp"
                                 android:paddingVertical="10dp"
@@ -283,38 +283,12 @@
                                 android:layout_margin="4dp" />
 
                             <RadioButton
-                                android:id="@+id/radio_size_10"
+                                android:id="@+id/radio_size_3xl"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_button_radio_size"
                                 android:button="@null"
-                                android:text="@string/detail_size_10"
-                                android:textColor="@drawable/txt_color_radio_size"
-                                android:textSize="16sp"
-                                android:paddingVertical="10dp"
-                                android:paddingHorizontal="25dp"
-                                android:layout_margin="4dp" />
-
-                            <RadioButton
-                                android:id="@+id/radio_size_10.5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bg_button_radio_size"
-                                android:button="@null"
-                                android:text="@string/detail_size_10.5"
-                                android:textColor="@drawable/txt_color_radio_size"
-                                android:textSize="16sp"
-                                android:paddingVertical="10dp"
-                                android:paddingHorizontal="25dp"
-                                android:layout_margin="4dp" />
-
-                            <RadioButton
-                                android:id="@+id/radio_size_11"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bg_button_radio_size"
-                                android:button="@null"
-                                android:text="@string/detail_size_11"
+                                android:text="@string/detail_size_3xl"
                                 android:textColor="@drawable/txt_color_radio_size"
                                 android:textSize="16sp"
                                 android:paddingVertical="10dp"

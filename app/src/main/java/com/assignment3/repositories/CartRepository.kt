@@ -24,7 +24,7 @@ class CartRepository {
             cartDocs.documents.mapNotNull { cartDoc ->
                 val productId = cartDoc.getString("product_id") ?: return@mapNotNull null
                 val quantity = cartDoc.getLong("quantity")?.toInt() ?: 1
-                val size = cartDoc.getDouble("size") ?: 0.0
+                val size = cartDoc.getString("size") ?: ""
                 val cartId = cartDoc.id
 
                 val productDoc = db.collection("products").document(productId).get().await()
@@ -44,7 +44,7 @@ class CartRepository {
 
 
     // Add product to cart
-    suspend fun addToCart(userId: String, product: Product, size: Double): Result<Boolean> {
+    suspend fun addToCart(userId: String, product: Product, size: String): Result<Boolean> {
         return try {
             val productCart = db.collection("carts")
                 .whereEqualTo("user_id", userId)

@@ -90,7 +90,7 @@ class ProductDetailFragment : Fragment() {
                 }
 
                 val checkedRadioSize: RadioButton = binding.root.findViewById(checkedId)
-                val selectedSize = checkedRadioSize.text.toString().toDouble()
+                val selectedSize = checkedRadioSize.text.toString()
 
                 cartViewModel.addCartItem(authViewModel.firebaseUser!!.uid, productId!!, selectedSize)
                 Toast.makeText(requireContext(), "Added successfully, check your cart!", Toast.LENGTH_SHORT).show()

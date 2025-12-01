@@ -12,5 +12,5 @@ data class CartItem(
 
     val product: Product,
     val quantity: Int,
-    val size: Double
+    val size: String
 ) : Parcelable

@@ -136,7 +136,7 @@ class OrderRepository {
             try {
                 val cartId = itemMap["cart_id"] as? String ?: ""
                 val quantity = (itemMap["quantity"] as? Long ?: 0L).toInt()
-                val size = itemMap["size"] as? Double ?: 0.0
+                val size = itemMap["size"] as? String ?: ""
 
                 val productMap = itemMap["product"] as? Map<String, Any>
                 val product = Product(

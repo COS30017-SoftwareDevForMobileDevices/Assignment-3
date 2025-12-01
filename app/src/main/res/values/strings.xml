@@ -97,15 +97,13 @@
     <!-- Detail page -->
     <string name="detail_select_size">Select Size</string>
     <string name="detail_size_guide">Size Guide</string>
-    <string name="detail_size_7">7</string>
-    <string name="detail_size_7.5">7.5</string>
-    <string name="detail_size_8">8</string>
-    <string name="detail_size_8.5">8.5</string>
-    <string name="detail_size_9">9</string>
-    <string name="detail_size_9.5">9.5</string>
-    <string name="detail_size_10">10</string>
-    <string name="detail_size_10.5">10.5</string>
-    <string name="detail_size_11">11</string>
+    <string name="detail_size_xs">XS</string>
+    <string name="detail_size_s">S</string>
+    <string name="detail_size_m">M</string>
+    <string name="detail_size_l">L</string>
+    <string name="detail_size_xl">XL</string>
+    <string name="detail_size_xxl">XXL</string>
+    <string name="detail_size_3xl">3XL</string>
     <string name="detail_product_description">Product Description</string>
 
     <!-- Profile -->

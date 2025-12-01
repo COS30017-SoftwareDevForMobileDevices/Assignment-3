@@ -42,7 +42,7 @@ class CartViewModel(
         }
     }
 
-    fun addCartItem(userId: String, productId: String, size: Double) = viewModelScope.launch {
+    fun addCartItem(userId: String, productId: String, size: String) = viewModelScope.launch {
         val product = favoriteRepository.getProduct(productId) ?: return@launch
 
         val result = repository.addToCart(userId, product, size)
